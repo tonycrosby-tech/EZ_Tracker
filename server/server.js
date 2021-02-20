@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 const helmet = require('helmet');
 const cors = require('cors');
 const session = require('express-session');
-
 const routes = require('./routes');
 const passport = require('./config/passport');
 const corsOptions = require('./config/cors.js');
