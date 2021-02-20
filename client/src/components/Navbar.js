@@ -4,7 +4,7 @@ import { Toolbar } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
 import Link from '@material-ui/core/Link';
 import { Button } from '@material-ui/core';
-import AccountCircle from '@material-ui/icons/AccountCircle';
+// import AccountCircle from '@material-ui/icons/AccountCircle';
 import IconButton from '@material-ui/core/IconButton';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
