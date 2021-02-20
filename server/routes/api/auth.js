@@ -15,7 +15,8 @@ router.post("/register", function (req, res) {
   User.register(Users, req.body.password, function (err, user) {
     if (err) {
       res.json({
-        success: false, message: "Your account could  not be saved.Error: ", err});
+        success: false, message: "Your account could  not be saved.Error: ", err
+      });
     } else {
       res.json({
         success: true, message: "Your account has been saved"
@@ -48,6 +49,27 @@ router.post("/register", function (req, res) {
   // }
 });
 
+//api/auth/user/:id
+router.get('/user/:id', function (req, res) {
+  User.findById(req.params.id)
+    .then(user => res.json(user))
+    .catch(err => res.status(439).json(err));
+});
+
+//api/auth/users  : all users
+router.get('/users', function (req, res) {
+  User.find(req.query)
+    .then(user => res.json(user))
+    .catch(err => res.status(439).json(err));
+
+    // .find(req.query)
+    // .sort({ date: -1 })
+    // .then(dbModel => res.json(dbModel))
+    // .catch(err => res.status(422).json(err));
+
+});
+
+//api/auth/login
 router.post('/login', function (req, res) {
   const { username, password } = req.body;
   User.findOne({
@@ -83,6 +105,18 @@ router.post('/login', function (req, res) {
       //res.json(user);
     }
   });
+
+
+
+  // findById: function(req, res) {
+  //   db.Book
+  //     .findById(req.params.id)
+  //     .then(dbModel => res.json(dbModel))
+  //     .catch(err => res.status(422).json(err));
+  // },
+
+
+
 });
 
 // Matches with '/api/auth/login'
