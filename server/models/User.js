@@ -1,4 +1,5 @@
 const { model, Schema } = require('mongoose');
+const mongoose = require('mongoose');
 // https://www.npmjs.com/package/passport-local-mongoose
 const passportLocalMongoose = require('passport-local-mongoose');
 const bcrypt = require('bcryptjs');
