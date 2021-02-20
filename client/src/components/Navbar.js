@@ -106,7 +106,7 @@ const Navbar = function () {
           <Link
               variant="button"
               color="textPrimary"
-              href="/signup"
+              href="/"
               className={classes.link}
             >
               Signup

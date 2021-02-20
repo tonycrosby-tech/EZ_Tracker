@@ -2,6 +2,7 @@ const router = require('express').Router();
 const passport = require('../../config/passport');
 const User = require('../../models/User');
 const authController = require('../../controllers/auth');
+const isAuthenticated = require('../../config/middleware/isAuthenticated');
 
 router.post("/register", function(req, res) {
     if (!req.body.username || !req.body.password || !req.body.email) {
@@ -22,7 +23,7 @@ router.post("/register", function(req, res) {
     }
 });
 
-// // Matches with '/api/auth/login'
-router.route('/login').post(authController.login);
+// Matches with '/api/auth/login'
+// router.route('/login').post(authController.login);
 
 module.exports = router;
