@@ -58,8 +58,8 @@ router.post('/login', function(req, res) {
       //   });
       //   res.cookie('token', token, { httpOnly: true }).sendStatus(200);
       //})
-      const { password, ...userloc } = user;
-      res.json(userloc);
+      const { password,username, email } = user;
+      res.json({username, email});
       //res.json(user);
     }
   });
