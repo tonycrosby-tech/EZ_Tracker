@@ -7,6 +7,7 @@ const session = require('express-session');
 const routes = require('./routes');
 const passport = require('./config/passport');
 const corsOptions = require('./config/cors.js');
+const auth = require("./routes/api/auth");
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -27,6 +28,7 @@ if (process.env.NODE_ENV === 'production') {
 
 // Add routes, API
 app.use(routes);
+app.use("/api/auth", auth);
 
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.

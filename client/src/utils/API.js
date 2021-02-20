@@ -22,7 +22,7 @@ export default {
   saveUser: function (userData) {
     console.log(userData);
 
-    return axios.post('http://localhost:3000/api/user', userData);
+    return axios.post('http://localhost:3001/api/auth/register', userData);
   },
   deleteUser: function () {
     return axios.delete('/api/user' + id);

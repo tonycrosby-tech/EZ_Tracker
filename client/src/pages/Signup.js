@@ -1,34 +1,36 @@
-import React, { useState } from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
+import React, { useState } from "react";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import Link from "@material-ui/core/Link";
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
 import API from "../utils/API";
-
+ 
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.primary.main,
   },
   form: {
-    width: '90%', // Fix IE 11 issue.
+    width: "90%", // Fix IE 11 issue.
     marginTop: theme.spacing(3),
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    backgroundColor: "#00008b",
+    color: "white",
   },
 }));
 
@@ -37,24 +39,25 @@ export default function SignUp() {
   const [username, setUsername] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const [formObject, setFormObject] = useState({})
+  const [formObject, setFormObject] = useState({});
 
   function handleInputChange(event) {
     const { name, value } = event.target;
-    setFormObject({...formObject, [name]: value})
-  };
+    setFormObject({ ...formObject, [name]: value });
+  }
 
-  function handleSubmit (e) {
+  function handleSubmit(e) {
     e.preventDefault();
-    if (formObject.user && formObject.email && formObject.password) 
-    {
+    if (formObject.user && formObject.email && formObject.password) {
       API.saveUser({
         username: formObject.user,
         email: formObject.email,
-        password: formObject.password
-      }).then((res) => {
-        console.log(res);
-      }).catch(err => console.log(err));
+        password: formObject.password,
+      })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => console.log(err));
     }
   };
 
@@ -68,7 +71,7 @@ export default function SignUp() {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
@@ -109,6 +112,9 @@ export default function SignUp() {
                 onChange={handleInputChange}
               />
             </Grid>
+            <Button type="submit" className={classes.submit} fullWidth>
+              Sign Up
+            </Button>
             <Grid container justify="flex-end">
               <Grid item>
                 <Link href="/login" variant="body1">
@@ -117,16 +123,6 @@ export default function SignUp() {
               </Grid>
             </Grid>
           </Grid>
-
-          <button
-            type="submit"
-            variant="contained"
-            color="primary"
-            // className={classes.submit}
-            onClick={handleSubmit}
-          >
-            Sign Up
-          </button>
         </form>
         <Box mt={2} mb={2}>
           <Copyright />
@@ -139,12 +135,12 @@ export default function SignUp() {
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
+      {"Copyright © "}
       <Link color="inherit" href="#">
         Subscription Tracker
-      </Link>{' '}
+      </Link>{" "}
       {new Date().getFullYear()}
-      {'.'}
+      {"."}
     </Typography>
   );
 }

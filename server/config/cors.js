@@ -1,4 +1,4 @@
-const ALLOW_LIST = ['http://localhost:3001', 'http://localhost:3001/'];
+const ALLOW_LIST = ['http://localhost:3001/', 'http://localhost:3001/'];
 
 exports.corsOptions = {
   origin: (origin, callback) => {
