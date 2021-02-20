@@ -11,6 +11,9 @@ const userSchema = new Schema({
     dateCreated: {type: Date, default: Date.now}
 });
 
+userSchema.plugin(passportLocalMongoose);
+
+
 userSchema.methods.generateHash = function(password) {
   return bcrypt.hash(password, bcrypt.genSalt(10), null);
 };
