@@ -3,6 +3,8 @@ const passport = require('../../config/passport');
 const User = require('../../models/User');
 const authController = require('../../controllers/auth');
 const isAuthenticated = require('../../config/middleware/isAuthenticated');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 router.post("/register", function(req, res) {
     if (!req.body.username || !req.body.password || !req.body.email) {
@@ -21,6 +23,42 @@ router.post("/register", function(req, res) {
           res.json({success: true, msg: 'Successful created new account.'});
         });
     }
+});
+
+router.post('/login', function(req, res) {
+  const { username, password } = req.body;
+  User.findOne({
+    username: req.body.username
+  }, function(err, user) {
+    if (err) 
+    {
+      res.status(500);
+    }
+
+    else if (!user) {
+      res.status(401).send({success: false, msg: 'Authentication failed. User not found.'});
+    }
+    else
+    {
+      //validPassword
+      console.log(user);
+      user.validPassword(password, (err, same)  => {
+        if (err)
+        {
+          res.status(500);
+        }
+        else if (!same) 
+        {
+          res.status(401).json('incorrect email or password');
+        }
+        const { payload } = username;
+        const token = jwt.sign(payload, secret, {
+          expiresIn: '1h'
+        });
+        res.cookie('token', token, { httpOnly: true }).sendStatus(200);
+      })
+    }
+  });
 });
 
 // Matches with '/api/auth/login'

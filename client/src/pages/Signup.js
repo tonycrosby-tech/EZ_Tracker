@@ -11,7 +11,7 @@
 // import { makeStyles } from "@material-ui/core/styles";
 // import Container from "@material-ui/core/Container";
 // import API from "../utils/API";
- 
+
 // const useStyles = makeStyles((theme) => ({
 //   paper: {
 //     marginTop: theme.spacing(8),
@@ -142,7 +142,6 @@
 //   );
 // }
 
-
 // import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -156,10 +155,10 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import API from "../utils/API";
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
+import axios from "axios";
+import { Link } from "react-router-dom";
 // import './Login.css';
 
 // const useStyles = makeStyles((theme) => ({
@@ -187,29 +186,35 @@ class Signup extends Component {
   constructor() {
     super();
     this.state = {
-      username: '',
-      password: '',
-      email: ''
+      username: "",
+      password: "",
+      email: "",
     };
   }
-  
+
   onChange = (e) => {
-    const state = this.state
+    const state = this.state;
     state[e.target.name] = e.target.value;
     this.setState(state);
-  }
+  };
 
   onSubmit = (e) => {
     e.preventDefault();
 
     const { email, username, password } = this.state;
 
-    axios.post('http://localhost:3001/api/auth/register', { email, username, password })
+    axios
+      .post("/api/auth/register", {
+        email,
+        username,
+        password,
+      })
       .then((result) => {
         console.log(result);
-        this.props.history.push("/login")
+        this.props.history.push("/login");
+
       });
-  }
+  };
 
   render() {
     const { email, username, password } = this.state;
@@ -226,77 +231,79 @@ class Signup extends Component {
       //     <button className="btn btn-lg btn-primary btn-block" type="submit">Register</button>
       //   </form>
       // </div>
-          <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div>
-        <Avatar>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign up
-        </Typography>
-        <form onSubmit={this.onSubmit}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                id="username"
-                value={username}
-                label="Username"
-                name="username"
-                autoComplete="username"
-                autoFocus
-                onChange={this.onChange} required
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                value={email}
-                id="email"
-                label="Email"
-                name="email"
-                autoComplete="email"
-                onChange={this.onChange} required
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                value={password}
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                onChange={this.onChange} required
-              />
-            </Grid>
-            <Button type="submit" fullWidth>
-              Sign Up
-            </Button>
-            <Grid container justify="flex-end">
-              <Grid item>
-                <Link href="/login" variant="body1">
-                  Already have an account? Sign in
-                </Link>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <div>
+          <Avatar>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign up
+          </Typography>
+          <form onSubmit={this.onSubmit}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="username"
+                  value={username}
+                  label="Username"
+                  name="username"
+                  autoComplete="username"
+                  autoFocus
+                  onChange={this.onChange}
+                  required
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  value={email}
+                  id="email"
+                  label="Email"
+                  name="email"
+                  autoComplete="email"
+                  onChange={this.onChange}
+                  required
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  value={password}
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+                  onChange={this.onChange}
+                  required
+                />
+              </Grid>
+              <Button type="submit" fullWidth>
+                Sign Up
+              </Button>
+              <Grid container justify="flex-end">
+                <Grid item>
+                  <Link href="/login" variant="body1">
+                    Already have an account? Sign in
+                  </Link>
+                </Grid>
               </Grid>
             </Grid>
-          </Grid>
-        </form>
-        {/* <Box mt={2} mb={2}>
+          </form>
+          {/* <Box mt={2} mb={2}>
           <Copyright />
         </Box> */}
-      </div>
-    </Container>
-
+        </div>
+      </Container>
     );
   }
 }

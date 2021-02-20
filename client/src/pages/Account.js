@@ -16,13 +16,12 @@ const Account = () => {
 
   return (
     <div>
-    <Box className={classes.message}>
-      Just a message
-    </Box>
-      <Calendar
+    <Box >
+    <Calendar
         onChange={onChange}
         value={value}
       />
+    </Box>
     </div>
     
   );
