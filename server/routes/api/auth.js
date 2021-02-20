@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const passport = require('../../config/passport');
+//const passport = require('../../config/passport');
 const User = require('../../models/User');
 const authController = require('../../controllers/auth');
 const isAuthenticated = require('../../config/middleware/isAuthenticated');
