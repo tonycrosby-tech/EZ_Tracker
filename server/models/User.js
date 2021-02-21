@@ -30,15 +30,16 @@ const userSchema = new Schema({
 
 );
 
-userSchema.plugin(passportLocalMongoose);
+// userSchema.plugin(passportLocalMongoose);
 
-
-userSchema.methods.generateHash = function (password) {
-    return bcrypt.hash(password, bcrypt.genSalt(10), null);
-};
-userSchema.methods.validPassword = function(password) {
-  return bcrypt.compare(password, this.password);
-};
+// //I believe these are not used
+// userSchema.methods.generateHash = function (password) {
+//     return bcrypt.hash(password, bcrypt.genSalt(10), null);
+// };
+// // not used with latest mongoose. use authenticate instead (user.authenticate)
+// userSchema.methods.validPassword = function(password) {
+//   return bcrypt.compare(password, this.password);
+// };
 
 userSchema.plugin(passportLocalMongoose);
 
