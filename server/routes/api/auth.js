@@ -104,6 +104,22 @@ router.get('/getAll', function (req, res) {
     })
 });
 
+//api/auth/getAll--get all users and subscriptions
+router.get('/getAllSubs/:id', function (req, res) {
+
+  User.findOne({
+    username: req.body.username
+  })
+    .populate('subscriptions')
+    .then((result) => {
+      res.json(result);
+    })
+    .catch(error => {
+      res.status(500).json({ error });
+    });
+
+});
+
 //api/auth/login
 router.post('/login', function (req, res) {
   const { username, password } = req.body;
@@ -130,28 +146,6 @@ router.post('/login', function (req, res) {
           res.json(result);
 
       });
-      // const user = new DefaultUser({username: username});
-      // await user.setPassword(req.body.password);
-      // await user.save();
-      // const { user } = await DefaultUser.authenticate()('user', 'password');
-
-      // user.validPassword(req.body.password, (err, same) => {
-      //   if (err) {
-      //     res.status(500);
-      //   }
-      //   else if (!same) {
-      //     res.status(401).json('incorrect email or password');
-      //   }
-      //   const { payload } = username;
-      //   const token = jwt.sign(payload, secret, {
-      //     expiresIn: '1h'
-      //   });
-      //   const { password, username, email } = user;
-      //   res.json({ username, email });
-
-      //   res.cookie('token', token, { httpOnly: true }).sendStatus(200);
-      //})
-      //res.json(user);
     }
   });
 
