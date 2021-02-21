@@ -21,7 +21,6 @@ router.post("/register", function (req, res) {
       });
     } else {
       res.json({
-        //success: true, message: "Your account has been saved"
         user
       })
     }
@@ -52,24 +51,15 @@ router.get('/users', function (req, res) {
 
 // pass the user id in the uri and the subscription id in the body
 router.delete('/deleteSubscription/:id', function (req, res) {
-  // const filter = { name: req.body.subscription_id };
-  // const update = { ObjectId: null };
 
   User.updateOne({ _id: req.params.id }, { $pull: { subscriptions: req.body.subscription_id } }, function (err, result) {
     if (err) {
-      //req.flash("error", "Uh Oh! Something went wrong.");
-      //return res.redirect("/campgrounds");
       res.status(401).send({ success: false, msg: 'Deletion failed. subscription not found.' });
-      //res.json(result);
     }
     else {
-      // req.flash("success", "Comment has been deleted!");
       res.json(result);
-      //res.status(203).send({ success: true, msg: 'deleted' });
     }
-    // return res.json(campground);
   });
-
 });
 
 // api/auth/subscription--add a subscription
