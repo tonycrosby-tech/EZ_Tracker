@@ -1,5 +1,6 @@
 const router = require('express').Router();
 //const passport = require('../../config/passport');
+//const mongojs = require("mongojs");
 const User = require('../../models/User');
 const Subscription = require('../../models/Subscription');
 const authController = require('../../controllers/auth');
@@ -16,7 +17,7 @@ router.post("/register", function (req, res) {
   User.register(Users, req.body.password, function (err, user) {
     if (err) {
       res.json({
-        success: false, message: "Your account could  not be saved.Error: ", err
+        success: false, message: "Your account could  not be saved. You need a unique email probably: ", err
       });
     } else {
       res.json({
@@ -25,29 +26,6 @@ router.post("/register", function (req, res) {
     }
   });
 
-
-
-
-
-
-
-
-  // if (!req.body.username || !req.body.password || !req.body.email) {
-  //   res.json({ success: false, msg: 'Please pass username and password.' });
-  // } else {
-  //   var newUser = new User({
-  //     email: req.body.email,
-  //     username: req.body.username,
-  //     password: req.body.password,
-  //   });
-  //   // save the user
-  //   newUser.save(function (err) {
-  //     if (err) {
-  //       return res.json({ success: false, msg: 'Account already exists.' });
-  //     }
-  //     res.json({ success: true, msg: 'Successful created new account.' });
-  //   });
-  // }
 });
 
 //api/auth/user/:id
@@ -70,6 +48,140 @@ router.get('/users', function (req, res) {
 
 });
 
+// 
+router.delete('/deleteSubscription/:id', function (req, res) {
+ // const filter = { name: req.body.subscription_id };
+ // const update = { ObjectId: null };
+
+  User.updateOne({ _id: req.params.id }, { $pull: { subscriptions: req.body.subscription_id } }, function (err, result) {
+    if (err) {
+      //req.flash("error", "Uh Oh! Something went wrong.");
+      //return res.redirect("/campgrounds");
+      res.status(401).send({ success: false, msg: 'Deletion failed. subscription not found.' });
+      //res.json(result);
+    }
+    else {
+      // req.flash("success", "Comment has been deleted!");
+      res.json(result);
+      //res.status(203).send({ success: true, msg: 'deleted' });
+    }
+    // return res.json(campground);
+  });
+
+
+
+  //   Campground.update({ _id: req.params.id }, { $pull: { comments: req.params.comment_id } }, function(err, campground){
+  //     if(err){
+  //         req.flash("error", "Uh Oh! Something went wrong.");
+  //         return res.redirect("/campgrounds");
+  //     }
+  //     req.flash("success", "Comment has been deleted!");
+  //     return res.redirect("back");
+  // });
+  // User.findById(req.params.id)
+  //   .then(user => {
+  //     user.subscriptions.update(filter,
+  //       { $pull: { comments: req.params.comment_id } }, {
+  //       new: true
+  //     })
+  //       .catch(err => {
+  //         res.status(439).json(err)
+  //       });
+
+
+
+
+
+
+  //     // { $pull: { comments: req.params.comment_id } }
+
+  //     // type: Schema.Types.ObjectId,
+  //     // ref: "Subscription"
+
+
+  //   })
+  //   .catch(err => res.send(err));
+
+
+
+  // User.subscriptions.remove(
+  //   {
+  //     _id: mongojs.ObjectID(req.params.id)
+  //   },
+  //   (err, data) => {
+
+  //     if (error) {
+  //       res.send(error);
+  //     } else {
+  //       res.send(data);
+  //     }
+
+  //   })
+
+
+  // User.findById(req.params.id)
+  //   .then(user => {
+
+
+
+
+  // filter, (err, res) => {
+  // res.status(401).send({ success: true, msg: 'deleted' });
+  //}
+  // )
+
+  //     .catch(err => {
+  //       res.status(459).json(err);
+  //     });
+
+  // })
+
+
+  // db.orders.deleteOne( { "_id" : ObjectId("563237a41a4d68582c2509da") } );
+
+
+
+  // app.delete("/delete/:id", (req, res) => {
+  //   db.notes.remove(
+  //     {
+  //       _id: mongojs.ObjectID(req.params.id)
+  //     },
+  //     (error, data) => {
+  //       if (error) {
+  //         res.send(error);
+  //       } else {
+  //         res.send(data);
+  //       }
+  //     }
+  //   );
+  // });
+
+
+
+
+
+  // .catch(err => res.status(439).json(err));
+
+});
+
+// app.delete("/delete/:id", (req, res) => {
+//   db.notes.remove(
+//     {
+//       _id: mongojs.ObjectID(req.params.id)
+//     },
+//     (error, data) => {
+//       if (error) {
+//         res.send(error);
+//       } else {
+//         res.send(data);
+//       }
+//     }
+//   );
+// });
+
+
+
+
 // api/auth/subscription
 // this takes a username and a subscription, saves the subscription,
 // and returns the username, email, and ids of the subscriptions that
@@ -82,9 +194,9 @@ router.post('/subscription', function (req, res) {
       User.findOneAndUpdate(filter,
         { $push: { subscriptions: result.id } }, { new: true }))
 
-        .then((result) => {
-      const {email, username, subscriptions} = result;
-      res.json({email, username, subscriptions});
+    .then((result) => {
+     // const { email, username, subscriptions } = result;
+      res.json(result);
     })
     .catch(err => res.status(439).json(err));
 
@@ -94,27 +206,13 @@ router.post('/subscription', function (req, res) {
 router.get('/getAll', function (req, res) {
 
   User.find({})
-  .then(result => {
-    res.json(result);
-  })
-  .catch(err => {
-    res.json(err);
-  })
+    .then(result => {
+      res.json(result);
+    })
+    .catch(err => {
+      res.json(err);
+    })
 });
-
-
-// app.get("/library", (req, res) => {
-//   db.Library.find({})
-//     .then(dbLibrary => {
-//       res.json(dbLibrary);
-//     })
-//     .catch(err => {
-//       res.json(err);
-//     });
-// });
-
-
-
 
 //api/auth/login
 router.post('/login', function (req, res) {
