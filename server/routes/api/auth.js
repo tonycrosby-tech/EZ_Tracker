@@ -1,6 +1,7 @@
 const router = require('express').Router();
 //const passport = require('../../config/passport');
 const User = require('../../models/User');
+const Subscription = require('../../models/Subscription');
 const authController = require('../../controllers/auth');
 const isAuthenticated = require('../../config/middleware/isAuthenticated');
 const bcrypt = require('bcryptjs');
@@ -62,12 +63,58 @@ router.get('/users', function (req, res) {
     .then(user => res.json(user))
     .catch(err => res.status(439).json(err));
 
-    // .find(req.query)
-    // .sort({ date: -1 })
-    // .then(dbModel => res.json(dbModel))
-    // .catch(err => res.status(422).json(err));
+  // .find(req.query)
+  // .sort({ date: -1 })
+  // .then(dbModel => res.json(dbModel))
+  // .catch(err => res.status(422).json(err));
 
 });
+
+// api/auth/subscription
+// this takes a username and a subscription, saves the subscription,
+// and returns the username, email, and ids of the subscriptions that
+//are attached to the user
+router.post('/subscription', function (req, res) {
+  const filter = { username: req.body.username };
+
+  Subscription.create(req.body.subscriptions)
+    .then((result) =>
+      User.findOneAndUpdate(filter,
+        { $push: { subscriptions: result.id } }, { new: true }))
+
+        .then((result) => {
+      const {email, username, subscriptions} = result;
+      res.json({email, username, subscriptions});
+    })
+    .catch(err => res.status(439).json(err));
+
+});
+
+//api/auth/getAll
+router.get('/getAll', function (req, res) {
+
+  User.find({})
+  .then(result => {
+    res.json(result);
+  })
+  .catch(err => {
+    res.json(err);
+  })
+});
+
+
+// app.get("/library", (req, res) => {
+//   db.Library.find({})
+//     .then(dbLibrary => {
+//       res.json(dbLibrary);
+//     })
+//     .catch(err => {
+//       res.json(err);
+//     });
+// });
+
+
+
 
 //api/auth/login
 router.post('/login', function (req, res) {
