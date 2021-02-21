@@ -21,7 +21,8 @@ router.post("/register", function (req, res) {
       });
     } else {
       res.json({
-        success: true, message: "Your account has been saved"
+        //success: true, message: "Your account has been saved"
+        user
       })
     }
   });
@@ -29,6 +30,7 @@ router.post("/register", function (req, res) {
 });
 
 //api/auth/user/:id
+// find user by id
 router.get('/user/:id', function (req, res) {
   User.findById(req.params.id)
     .then(user => res.json(user))
@@ -48,10 +50,10 @@ router.get('/users', function (req, res) {
 
 });
 
-// 
+// pass the user id in the uri and the subscription id in the body
 router.delete('/deleteSubscription/:id', function (req, res) {
- // const filter = { name: req.body.subscription_id };
- // const update = { ObjectId: null };
+  // const filter = { name: req.body.subscription_id };
+  // const update = { ObjectId: null };
 
   User.updateOne({ _id: req.params.id }, { $pull: { subscriptions: req.body.subscription_id } }, function (err, result) {
     if (err) {
@@ -68,121 +70,9 @@ router.delete('/deleteSubscription/:id', function (req, res) {
     // return res.json(campground);
   });
 
-
-
-  //   Campground.update({ _id: req.params.id }, { $pull: { comments: req.params.comment_id } }, function(err, campground){
-  //     if(err){
-  //         req.flash("error", "Uh Oh! Something went wrong.");
-  //         return res.redirect("/campgrounds");
-  //     }
-  //     req.flash("success", "Comment has been deleted!");
-  //     return res.redirect("back");
-  // });
-  // User.findById(req.params.id)
-  //   .then(user => {
-  //     user.subscriptions.update(filter,
-  //       { $pull: { comments: req.params.comment_id } }, {
-  //       new: true
-  //     })
-  //       .catch(err => {
-  //         res.status(439).json(err)
-  //       });
-
-
-
-
-
-
-  //     // { $pull: { comments: req.params.comment_id } }
-
-  //     // type: Schema.Types.ObjectId,
-  //     // ref: "Subscription"
-
-
-  //   })
-  //   .catch(err => res.send(err));
-
-
-
-  // User.subscriptions.remove(
-  //   {
-  //     _id: mongojs.ObjectID(req.params.id)
-  //   },
-  //   (err, data) => {
-
-  //     if (error) {
-  //       res.send(error);
-  //     } else {
-  //       res.send(data);
-  //     }
-
-  //   })
-
-
-  // User.findById(req.params.id)
-  //   .then(user => {
-
-
-
-
-  // filter, (err, res) => {
-  // res.status(401).send({ success: true, msg: 'deleted' });
-  //}
-  // )
-
-  //     .catch(err => {
-  //       res.status(459).json(err);
-  //     });
-
-  // })
-
-
-  // db.orders.deleteOne( { "_id" : ObjectId("563237a41a4d68582c2509da") } );
-
-
-
-  // app.delete("/delete/:id", (req, res) => {
-  //   db.notes.remove(
-  //     {
-  //       _id: mongojs.ObjectID(req.params.id)
-  //     },
-  //     (error, data) => {
-  //       if (error) {
-  //         res.send(error);
-  //       } else {
-  //         res.send(data);
-  //       }
-  //     }
-  //   );
-  // });
-
-
-
-
-
-  // .catch(err => res.status(439).json(err));
-
 });
 
-// app.delete("/delete/:id", (req, res) => {
-//   db.notes.remove(
-//     {
-//       _id: mongojs.ObjectID(req.params.id)
-//     },
-//     (error, data) => {
-//       if (error) {
-//         res.send(error);
-//       } else {
-//         res.send(data);
-//       }
-//     }
-//   );
-// });
-
-
-
-
-// api/auth/subscription
+// api/auth/subscription--add a subscription
 // this takes a username and a subscription, saves the subscription,
 // and returns the username, email, and ids of the subscriptions that
 //are attached to the user
@@ -195,14 +85,14 @@ router.post('/subscription', function (req, res) {
         { $push: { subscriptions: result.id } }, { new: true }))
 
     .then((result) => {
-     // const { email, username, subscriptions } = result;
+      // const { email, username, subscriptions } = result;
       res.json(result);
     })
     .catch(err => res.status(439).json(err));
 
 });
 
-//api/auth/getAll
+//api/auth/getAll--get all users and subscriptions
 router.get('/getAll', function (req, res) {
 
   User.find({})
@@ -219,6 +109,7 @@ router.post('/login', function (req, res) {
   const { username, password } = req.body;
   User.findOne({
     username: req.body.username
+    //password: req.body.password
   }, function (err, user) {
     if (err) {
       res.status(500);
@@ -229,24 +120,37 @@ router.post('/login', function (req, res) {
     }
     else {
       //validPassword
-      // console.log(user);
-      // //user.validPassword(password, (err, same)  => {
-      //   if (err)
-      //   {
+      console.log(user);
+      user.authenticate(req.body.password, (err, result) => {
+        if (err)
+          res.status(401).send({ success: false, msg: 'login failed.' });
+        else if (result === false)
+          res.status(401).send({ success: false, msg: 'login failed.' });
+        else
+          res.json(result);
+
+      });
+      // const user = new DefaultUser({username: username});
+      // await user.setPassword(req.body.password);
+      // await user.save();
+      // const { user } = await DefaultUser.authenticate()('user', 'password');
+
+      // user.validPassword(req.body.password, (err, same) => {
+      //   if (err) {
       //     res.status(500);
       //   }
-      //   else if (!same) 
-      //   {
+      //   else if (!same) {
       //     res.status(401).json('incorrect email or password');
       //   }
       //   const { payload } = username;
       //   const token = jwt.sign(payload, secret, {
       //     expiresIn: '1h'
       //   });
+      //   const { password, username, email } = user;
+      //   res.json({ username, email });
+
       //   res.cookie('token', token, { httpOnly: true }).sendStatus(200);
       //})
-      const { password, username, email } = user;
-      res.json({ username, email });
       //res.json(user);
     }
   });

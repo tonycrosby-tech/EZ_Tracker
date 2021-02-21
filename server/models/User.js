@@ -36,9 +36,9 @@ userSchema.plugin(passportLocalMongoose);
 userSchema.methods.generateHash = function (password) {
     return bcrypt.hash(password, bcrypt.genSalt(10), null);
 };
-// userSchema.methods.validPassword = function(password) {
-//   return bcrypt.compare(password, this.password);
-// };
+userSchema.methods.validPassword = function(password) {
+  return bcrypt.compare(password, this.password);
+};
 
 userSchema.plugin(passportLocalMongoose);
 
