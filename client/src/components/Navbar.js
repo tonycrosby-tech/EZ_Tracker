@@ -166,7 +166,7 @@ const Navbar = function () {
                 <Link style={{ textDecoration: "none" }} href="/account">
                   <MenuItem onClick={handleClose}>My account</MenuItem>
                 </Link >
-                <Link style={{ textDecoration: "none" }} href="/subs">
+                <Link style={{ textDecoration: "none" }} href="/subscription">
                   <MenuItem onClick={handleClose}>Subscriptions</MenuItem>
                 </Link>
                 <Link style={{ textDecoration: "none" }} href="/logout">

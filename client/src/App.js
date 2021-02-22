@@ -14,9 +14,9 @@ import Profile from "./pages/Profile";
 import Account from "./pages/Settings";
 
 function App() {
-  const [user, setUser] = useState(null); // should be global state, probably context
+  const [auth, setAuth] = useState(null); // should be global state, probably context
 
-  const isAuthenticated = !!user;
+  const isAuthenticated = !!auth;
 
   // if (!isAuthenticated) return <Redirect to="/" />;
   console.log(isAuthenticated);
@@ -31,7 +31,7 @@ function App() {
           <Route exact path="/about" component={About} />
           <Route exact path="/contact" component={Contact} />
           <Route exact path="/home" component={Header} />
-          <Route exact path="/subs" component={Subscription} />
+          <Route exact path="/subscription" component={Subscription} />
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/account" component={Account} />
           <Route path="/404" component={NotFoundPage} />
