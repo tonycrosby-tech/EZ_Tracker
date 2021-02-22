@@ -125,7 +125,7 @@ const Subscription = () => {
 
       <div>
       <List className={classes.root}>
-      <ListItem>
+      <ListItem button>
         <ListItemAvatar>
             <AddCircleIcon />
         </ListItemAvatar>
