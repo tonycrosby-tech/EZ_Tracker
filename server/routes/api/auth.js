@@ -1,11 +1,11 @@
 const router = require('express').Router();
 const User = require('../../models/User');
 const Subscription = require('../../models/Subscription');
+const passport = require('passport');
 const authController = require('../../controllers/auth');
 const isAuthenticated = require('../../config/middleware/isAuthenticated');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-
 // api/auth/register
 // input: email, username, password
 // output: registered user, send back email and username, and id of user
@@ -189,7 +189,10 @@ router.put('/updateSubCost/:id', function (req, res) {
 //api/auth/login
 // input: username and password
 // output: authenticated password and found username
-router.post('/login', function (req, res) {
+router.post('/login',   
+passport.authenticate('local', { successRedirect: '/home',
+failureRedirect: '/login'}),
+function (req, res) {
   const { username, password } = req.body;
 
   User.findOne({

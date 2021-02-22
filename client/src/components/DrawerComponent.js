@@ -9,7 +9,6 @@ import {
   Link,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
-import Redirect from 'react-router-dom';
 
 
 const DrawerComponent = () => {
@@ -28,6 +27,11 @@ const DrawerComponent = () => {
 
   const [openDrawer, setOpenDrawer] = useState(false);
   //Css
+  // const [user, setUser] = useState(null); // should be global state, probably context
+
+  // const isAuthenticated = !!user;
+  
+  // if(!isAuthenticated) return <Redirect to='/' />;
 
   const classes = useStyles();
   return (
@@ -49,8 +53,6 @@ const DrawerComponent = () => {
               <ListItemText> Home</ListItemText>
             </Link>
           </ListItem>
-          {isAuthenticated && (
-            <div>
           <ListItem divider button onClick={() => setOpenDrawer(false)}>
             <Link
               style={{ textDecoration: "none" }}
@@ -60,8 +62,6 @@ const DrawerComponent = () => {
               <ListItemText> Profile</ListItemText>
             </Link>
           </ListItem>
-        </div>
-          )}
 
           <ListItem divider button onClick={() => setOpenDrawer(false)}>
             <Link
@@ -83,8 +83,6 @@ const DrawerComponent = () => {
             </Link>
           </ListItem>
 
-          {auth && (
-            <div>
           <ListItem divider button onClick={() => setOpenDrawer(false)}>
             <Link
               style={{ textDecoration: "none" }}
@@ -94,8 +92,6 @@ const DrawerComponent = () => {
               <ListItemText> Logout</ListItemText>
             </Link>
           </ListItem>
-        </div>
-          )}
         </List>
       </Drawer>
       {/* Since this is inside our toolbar we can push it to the end of the toolbar */}

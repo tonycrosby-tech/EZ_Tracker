@@ -18,7 +18,7 @@ function App() {
 
   const isAuthenticated = !!user;
 
-  if (!isAuthenticated) return <Redirect to="/" />;
+  // if (!isAuthenticated) return <Redirect to="/" />;
   console.log(isAuthenticated);
   return (
     <React.Fragment>
