@@ -53,7 +53,7 @@ const DrawerComponent = () => {
               <ListItemText> Home</ListItemText>
             </Link>
           </ListItem>
-          <ListItem divider button onClick={() => setOpenDrawer(false)}>
+          {/* <ListItem divider button onClick={() => setOpenDrawer(false)}>
             <Link
               style={{ textDecoration: "none" }}
               href="/profile"
@@ -61,7 +61,7 @@ const DrawerComponent = () => {
             >
               <ListItemText> Profile</ListItemText>
             </Link>
-          </ListItem>
+          </ListItem> want this to only show when a user is logged in */}
 
           <ListItem divider button onClick={() => setOpenDrawer(false)}>
             <Link
@@ -83,7 +83,7 @@ const DrawerComponent = () => {
             </Link>
           </ListItem>
 
-          <ListItem divider button onClick={() => setOpenDrawer(false)}>
+          {/* <ListItem divider button onClick={() => setOpenDrawer(false)}>
             <Link
               style={{ textDecoration: "none" }}
               href="/logout"
@@ -91,7 +91,7 @@ const DrawerComponent = () => {
             >
               <ListItemText> Logout</ListItemText>
             </Link>
-          </ListItem>
+          </ListItem> want this to only show when a user is logged in */} 
         </List>
       </Drawer>
       {/* Since this is inside our toolbar we can push it to the end of the toolbar */}
