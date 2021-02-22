@@ -84,18 +84,10 @@ const Subscription = () => {
 
   return (
     <div>
-      <h1>Subscriptions</h1>
-      <Grid Container>
-        <Grid item xs={6}>
-            <DataGrid
-              rows={rows}
-              columns={columns}
-              pageSize={4}
-              checkboxSelection
-            />
-        </Grid>
-
-          <Grid item xs={6}>
+      <h1>Subscriptions - Amount Spent: $0 </h1>
+      <h3>Remaining Balance - $0</h3>
+      <Grid Container spacing={3}>
+          <Grid item xs>
             <Card className={classes.root}>
               <CardHeader
                 avatar={
@@ -118,6 +110,17 @@ const Subscription = () => {
                 </Typography>
               </CardContent>
             </Card>
+          </Grid>
+
+          <Grid item xs>
+          <div style={{ height: 300, width: "50%" }}>
+            <DataGrid
+              rows={rows}
+              columns={columns}
+              pageSize={4}
+              checkboxSelection
+            />
+          </div>
           </Grid>
       </Grid>
 
