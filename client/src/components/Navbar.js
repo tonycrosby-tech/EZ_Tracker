@@ -7,10 +7,9 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import IconButton from "@material-ui/core/IconButton";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
-import { makeStyles} from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
-import DrawerComponent from './DrawerComponent';
-
+import DrawerComponent from "./DrawerComponent";
 const useStyles = makeStyles((theme) => ({
   "@global": {
     ul: {
@@ -70,7 +69,6 @@ const Navbar = function () {
   };
   return (
     <div className={classes.root}>
-      
       <AppBar
         position="static"
         color="default"
@@ -80,11 +78,11 @@ const Navbar = function () {
         })}
       >
         <Toolbar>
-        <DrawerComponent />
+          <DrawerComponent />
           <Typography variant="h6" className={classes.title} noWrap>
             EZ Tracker
           </Typography>
-          <Link
+          <Link style={{ textDecoration: "none" }}
             variant="button"
             color="textPrimary"
             href="/home"
@@ -92,7 +90,7 @@ const Navbar = function () {
           >
             Home
           </Link>
-          <Link
+          <Link style={{ textDecoration: "none" }}
             variant="button"
             color="textPrimary"
             href="/about"
@@ -100,7 +98,7 @@ const Navbar = function () {
           >
             About
           </Link>
-          <Link
+          <Link style={{ textDecoration: "none" }}
             variant="button"
             color="textPrimary"
             href="/contact"
@@ -152,13 +150,13 @@ const Navbar = function () {
                 open={open}
                 onClose={handleClose}
               >
-                <Link href="/profile">
+                <Link style={{ textDecoration: "none" }} href="/profile">
                   <MenuItem onClick={handleClose}>Profile</MenuItem>
                 </Link>
-                <Link href="/account">
+                <Link style={{ textDecoration: "none" }} href="/account">
                   <MenuItem onClick={handleClose}>My account</MenuItem>
-                </Link>
-                <Link href="/subs">
+                </Link >
+                <Link style={{ textDecoration: "none" }} href="/subs">
                   <MenuItem onClick={handleClose}>Subscriptions</MenuItem>
                 </Link>
               </Menu>

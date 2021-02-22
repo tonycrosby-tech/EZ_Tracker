@@ -107,6 +107,7 @@ const Subscription = () => {
 
   return (
     <div>
+      <h1>Hello, User</h1>
       <h1>Subscriptions - Amount Spent: $0 </h1>
       <h3>Remaining Balance - $0</h3>
       <List className={classes.root}>
@@ -117,7 +118,10 @@ const Subscription = () => {
           <ListItemText primary="Add a new Subscription" />
         </ListItem>
       </List>
-      <Grid Container spacing={3}>
+      <Grid   container
+  direction="row"
+  justify="center"
+  alignItems="center">
         <Grid item xs>
           <Card className={classes.root}>
             <CardHeader
@@ -144,11 +148,11 @@ const Subscription = () => {
         </Grid>
 
         <Grid item xs>
-          <div style={{ height: 300, width: "100%" }}>
+          <div style={{ height: 600, width: "100%" }}>
             <DataGrid
               rows={rows}
               columns={columns}
-              pageSize={4}
+              pageSize={6}
               checkboxSelection
             />
           </div>
