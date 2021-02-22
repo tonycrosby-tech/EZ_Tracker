@@ -9,9 +9,6 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import Switch from "@material-ui/core/Switch";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormGroup from "@material-ui/core/FormGroup";
 import MenuIcon from "@material-ui/icons/Menu";
 import clsx from "clsx";
 import Drawer from "@material-ui/core/Drawer";
@@ -22,6 +19,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import SettingsIcon from '@material-ui/icons/Settings';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import HomeIcon from '@material-ui/icons/Home';
 import Divider from "@material-ui/core/Divider";
 import List from "@material-ui/core/List";
@@ -96,18 +94,6 @@ const Navbar = function () {
   };
   return (
     <div className={classes.root}>
-      {/* <FormGroup>
-        <FormControlLabel
-          control={
-            <Switch
-              checked={auth}
-              onChange={handleChange}
-              aria-label="login switch"
-            />
-          }
-          label={auth ? 'Logout' : 'Login'}
-        />
-      </FormGroup> */}
       <AppBar
         position="static"
         color="default"
@@ -222,65 +208,6 @@ const Navbar = function () {
           </Drawer>
         </Toolbar>
       </AppBar>
-      {/* <AppBar
-        position="static"
-        color="default"
-        elevation={0}
-        className={classes.appBar}
-      >
-        <Toolbar>
-          <Typography
-            variant="h6"
-            color="inherit"
-            noWrap
-            className={classes.title}
-          >
-            EZ Tracker
-          </Typography>
-          <nav>
-            <Link
-              variant="button"
-              color="textPrimary"
-              href="/"
-              className={classes.link}
-            >
-              Home
-            </Link>
-            <Link
-              variant="button"
-              color="textPrimary"
-              href="/about"
-              className={classes.link}
-            >
-              About
-            </Link>
-            <Link
-              variant="button"
-              color="textPrimary"
-              href="/contact"
-              className={classes.link}
-            >
-              Contact
-            </Link>
-            <Link
-              variant="button"
-              color="textPrimary"
-              href="/support"
-              className={classes.link}
-            >
-              Support
-            </Link>
-          </nav>
-          <Button
-            href="/login"
-            color="primary"
-            variant="outlined"
-            className={classes.Logout}
-          >
-            Login
-          </Button>
-        </Toolbar>
-      </AppBar> */}
     </div>
   );
 };
