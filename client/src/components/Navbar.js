@@ -195,7 +195,6 @@ const Navbar = function () {
             <List>
               {["Home", "Profile", "Settings", "Logout"].map((text, index) => (
                 <ListItem button key={text}>
-                  <Link href='/'/>
                   <ListItemIcon>
                     {index % 2 === 0 ? <HomeIcon /> : <AccountBoxIcon /> }
                   </ListItemIcon>

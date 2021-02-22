@@ -5,7 +5,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import SignInSide from './pages/SignIn';
 import Signup from './pages/Signup';
 import Header from './components/Header';
-import About from './pages/About';
+import Subscription from './pages/Subscription';
 import Account from './pages/Account';
 import Navbar from './components/Navbar';
 import NotFoundPage from './pages/NotFoundPage';
@@ -21,7 +21,7 @@ function App() {
           <Route exact path="/" component={Signup} />
           <Route exact path="/home" component={Header} />
           <Route exact path="/login" component={SignInSide} />
-          <Route exact path="/about" component={About} />
+          <Route exact path="/subs" component={Subscription} />
           <Route exact path="/account" component={Account}/>
           <Route exact path="/contact" component={Contact} />
           <Route exact path="/support" component={Support} />
