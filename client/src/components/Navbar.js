@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Navbar = function () {
   const classes = useStyles();
-  const [auth, setAuth] = React.useState(true);
+  const [auth, setAuth] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 

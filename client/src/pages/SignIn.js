@@ -8,7 +8,7 @@ import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
-
+import Box from '@material-ui/core/Box';
 class Login extends Component {
   constructor() {
     super();
@@ -18,6 +18,7 @@ class Login extends Component {
       message: "",
     };
   }
+  
   onChange = (e) => {
     const state = this.state;
     state[e.target.name] = e.target.value;
@@ -45,24 +46,6 @@ class Login extends Component {
   render() {
     const { username, password, message } = this.state;
     return (
-      // <div class="container">
-      //   <form class="form-signin" onSubmit={this.onSubmit}>
-      //     {message !== '' &&
-      //       <div class="alert alert-warning alert-dismissible" role="alert">
-      //         { message }
-      //       </div>
-      //     }
-      //     <h2 class="form-signin-heading">Please sign in</h2>
-      //     <label for="inputEmail" class="sr-only">Email address</label>
-      //     <input type="email" class="form-control" placeholder="Email address" name="username" value={username} onChange={this.onChange} required/>
-      //     <label for="inputPassword" class="sr-only">Password</label>
-      //     <input type="password" class="form-control" placeholder="Password" name="password" value={password} onChange={this.onChange} required/>
-      //     <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
-      //     <p>
-      //       Not a member? <Link to="/register"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Register here</Link>
-      //     </p>
-      //   </form>
-      // </div>
       <Grid container component="main">
         <CssBaseline />
         <Grid item xs={false} sm={4} md={7} />
