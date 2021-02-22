@@ -5,7 +5,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import Card from "@material-ui/core/Card";
@@ -16,6 +15,10 @@ import Typography from "@material-ui/core/Typography";
 import { red } from "@material-ui/core/colors";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
 import "react-calendar/dist/Calendar.css";
 
 const columns = [
@@ -75,10 +78,30 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     backgroundColor: red[500],
   },
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
 }));
 
 const Subscription = () => {
   const [value, onChange] = useState(new Date());
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const classes = useStyles();
 
@@ -87,32 +110,32 @@ const Subscription = () => {
       <h1>Subscriptions - Amount Spent: $0 </h1>
       <h3>Remaining Balance - $0</h3>
       <Grid Container spacing={3}>
-          <Grid item xs>
-            <Card className={classes.root}>
-              <CardHeader
-                avatar={
-                  <Avatar aria-label="recipe" className={classes.avatar}>
-                    N
-                  </Avatar>
-                }
-                action={
-                  <IconButton aria-label="settings">
-                    <MoreVertIcon />
-                  </IconButton>
-                }
-                title="Expiration for Netflix"
-                subheader="February 21, 2020"
-              />
-              <Calendar onChange={onChange} value={value} />
-              <CardContent>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  Your Subscription is set to expire: Februrary 21, 2021
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
+        <Grid item xs>
+          <Card className={classes.root}>
+            <CardHeader
+              avatar={
+                <Avatar aria-label="recipe" className={classes.avatar}>
+                  N
+                </Avatar>
+              }
+              action={
+                <IconButton aria-label="settings">
+                  <MoreVertIcon />
+                </IconButton>
+              }
+              title="Expiration for Netflix"
+              subheader="February 21, 2020"
+            />
+            <Calendar onChange={onChange} value={value} />
+            <CardContent>
+              <Typography variant="body2" color="textSecondary" component="p">
+                Your Subscription is set to expire: Februrary 21, 2021
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
 
-          <Grid item xs>
+        <Grid item xs>
           <div style={{ height: 300, width: "50%" }}>
             <DataGrid
               rows={rows}
@@ -121,18 +144,37 @@ const Subscription = () => {
               checkboxSelection
             />
           </div>
-          </Grid>
+        </Grid>
       </Grid>
 
       <div>
         <List className={classes.root}>
-          <ListItem button>
-            <ListItemAvatar>
+          <ListItem>
+            <Button onClick={handleOpen}>
               <AddCircleIcon />
-            </ListItemAvatar>
+            </Button>
             <ListItemText primary="Add a new Subscription" />
           </ListItem>
         </List>
+        <Modal
+        aria-labelledby="New Subscription"
+        aria-describedby="new-subscription"
+        className={classes.modal}
+        open={open}
+        onClose={handleClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <Fade in={open}>
+          <div className={classes.paper}>
+            <h2 id="New Subscription">New Subscription</h2>
+            <p id="new-subscription">To create a new Subscription please enter the details below.</p>
+          </div>
+        </Fade>
+      </Modal>
       </div>
     </div>
   );
