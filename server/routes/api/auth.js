@@ -189,10 +189,7 @@ router.put('/updateSubCost/:id', function (req, res) {
 //api/auth/login
 // input: username and password
 // output: authenticated password and found username
-router.post('/login',   
-passport.authenticate('local', { successRedirect: '/home',
-failureRedirect: '/login'}),
-function (req, res) {
+router.post('/login', function (req, res) {
   const { username, password } = req.body;
 
   User.findOne({
