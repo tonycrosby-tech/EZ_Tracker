@@ -250,7 +250,7 @@ router.put('/addSubAlreadyExistToUser',isAuthenticated, function (req, res) {
 router.get('/logout', function(req, res) {
   try{
     req.logout();
-    res.redirect('/');
+    res.json({"send to login" : true});
     //res.json({"logged out successfully" : "true"});
 
   }
