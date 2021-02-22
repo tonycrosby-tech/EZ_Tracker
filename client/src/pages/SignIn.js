@@ -50,7 +50,7 @@ class Login extends Component {
       <Grid container component="main">
         <CssBaseline />
         <Grid item xs={false} sm={4} md={7} />
-        <Grid item xs={12} sm={8} md={5} elevation={6} square>
+        <Grid item xs={12} sm={8} md={5} elevation={6}>
           <div>
             <Avatar>
               <LockOutlinedIcon />

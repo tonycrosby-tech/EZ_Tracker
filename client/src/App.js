@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -12,14 +12,32 @@ import NotFoundPage from "./pages/NotFoundPage";
 import Contact from "./pages/Contact";
 import Profile from "./pages/Profile";
 import Account from "./pages/Settings";
+import API from "./utils/API";
+
 
 function App() {
-  const [auth, setAuth] = useState(null); // should be global state, probably context
+  const [auth, setAuth] = useState(''); // should be global state, probably context
 
   const isAuthenticated = !!auth;
 
+  // useEffect(() => {
+    
+  // }, [auth]);
+
+  // const isLoggedIn = () => {
+  //   API.getUser()
+  //   .then(res => {
+  //     JSON.stringify(res.auth);
+  //     setdata(JSON.stringify(res.auth));
+  //   })
+  //   .catch(err => console.log(err));
+  // }
+  // console.log(isLoggedIn);
+
+
+
   // if (!isAuthenticated) return <Redirect to="/" />;
-  console.log(isAuthenticated);
+  // console.log(isAuthenticated);
   return (
     <React.Fragment>
       <CssBaseline />
