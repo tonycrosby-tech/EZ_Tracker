@@ -1,6 +1,6 @@
-import axios from 'axios';
+// import axios from 'axios';
 
-export default {
+// export default {
 //   getSubs: function () {
 //     return axios.get('/api/subs');
 //   },
@@ -13,9 +13,9 @@ export default {
 //   updateSubs: function (updateInfo) {
 //     return axios.post('/api/subs/' + id, updateInfo);
 //   },
-  getUser: function () {
-    return axios.get('/api/user');
-  },
+//   getUser: function () {
+//     return axios.get('/api/user');
+//   },
 //   updateUser: function (updateInfo) {
 //     return axios.post('/api/user/' + id, updateInfo);
 //   },
@@ -27,4 +27,4 @@ export default {
 //   deleteUser: function () {
 //     return axios.delete('/api/user' + id);
 //   },
-};
+// };
