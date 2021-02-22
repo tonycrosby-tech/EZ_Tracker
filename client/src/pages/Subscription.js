@@ -3,11 +3,11 @@ import { DataGrid } from "@material-ui/data-grid";
 import Calendar from "react-calendar";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Avatar from '@material-ui/core/Avatar';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import Avatar from "@material-ui/core/Avatar";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
@@ -85,53 +85,51 @@ const Subscription = () => {
   return (
     <div>
       <h1>Subscriptions</h1>
-      <Grid direction="column" justify="left">
-        <div style={{ height: 300, width: "50%" }}>
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            pageSize={4}
-            checkboxSelection
-          />
-        </div>
+      <Grid Container>
+        <Grid item xs={6}>
+            <DataGrid
+              rows={rows}
+              columns={columns}
+              pageSize={4}
+              checkboxSelection
+            />
+        </Grid>
+
+          <Grid item xs={6}>
+            <Card className={classes.root}>
+              <CardHeader
+                avatar={
+                  <Avatar aria-label="recipe" className={classes.avatar}>
+                    N
+                  </Avatar>
+                }
+                action={
+                  <IconButton aria-label="settings">
+                    <MoreVertIcon />
+                  </IconButton>
+                }
+                title="Expiration for Netflix"
+                subheader="February 21, 2020"
+              />
+              <Calendar onChange={onChange} value={value} />
+              <CardContent>
+                <Typography variant="body2" color="textSecondary" component="p">
+                  Your Subscription is set to expire: Februrary 21, 2021
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
       </Grid>
 
       <div>
-        <Grid direction="column" justify="left">
-          <Card className={classes.root}>
-            <CardHeader
-              avatar={
-                <Avatar aria-label="recipe" className={classes.avatar}>
-                  N
-                </Avatar>
-              }
-              action={
-                <IconButton aria-label="settings">
-                  <MoreVertIcon />
-                </IconButton>
-              }
-              title="Expiration for Netflix"
-              subheader="February 21, 2020"
-            />
-            <Calendar onChange={onChange} value={value} />
-            <CardContent>
-              <Typography variant="body2" color="textSecondary" component="p">
-                Your Subscription is set to expire: Februrary 21, 2021
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-      </div>
-
-      <div>
-      <List className={classes.root}>
-      <ListItem button>
-        <ListItemAvatar>
-            <AddCircleIcon />
-        </ListItemAvatar>
-        <ListItemText primary="Add a new Subscription" />
-      </ListItem>
-      </List>
+        <List className={classes.root}>
+          <ListItem button>
+            <ListItemAvatar>
+              <AddCircleIcon />
+            </ListItemAvatar>
+            <ListItemText primary="Add a new Subscription" />
+          </ListItem>
+        </List>
       </div>
     </div>
   );
