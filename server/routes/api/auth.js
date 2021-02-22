@@ -246,6 +246,18 @@ router.put('/addSubAlreadyExistToUser', function (req, res) {
     .catch(err => res.status(439).json(err));
 });
 
+router.get('/logout', function(req, res) {
+  try{
+    req.logout();
+    res.json({"logged out successfully" : "true"});
+
+  }
+  catch(ex){
+    res.status(401).send({ success: false, msg: 'logout failed.' });
+  }
+  //res.redirect('/');
+});
+
 
 // Matches with '/api/auth/login'
 // router.route('/login').post(authController.login);
