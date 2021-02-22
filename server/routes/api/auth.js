@@ -81,7 +81,7 @@ router.delete('/deleteSubscription/:id', function (req, res) {
 router.post('/subscription', function (req, res) {
   const filter = { username: req.body.username };
 
-  Subscription.create(req.body.subscriptions)
+  Subscription.create(req.body.subscription)
     .then((result) =>
       User.findOneAndUpdate(filter,
         { $push: { subscriptions: result.id } }, { new: true }))
@@ -244,6 +244,18 @@ router.put('/addSubAlreadyExistToUser', function (req, res) {
       res.json(result);
     })
     .catch(err => res.status(439).json(err));
+});
+
+router.get('/logout', function(req, res) {
+  try{
+    req.logout();
+    res.json({"logged out successfully" : "true"});
+
+  }
+  catch(ex){
+    res.status(401).send({ success: false, msg: 'logout failed.' });
+  }
+  //res.redirect('/');
 });
 
 
