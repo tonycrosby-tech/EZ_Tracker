@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 import axios from "axios";
 import Link from "@material-ui/core/Link";
 import Avatar from "@material-ui/core/Avatar";
@@ -31,10 +31,10 @@ class Login extends Component {
     const { username, password } = this.state;
 
     axios
-      .get("/api/auth/login", { username, password })
+      .post("/api/auth/login",{ username, password })
       .then((res) => {
         this.setState({ message: "" });
-        res.json(res);
+        this.props.history.push("/home");
       })
       .catch((error) => {
         this.setState({
