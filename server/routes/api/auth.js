@@ -216,6 +216,26 @@ router.post('/login', function (req, res) {
   // },
 });
 
+// input: id of subscription and name of user
+router.put('/addSubAlreadyExistToUser', function (req, res) {
+  const filter = { username: req.body.username };
+
+  // Subscription.create(req.body.subscriptions)
+  // .then(
+  // (result) =>
+  User.findOneAndUpdate(filter,
+    { $push: { subscriptions: req.body.subscription } }, { new: true }
+  )
+    //)
+
+    .then((result) => {
+      // const { email, username, subscriptions } = result;
+      res.json(result);
+    })
+    .catch(err => res.status(439).json(err));
+});
+
+
 // Matches with '/api/auth/login'
 // router.route('/login').post(authController.login);
 
