@@ -7,7 +7,7 @@ class NotFoundPage extends Component {
       <div>
         <h1 style={{ textAlign: "center" }}>PAGE NOT FOUND</h1>
         <h1 style={{ textAlign: "center" }}>
-          <Link to="/">Go to Home </Link>
+          <Link to="/home">Go to Home </Link>
         </h1>
       </div>
     );

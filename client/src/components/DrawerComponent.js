@@ -39,51 +39,43 @@ const DrawerComponent = () => {
       >
         <List>
           <ListItem divider button onClick={() => setOpenDrawer(false)}>
-            <ListItemIcon>
-              <Link
-                style={{ textDecoration: "none" }}
-                href="/home"
-                color="inherit"
-              >
-                <ListItemText> Home</ListItemText>
-              </Link>
-            </ListItemIcon>
+            <Link
+              style={{ textDecoration: "none" }}
+              href="/home"
+              color="inherit"
+            >
+              <ListItemText> Home</ListItemText>
+            </Link>
           </ListItem>
 
           <ListItem divider button onClick={() => setOpenDrawer(false)}>
-            <ListItemIcon>
-              <Link
-                style={{ textDecoration: "none" }}
-                href="/profile"
-                color="inherit"
-              >
-                <ListItemText> Profile</ListItemText>
-              </Link>
-            </ListItemIcon>
+            <Link
+              style={{ textDecoration: "none" }}
+              href="/profile"
+              color="inherit"
+            >
+              <ListItemText> Profile</ListItemText>
+            </Link>
           </ListItem>
 
           <ListItem divider button onClick={() => setOpenDrawer(false)}>
-            <ListItemIcon>
-              <Link
-                style={{ textDecoration: "none" }}
-                href="/account"
-                color="inherit"
-              >
-                <ListItemText> Settings</ListItemText>
-              </Link>
-            </ListItemIcon>
+            <Link
+              style={{ textDecoration: "none" }}
+              href="/about"
+              color="inherit"
+            >
+              <ListItemText> About</ListItemText>
+            </Link>
           </ListItem>
 
           <ListItem divider button onClick={() => setOpenDrawer(false)}>
-            <ListItemIcon>
-              <Link
-                style={{ textDecoration: "none" }}
-                href="/logout"
-                color="inherit"
-              >
-                <ListItemText> Logout</ListItemText>
-              </Link>
-            </ListItemIcon>
+            <Link
+              style={{ textDecoration: "none" }}
+              href="/contact"
+              color="inherit"
+            >
+              <ListItemText> Contact</ListItemText>
+            </Link>
           </ListItem>
         </List>
       </Drawer>
