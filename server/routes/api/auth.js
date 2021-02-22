@@ -2,6 +2,8 @@ const router = require('express').Router();
 const User = require('../../models/User');
 const Subscription = require('../../models/Subscription');
 const passport = require('passport');
+var parser = require('body-parser');
+var urlencodedParser = parser.urlencoded({extended : false});
 const authController = require('../../controllers/auth');
 const isAuthenticated = require('../../config/middleware/isAuthenticated');
 const bcrypt = require('bcryptjs');
@@ -189,34 +191,35 @@ router.put('/updateSubCost/:id',isAuthenticated, function (req, res) {
 //api/auth/login
 // input: username and password
 // output: authenticated password and found username
-router.get('/login', passport.authenticate('local'), function (req, res) {
-  const { username, password } = req.body;
+router.post('/login', (req, res) => passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login', })(req, res));
+// {
+//   const { username, password } = req.body;
 
-  User.findOne({
-    username: req.body.username
-  }, function (err, user) {
-    if (err) {
-      res.status(500);
-    }
+//   User.findOne({
+//     username: req.body.username
+//   }, function (err, user) {
+//     if (err) {
+//       res.status(500);
+//     }
 
-    else if (!user) {
-     // res.status(401).send({ success: false, msg: 'Authentication failed. User not found.' });
-      res.json({"send to login": true});
-    }
-    else {
-      //validPassword
-      console.log(user);
-      user.authenticate(req.body.password, (err, result) => {
-        if (err)
-          res.status(401).send({ success: false, msg: 'login failed.' });
-        else if (result === false)
-          res.status(401).send({ success: false, msg: 'login failed.' });
-        else
-          res.json(result);
+//     else if (!user) {
+//      // res.status(401).send({ success: false, msg: 'Authentication failed. User not found.' });
+//       res.json({"send to login": true});
+//     }
+//     else {
+//       //validPassword
+//       console.log(user);
+//       user.authenticate(req.body.password, (err, result) => {
+//         if (err)
+//           res.status(401).send({ success: false, msg: 'login failed.' });
+//         else if (result === false)
+//           res.status(401).send({ success: false, msg: 'login failed.' });
+//         else
+//           res.json(result);
 
-      });
-    }
-  });
+//       });
+//     }
+//   });
 
 
 
@@ -226,7 +229,7 @@ router.get('/login', passport.authenticate('local'), function (req, res) {
   //     .then(dbModel => res.json(dbModel))
   //     .catch(err => res.status(422).json(err));
   // },
-});
+// });
 
 // input: id of subscription and name of user
 router.put('/addSubAlreadyExistToUser',isAuthenticated, function (req, res) {
