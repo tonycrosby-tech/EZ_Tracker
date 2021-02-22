@@ -95,6 +95,7 @@ router.get('/getAll', function (req, res) {
 });
 
 //api/auth/getAll--get all users and subscriptions
+// given the user id, get all of its subscriptions
 router.get('/getAllSubs/:id', function (req, res) {
 
   User.findOne({
@@ -107,8 +108,39 @@ router.get('/getAllSubs/:id', function (req, res) {
     .catch(error => {
       res.status(500).json({ error });
     });
-
 });
+
+//api/auth/updateSub with key of the subscription in the uri and the desired
+// updated value of satisfaction
+router.put('/updateSubSat/:id', function (req, res) {
+  const setter = { satisfaction: req.body.satisfaction };
+  Subscription.findOneAndUpdate({ _id: req.params.id }, setter,
+    { returnOriginal: false }, (err, result) => {
+      if (err) {
+        res.status(439).json(err);
+      }
+      else {
+        res.json(result);
+      }
+    });
+});
+
+
+//api/auth/updateSub with key of the subscription in the uri and the desired
+// updated value of satisfaction
+router.put('/updateSubCost/:id', function (req, res) {
+  const setter = { cost: req.body.cost };
+  Subscription.findOneAndUpdate({ _id: req.params.id }, setter,
+    { returnOriginal: false }, (err, result) => {
+      if (err) {
+        res.status(439).json(err);
+      }
+      else {
+        res.json(result);
+      }
+    });
+});
+
 
 //api/auth/login
 router.post('/login', function (req, res) {
