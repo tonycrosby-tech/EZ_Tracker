@@ -201,7 +201,7 @@ router.get('/login', passport.authenticate('local'), function (req, res) {
 
     else if (!user) {
      // res.status(401).send({ success: false, msg: 'Authentication failed. User not found.' });
-      res.redirect("/");
+      res.json({"send to login": true});
     }
     else {
       //validPassword
