@@ -110,6 +110,25 @@ router.get('/getAllSubs/:id', function (req, res) {
     });
 });
 
+
+//api/auth/getAllUsersAndSubscriptions--get all users and subscriptions
+// given the user id, get all of its subscriptions
+// this will populate the subscriptions
+router.get('/getAllUsersAndSubs', function (req, res) {
+
+  User.find()
+    .populate('subscriptions')
+    .then((result) => {
+      res.json(result);
+    })
+    .catch(error => {
+      res.status(500).json({ error });
+    });
+});
+
+
+
+
 //api/auth/updateSub with key of the subscription in the uri and the desired
 // updated value of satisfaction
 router.put('/updateSubSat/:id', function (req, res) {
