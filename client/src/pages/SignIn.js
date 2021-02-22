@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import axios from "axios";
 import Link from "@material-ui/core/Link";
 import Avatar from "@material-ui/core/Avatar";
@@ -40,6 +40,7 @@ class Login extends Component {
         this.setState({
           message: "Login failed. Username or password do not match",
         });
+        this.props.history.push("/");
       });
   };
 
