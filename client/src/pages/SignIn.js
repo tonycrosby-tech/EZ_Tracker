@@ -31,16 +31,15 @@ class Login extends Component {
     const { username, password } = this.state;
 
     axios
-      .post("/api/auth/login", { username, password })
-      .then((result) => {
+      .get("/api/auth/login", { username, password })
+      .then((res) => {
         this.setState({ message: "" });
-        this.props.history.push("/home");
+        res.json(res);
       })
       .catch((error) => {
         this.setState({
           message: "Login failed. Username or password do not match",
         });
-        this.props.history.push("/");
       });
   };
 
@@ -50,7 +49,7 @@ class Login extends Component {
       <Grid container component="main">
         <CssBaseline />
         <Grid item xs={false} sm={4} md={7} />
-        <Grid item xs={12} sm={8} md={5} elevation={6} square>
+        <Grid item xs={12} sm={8} md={5} elevation={6}>
           <div>
             <Avatar>
               <LockOutlinedIcon />
