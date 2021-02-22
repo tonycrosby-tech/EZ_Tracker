@@ -93,6 +93,17 @@ router.post('/subscription', function (req, res) {
     .catch(err => res.status(439).json(err));
 });
 
+router.post('/addSubscription', function (req, res) {
+  //const filter = { username: req.body.username };
+
+  Subscription.create(req.body.subscription)
+
+    .then((result) => {
+      res.json(result);
+    })
+    .catch(err => res.status(439).json(err));
+});
+
 //api/auth/getAll--get all users and subscriptions
 // get all users with pointers to subscriptions
 router.get('/getAll', function (req, res) {
