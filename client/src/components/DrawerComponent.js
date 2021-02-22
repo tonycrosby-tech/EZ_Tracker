@@ -10,7 +10,6 @@ import {
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 
-
 const DrawerComponent = () => {
   const useStyles = makeStyles((theme) => ({
     drawerContainer: {},
@@ -26,11 +25,16 @@ const DrawerComponent = () => {
   }));
 
   const [openDrawer, setOpenDrawer] = useState(false);
+  const [auth, setAuth] = useState(false);
+
+  const handleChange = (event) => {
+    setAuth(event.target.checked);
+  };
   //Css
   // const [user, setUser] = useState(null); // should be global state, probably context
 
   // const isAuthenticated = !!user;
-  
+
   // if(!isAuthenticated) return <Redirect to='/' />;
 
   const classes = useStyles();
@@ -53,15 +57,6 @@ const DrawerComponent = () => {
               <ListItemText> Home</ListItemText>
             </Link>
           </ListItem>
-          {/* <ListItem divider button onClick={() => setOpenDrawer(false)}>
-            <Link
-              style={{ textDecoration: "none" }}
-              href="/profile"
-              color="inherit"
-            >
-              <ListItemText> Profile</ListItemText>
-            </Link>
-          </ListItem> want this to only show when a user is logged in */}
 
           <ListItem divider button onClick={() => setOpenDrawer(false)}>
             <Link
@@ -82,16 +77,28 @@ const DrawerComponent = () => {
               <ListItemText> Contact</ListItemText>
             </Link>
           </ListItem>
-
-          {/* <ListItem divider button onClick={() => setOpenDrawer(false)}>
-            <Link
-              style={{ textDecoration: "none" }}
-              href="/logout"
-              color="inherit"
-            >
-              <ListItemText> Logout</ListItemText>
-            </Link>
-          </ListItem> want this to only show when a user is logged in */} 
+          {auth && (
+            <div>
+              <ListItem divider button onClick={() => setOpenDrawer(false)}>
+                <Link
+                  style={{ textDecoration: "none" }}
+                  href="/profile"
+                  color="inherit"
+                >
+                  <ListItemText> Profile</ListItemText>
+                </Link>
+              </ListItem>
+              <ListItem divider button onClick={() => setOpenDrawer(false)}>
+                <Link
+                  style={{ textDecoration: "none" }}
+                  href="/logout"
+                  color="inherit"
+                >
+                  <ListItemText> Logout</ListItemText>
+                </Link>
+              </ListItem>
+            </div>
+          )}
         </List>
       </Drawer>
       {/* Since this is inside our toolbar we can push it to the end of the toolbar */}
