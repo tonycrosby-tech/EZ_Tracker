@@ -16,9 +16,9 @@ import { red } from "@material-ui/core/colors";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
-import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
-import Fade from '@material-ui/core/Fade';
+import Modal from "@material-ui/core/Modal";
+import Backdrop from "@material-ui/core/Backdrop";
+import Fade from "@material-ui/core/Fade";
 import "react-calendar/dist/Calendar.css";
 
 const columns = [
@@ -79,13 +79,13 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: red[500],
   },
   modal: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
+    border: "2px solid #000",
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
@@ -109,6 +109,14 @@ const Subscription = () => {
     <div>
       <h1>Subscriptions - Amount Spent: $0 </h1>
       <h3>Remaining Balance - $0</h3>
+      <List className={classes.root}>
+        <ListItem>
+          <Button onClick={handleOpen}>
+            <AddCircleIcon />
+          </Button>
+          <ListItemText primary="Add a new Subscription" />
+        </ListItem>
+      </List>
       <Grid Container spacing={3}>
         <Grid item xs>
           <Card className={classes.root}>
@@ -148,33 +156,27 @@ const Subscription = () => {
       </Grid>
 
       <div>
-        <List className={classes.root}>
-          <ListItem>
-            <Button onClick={handleOpen}>
-              <AddCircleIcon />
-            </Button>
-            <ListItemText primary="Add a new Subscription" />
-          </ListItem>
-        </List>
         <Modal
-        aria-labelledby="New Subscription"
-        aria-describedby="new-subscription"
-        className={classes.modal}
-        open={open}
-        onClose={handleClose}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-        }}
-      >
-        <Fade in={open}>
-          <div className={classes.paper}>
-            <h2 id="New Subscription">New Subscription</h2>
-            <p id="new-subscription">To create a new Subscription please enter the details below.</p>
-          </div>
-        </Fade>
-      </Modal>
+          aria-labelledby="New Subscription"
+          aria-describedby="new-subscription"
+          className={classes.modal}
+          open={open}
+          onClose={handleClose}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500,
+          }}
+        >
+          <Fade in={open}>
+            <div className={classes.paper}>
+              <h2 id="New Subscription">New Subscription</h2>
+              <p id="new-subscription">
+                To create a new Subscription please enter the details below.
+              </p>
+            </div>
+          </Fade>
+        </Modal>
       </div>
     </div>
   );
