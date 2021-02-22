@@ -6,11 +6,8 @@ import SignInSide from './pages/SignIn';
 import Signup from './pages/Signup';
 import Header from './components/Header';
 import Subscription from './pages/Subscription';
-import Account from './pages/Account';
 import Navbar from './components/Navbar';
 import NotFoundPage from './pages/NotFoundPage';
-import Contact from './pages/Contact';
-import Support from './pages/Support';
 function App() {
   return (
     <React.Fragment>
@@ -22,9 +19,6 @@ function App() {
           <Route exact path="/home" component={Header} />
           <Route exact path="/login" component={SignInSide} />
           <Route exact path="/subs" component={Subscription} />
-          <Route exact path="/account" component={Account}/>
-          <Route exact path="/contact" component={Contact} />
-          <Route exact path="/support" component={Support} />
           <Route path="/404" component={NotFoundPage} />
           <Redirect to="/404" />
         </Switch>
