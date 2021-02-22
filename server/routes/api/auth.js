@@ -1,11 +1,11 @@
 const router = require('express').Router();
 const User = require('../../models/User');
 const Subscription = require('../../models/Subscription');
+const passport = require('passport');
 const authController = require('../../controllers/auth');
 const isAuthenticated = require('../../config/middleware/isAuthenticated');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-
 // api/auth/register
 // input: email, username, password
 // output: registered user, send back email and username, and id of user

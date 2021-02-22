@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   List,
   ListItem,
-  ListItemIcon,
   IconButton,
   ListItemText,
   makeStyles,
@@ -10,6 +9,7 @@ import {
   Link,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
+
 
 const DrawerComponent = () => {
   const useStyles = makeStyles((theme) => ({
@@ -27,6 +27,12 @@ const DrawerComponent = () => {
 
   const [openDrawer, setOpenDrawer] = useState(false);
   //Css
+  // const [user, setUser] = useState(null); // should be global state, probably context
+
+  // const isAuthenticated = !!user;
+  
+  // if(!isAuthenticated) return <Redirect to='/' />;
+
   const classes = useStyles();
   return (
     <>
@@ -39,51 +45,52 @@ const DrawerComponent = () => {
       >
         <List>
           <ListItem divider button onClick={() => setOpenDrawer(false)}>
-            <ListItemIcon>
-              <Link
-                style={{ textDecoration: "none" }}
-                href="/home"
-                color="inherit"
-              >
-                <ListItemText> Home</ListItemText>
-              </Link>
-            </ListItemIcon>
+            <Link
+              style={{ textDecoration: "none" }}
+              href="/home"
+              color="inherit"
+            >
+              <ListItemText> Home</ListItemText>
+            </Link>
+          </ListItem>
+          <ListItem divider button onClick={() => setOpenDrawer(false)}>
+            <Link
+              style={{ textDecoration: "none" }}
+              href="/profile"
+              color="inherit"
+            >
+              <ListItemText> Profile</ListItemText>
+            </Link>
           </ListItem>
 
           <ListItem divider button onClick={() => setOpenDrawer(false)}>
-            <ListItemIcon>
-              <Link
-                style={{ textDecoration: "none" }}
-                href="/profile"
-                color="inherit"
-              >
-                <ListItemText> Profile</ListItemText>
-              </Link>
-            </ListItemIcon>
+            <Link
+              style={{ textDecoration: "none" }}
+              href="/about"
+              color="inherit"
+            >
+              <ListItemText> About</ListItemText>
+            </Link>
           </ListItem>
 
           <ListItem divider button onClick={() => setOpenDrawer(false)}>
-            <ListItemIcon>
-              <Link
-                style={{ textDecoration: "none" }}
-                href="/account"
-                color="inherit"
-              >
-                <ListItemText> Settings</ListItemText>
-              </Link>
-            </ListItemIcon>
+            <Link
+              style={{ textDecoration: "none" }}
+              href="/contact"
+              color="inherit"
+            >
+              <ListItemText> Contact</ListItemText>
+            </Link>
           </ListItem>
 
           <ListItem divider button onClick={() => setOpenDrawer(false)}>
-            <ListItemIcon>
-              <Link
-                style={{ textDecoration: "none" }}
-                href="/logout"
-                color="inherit"
-              >
-                <ListItemText> Logout</ListItemText>
-              </Link>
-            </ListItemIcon>
+            <Link
+              style={{ textDecoration: "none" }}
+              href="/logout"
+              color="inherit"
+            >
+              <ListItemText> Logout</ListItemText>
+            </Link>
           </ListItem>
         </List>
       </Drawer>

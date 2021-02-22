@@ -52,18 +52,6 @@ class Signup extends Component {
   render() {
     const { email, username, password } = this.state;
     return (
-      // <div className="container">
-      //   <form className="form-signin" onSubmit={this.onSubmit}>
-      //     <h2 className="form-signin-heading">Register</h2>
-      //     <label htmlFor="inputPassword" className="sr-only">Username</label>
-      //     <input type="username" className="form-control" placeholder="Username" name="username" value={username} onChange={this.onChange} required/>
-      //     <label htmlFor="inputEmail" className="sr-only">Email address</label>
-      //     <input type="email" className="form-control" placeholder="Email address" name="email" value={email} onChange={this.onChange} required/>
-      //     <label htmlFor="inputPassword" className="sr-only">Password</label>
-      //     <input type="password" className="form-control" placeholder="Password" name="password" value={password} onChange={this.onChange} required/>
-      //     <button className="btn btn-lg btn-primary btn-block" type="submit">Register</button>
-      //   </form>
-      // </div>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div>

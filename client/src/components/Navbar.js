@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Navbar = function () {
   const classes = useStyles();
-  const [auth, setAuth] = React.useState(true);
+  const [auth, setAuth] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
@@ -90,6 +90,16 @@ const Navbar = function () {
           >
             Home
           </Link>
+          {auth && (
+          <Link style={{ textDecoration: "none" }}
+            variant="button"
+            color="textPrimary"
+            href="/profile"
+            className={classes.link}
+          >
+            Profile
+          </Link>
+          )}
           <Link style={{ textDecoration: "none" }}
             variant="button"
             color="textPrimary"
@@ -150,14 +160,17 @@ const Navbar = function () {
                 open={open}
                 onClose={handleClose}
               >
-                <Link style={{ textDecoration: "none" }} href="/profile">
+                {/* <Link style={{ textDecoration: "none" }} href="/profile">
                   <MenuItem onClick={handleClose}>Profile</MenuItem>
-                </Link>
+                </Link> */}
                 <Link style={{ textDecoration: "none" }} href="/account">
                   <MenuItem onClick={handleClose}>My account</MenuItem>
                 </Link >
                 <Link style={{ textDecoration: "none" }} href="/subs">
                   <MenuItem onClick={handleClose}>Subscriptions</MenuItem>
+                </Link>
+                <Link style={{ textDecoration: "none" }} href="/logout">
+                  <MenuItem onClick={handleClose}>Logout</MenuItem>
                 </Link>
               </Menu>
               {/* <Button
