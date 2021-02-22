@@ -3,26 +3,13 @@ import { AppBar } from "@material-ui/core";
 import { Toolbar } from "@material-ui/core";
 import { Typography } from "@material-ui/core";
 import Link from "@material-ui/core/Link";
-import { Button } from "@material-ui/core";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import IconButton from "@material-ui/core/IconButton";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import MenuIcon from "@material-ui/icons/Menu";
+import { makeStyles} from "@material-ui/core/styles";
 import clsx from "clsx";
-import Drawer from "@material-ui/core/Drawer";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
-import SettingsIcon from '@material-ui/icons/Settings';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import HomeIcon from '@material-ui/icons/Home';
-import Divider from "@material-ui/core/Divider";
-import List from "@material-ui/core/List";
+import DrawerComponent from './DrawerComponent';
 
 const useStyles = makeStyles((theme) => ({
   "@global": {
@@ -66,20 +53,9 @@ const useStyles = makeStyles((theme) => ({
 
 const Navbar = function () {
   const classes = useStyles();
-  const theme = useTheme();
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-
-  const [openl, setOpen] = React.useState(false);
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
 
   const handleChange = (event) => {
     setAuth(event.target.checked);
@@ -94,6 +70,7 @@ const Navbar = function () {
   };
   return (
     <div className={classes.root}>
+      
       <AppBar
         position="static"
         color="default"
@@ -103,20 +80,36 @@ const Navbar = function () {
         })}
       >
         <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, open && classes.hide)}
-          >
-            <MenuIcon />
-          </IconButton>
+        <DrawerComponent />
           <Typography variant="h6" className={classes.title} noWrap>
             EZ Tracker
           </Typography>
-
           <Link
+            variant="button"
+            color="textPrimary"
+            href="/home"
+            className={classes.link}
+          >
+            Home
+          </Link>
+          <Link
+            variant="button"
+            color="textPrimary"
+            href="/about"
+            className={classes.link}
+          >
+            About
+          </Link>
+          <Link
+            variant="button"
+            color="textPrimary"
+            href="/contact"
+            className={classes.link}
+          >
+            Contact
+          </Link>
+
+          {/* <Link
             variant="button"
             color="textPrimary"
             href="/"
@@ -131,7 +124,7 @@ const Navbar = function () {
             className={classes.link}
           >
             Login
-          </Link>
+          </Link> */}
           {auth && (
             <div>
               <IconButton
@@ -165,46 +158,20 @@ const Navbar = function () {
                 <Link href="/account">
                   <MenuItem onClick={handleClose}>My account</MenuItem>
                 </Link>
+                <Link href="/subs">
+                  <MenuItem onClick={handleClose}>Subscriptions</MenuItem>
+                </Link>
               </Menu>
-              <Button
+              {/* <Button
                 href="/logout"
                 color="primary"
                 variant="outlined"
                 className={classes.Logout}
               >
                 Logout
-              </Button>
+              </Button> */}
             </div>
           )}
-          <Drawer
-            className={classes.drawer}
-            variant="persistent"
-            anchor="left"
-            open={openl}
-          >
-            <div className={classes.drawerHeader}>
-              <IconButton onClick={handleDrawerClose}>
-                {theme.direction === "ltr" ? (
-                  <ChevronLeftIcon />
-                ) : (
-                  <ChevronRightIcon />
-                )}
-              </IconButton>
-            </div>
-            <Divider />
-            <List>
-              {["Home", "Profile", "Settings", "Logout"].map((text, index) => (
-                <ListItem button key={text}>
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <HomeIcon /> : <AccountBoxIcon /> }
-                  </ListItemIcon>
-
-                  <ListItemText primary={text} />
-                </ListItem>
-              ))}
-            </List>
-            <Divider />
-          </Drawer>
         </Toolbar>
       </AppBar>
     </div>

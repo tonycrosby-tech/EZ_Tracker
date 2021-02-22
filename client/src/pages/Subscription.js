@@ -144,7 +144,7 @@ const Subscription = () => {
         </Grid>
 
         <Grid item xs>
-          <div style={{ height: 300, width: "50%" }}>
+          <div style={{ height: 300, width: "100%" }}>
             <DataGrid
               rows={rows}
               columns={columns}
