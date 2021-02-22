@@ -14,8 +14,7 @@ import API from "../utils/API";
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
-import Link from '@material-ui/core/Link';
-
+import Link from "@material-ui/core/Link";
 
 class Signup extends Component {
   constructor() {
@@ -47,7 +46,6 @@ class Signup extends Component {
       .then((result) => {
         console.log(result);
         this.props.history.push("/login");
-
       });
   };
 
@@ -122,7 +120,12 @@ class Signup extends Component {
                   required
                 />
               </Grid>
-              <Button type="submit" variant='contained' color='primary' fullWidth>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                fullWidth
+              >
                 Sign Up
               </Button>
               <Grid container justify="flex-end">
