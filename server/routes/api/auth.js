@@ -13,7 +13,7 @@ router.post("/register", function (req, res) {
 
   Users = new User({ email: req.body.email, username: req.body.username });
 
-  User.register(Users, req.body.password, function (err, user) {
+  User.register(Users, req.body.password,  function (err, user) {
     if (err) {
       res.json({
         success: false, message: "Your account could  not be saved. You need a unique email probably: ", err
@@ -30,7 +30,7 @@ router.post("/register", function (req, res) {
 // find user by id
 // input: id
 // output: one user
-router.get('/user/:id', function (req, res) {
+router.get('/user/:id', isAuthenticated, function (req, res) {
   User.findById(req.params.id)
     .then(user => res.json(user))
     .catch(err => res.status(439).json(err));
@@ -39,7 +39,7 @@ router.get('/user/:id', function (req, res) {
 //api/auth/users  : all users
 // input: nothing
 // output: all users, no subscriptions
-router.get('/users', function (req, res) {
+router.get('/users', isAuthenticated,  function (req, res) {
   User.find(req.query)
     .then(user => res.json(user))
     .catch(err => res.status(439).json(err));
@@ -50,7 +50,7 @@ router.get('/users', function (req, res) {
   // .catch(err => res.status(422).json(err));
 });
 
-router.get('/getAllsubscriptions', function (req, res) {
+router.get('/getAllsubscriptions', isAuthenticated, function (req, res) {
   Subscription.find(req.query)
     .then(subscript => res.json(subscript))
     .catch(err => res.status(439).json(err));
@@ -60,7 +60,7 @@ router.get('/getAllsubscriptions', function (req, res) {
 // input: user id in uri and id of the subscription in the body
 // output: deleted subscription id in the user document: note: this does not
 // delete a subscription out of the subscription document
-router.delete('/deleteSubscription/:id', function (req, res) {
+router.delete('/deleteSubscription/:id',isAuthenticated,  function (req, res) {
   User.updateOne({ _id: req.params.id }, { $pull: { subscriptions: req.body.subscription_id } }, function (err, result) {
     if (err) {
       res.status(401).send({ success: false, msg: 'Deletion failed. subscription not found.' });
@@ -78,7 +78,7 @@ router.delete('/deleteSubscription/:id', function (req, res) {
 // input: username and subscription you want to insert
 // output: a new subscription with a pointer in the user document; you get 
 // the user and the pointer(s) to the subscription(s)
-router.post('/subscription', function (req, res) {
+router.post('/subscription', isAuthenticated, function (req, res) {
   const filter = { username: req.body.username };
 
   Subscription.create(req.body.subscription)
@@ -93,7 +93,7 @@ router.post('/subscription', function (req, res) {
     .catch(err => res.status(439).json(err));
 });
 
-router.post('/addSubscription', function (req, res) {
+router.post('/addSubscription',isAuthenticated, function (req, res) {
   //const filter = { username: req.body.username };
 
   Subscription.create(req.body.subscription)
@@ -106,7 +106,7 @@ router.post('/addSubscription', function (req, res) {
 
 //api/auth/getAll--get all users and subscriptions
 // get all users with pointers to subscriptions
-router.get('/getAll', function (req, res) {
+router.get('/getAll',isAuthenticated, function (req, res) {
 
   User.find({})
     .then(result => {
@@ -121,7 +121,7 @@ router.get('/getAll', function (req, res) {
 // given the user id, get all of its subscriptions
 // input: user id
 // output: values of subscriptions
-router.get('/getAllSubs/:id', function (req, res) {
+router.get('/getAllSubs/:id',isAuthenticated, function (req, res) {
 
   User.findOne({
     username: req.body.username
@@ -139,7 +139,7 @@ router.get('/getAllSubs/:id', function (req, res) {
 //api/auth/getAllUsersAndSubscriptions--get all users and subscriptions
 // given nothing, get all of the users and their subscriptions
 // this will populate the subscriptions
-router.get('/getAllUsersAndSubs', function (req, res) {
+router.get('/getAllUsersAndSubs',isAuthenticated, function (req, res) {
 
   User.find()
     .populate('subscriptions')
@@ -155,7 +155,7 @@ router.get('/getAllUsersAndSubs', function (req, res) {
 // updated value of satisfaction
 // input: key of the subscription and value of satisfaction we want to update to
 // output: updated subscription
-router.put('/updateSubSat/:id', function (req, res) {
+router.put('/updateSubSat/:id',isAuthenticated, function (req, res) {
   const setter = { satisfaction: req.body.satisfaction };
   Subscription.findOneAndUpdate({ _id: req.params.id }, setter,
     { returnOriginal: false }, (err, result) => {
@@ -173,7 +173,7 @@ router.put('/updateSubSat/:id', function (req, res) {
 // updated value of satisfaction
 // input: id of subscription and value of cost
 // output: updated subscription
-router.put('/updateSubCost/:id', function (req, res) {
+router.put('/updateSubCost/:id',isAuthenticated, function (req, res) {
   const setter = { cost: req.body.cost };
   Subscription.findOneAndUpdate({ _id: req.params.id }, setter,
     { returnOriginal: false }, (err, result) => {
@@ -189,7 +189,7 @@ router.put('/updateSubCost/:id', function (req, res) {
 //api/auth/login
 // input: username and password
 // output: authenticated password and found username
-router.post('/login', function (req, res) {
+router.get('/login', passport.authenticate('local'), function (req, res) {
   const { username, password } = req.body;
 
   User.findOne({
@@ -200,7 +200,8 @@ router.post('/login', function (req, res) {
     }
 
     else if (!user) {
-      res.status(401).send({ success: false, msg: 'Authentication failed. User not found.' });
+     // res.status(401).send({ success: false, msg: 'Authentication failed. User not found.' });
+      res.redirect("/");
     }
     else {
       //validPassword
@@ -228,7 +229,7 @@ router.post('/login', function (req, res) {
 });
 
 // input: id of subscription and name of user
-router.put('/addSubAlreadyExistToUser', function (req, res) {
+router.put('/addSubAlreadyExistToUser',isAuthenticated, function (req, res) {
   const filter = { username: req.body.username };
 
   // Subscription.create(req.body.subscriptions)
@@ -249,7 +250,8 @@ router.put('/addSubAlreadyExistToUser', function (req, res) {
 router.get('/logout', function(req, res) {
   try{
     req.logout();
-    res.json({"logged out successfully" : "true"});
+    res.redirect('/');
+    //res.json({"logged out successfully" : "true"});
 
   }
   catch(ex){
