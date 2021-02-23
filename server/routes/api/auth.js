@@ -82,7 +82,7 @@ router.delete('/deleteSubscription',isAuthenticated,  function (req, res) {
 router.post('/subscription', isAuthenticated, function (req, res) {
   const filter = { _id: req.user.id };
 
-  Subscription.create(req.body.subscription)
+  Subscription.create(req.body)
     .then((result) =>
       User.findOneAndUpdate(filter,
         { $push: { subscriptions: result.id } }, { new: true }))
