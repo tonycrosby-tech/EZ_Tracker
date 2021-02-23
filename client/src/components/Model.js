@@ -27,21 +27,21 @@ const NewSubscription = () => {
 
   const [value, setValue] = React.useState(30);
 
-  const handleSliderChange = (event, newValue) => {
-    setValue(newValue);
-  };
+  // const handleSliderChange = (event, newValue) => {
+  //   setValue(newValue);
+  // };
 
-  const handleInputChange = (event) => {
-    setValue(event.target.value === '' ? '' : Number(event.target.value));
-  };
+  // const handleInputChange = (event) => {
+  //   setValue(event.target.value === '' ? '' : Number(event.target.value));
+  // };
 
-  const handleBlur = () => {
-    if (value < 0) {
-      setValue(0);
-    } else if (value > 100) {
-      setValue(100);
-    }
-  };
+  // const handleBlur = () => {
+  //   if (value < 0) {
+  //     setValue(0);
+  //   } else if (value > 100) {
+  //     setValue(100);
+  //   }
+  // };
 
   const [numObject, setNumObject] = useState();
   const [formObject, setFormObject] = useState();
@@ -140,7 +140,7 @@ const NewSubscription = () => {
               />
             </div>
           </Grid>
-          <Grid item xs={12}>
+          {/* <Grid item xs={12}>
             <div className={classes.root}>
               <Typography id="input-slider" gutterBottom>
                 Rating
@@ -173,7 +173,7 @@ const NewSubscription = () => {
                 </Grid>
               </Grid>
             </div>
-          </Grid>
+          </Grid> */}
           <Button type="submit" fullWidth variant="contained" color="primary">
             Create
           </Button>
