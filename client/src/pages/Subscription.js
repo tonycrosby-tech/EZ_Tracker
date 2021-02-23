@@ -19,7 +19,10 @@ import Button from "@material-ui/core/Button";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
+import TextField from "@material-ui/core/TextField";
 import "react-calendar/dist/Calendar.css";
+import axios from "axios";
+import API from '../utils/API';
 
 const columns = [
   {
@@ -94,6 +97,7 @@ const useStyles = makeStyles((theme) => ({
 const Subscription = () => {
   const [value, onChange] = useState(new Date());
   const [open, setOpen] = React.useState(false);
+  const [formObject, setFormObject] = useState({});
 
   const handleOpen = () => {
     setOpen(true);
@@ -101,6 +105,26 @@ const Subscription = () => {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+
+  function handleInputChange(event) {
+    const { name, value } = event.target;
+    setFormObject({...formObject, [name]: value})
+  };
+
+  function handleFormSubmit(event) {
+    event.preventDefault();
+    if (formObject.SubscriptionName && formObject.cost && formObject.satisfaction && formObject.expirationDate) {
+      API.saveSubs({
+        SubscriptionName: formObject.SubscriptionName,
+        cost: formObject.cost,
+        satisfaction: formObject.satisfaction,
+        expirationDate: formObject.expirationDate
+      })
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
+    }
   };
 
   const classes = useStyles();
@@ -118,10 +142,7 @@ const Subscription = () => {
           <ListItemText primary="Add a new Subscription" />
         </ListItem>
       </List>
-      <Grid   container
-  direction="row"
-  justify="center"
-  alignItems="center">
+      <Grid container direction="row" justify="center" alignItems="center">
         <Grid item xs>
           <Card className={classes.root}>
             <CardHeader
@@ -174,10 +195,66 @@ const Subscription = () => {
         >
           <Fade in={open}>
             <div className={classes.paper}>
-              <h2 id="New Subscription">New Subscription</h2>
+              <h2 id="NewSubscription">New Subscription</h2>
               <p id="new-subscription">
                 To create a new Subscription please enter the details below.
               </p>
+              <form onClick={handleFormSubmit}>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="subscription-name"
+                label="Subscription Name"
+                name="SubscriptionName"
+                value="Netflix"
+                autoFocus
+                onChange={handleInputChange}
+                required
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="subscription-cost"
+                label="Subscription Cost"
+                name="cost"
+                value="$9.99"
+                autoFocus
+                onChange={handleInputChange}
+                required
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="subscription-rating"
+                label="Subscription Rating"
+                name="satisfaction"
+                value="5 stars"
+                autoFocus
+                onChange={handleInputChange}
+                required
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="subscription-expire"
+                label="Subscription Expire Date"
+                name="expirationDate"
+                value="2/22/2021"
+                autoFocus
+                onChange={handleInputChange}
+                required
+              />
+              <Button type="submit"
+                fullWidth variant="contained" color="primary">Submit</Button>
+              </form>
             </div>
           </Fade>
         </Modal>
