@@ -120,7 +120,7 @@ router.get('/getAll',isAuthenticated, function (req, res) {
 // given the user id, get all of its subscriptions
 // input: user id
 // output: values of subscriptions
-router.get('/getAllSubs/:id',isAuthenticated, function (req, res) {
+router.get('/getAllSubs',isAuthenticated, function (req, res) {
 
   const ider = req.user.id;
   User.findOne({
@@ -175,8 +175,9 @@ router.put('/updateSubSat/:id',isAuthenticated, function (req, res) {
 // input: id of subscription and value of cost
 // output: updated subscription
 router.put('/updateSubCost/:id',isAuthenticated, function (req, res) {
+  const ider = req.user.id;
   const setter = { cost: req.body.cost };
-  Subscription.findOneAndUpdate({ _id: req.params.id }, setter,
+  Subscription.findOneAndUpdate({ _id: ider }, setter,
     { returnOriginal: false }, (err, result) => {
       if (err) {
         res.status(439).json(err);
