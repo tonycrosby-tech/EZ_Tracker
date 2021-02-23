@@ -22,6 +22,7 @@ import Fade from "@material-ui/core/Fade";
 import TextField from "@material-ui/core/TextField";
 import "react-calendar/dist/Calendar.css";
 import axios from "axios";
+import API from '../utils/API';
 
 const columns = [
   {
@@ -96,7 +97,7 @@ const useStyles = makeStyles((theme) => ({
 const Subscription = () => {
   const [value, onChange] = useState(new Date());
   const [open, setOpen] = React.useState(false);
-  const [newValue, setNewValue] = useState("");
+  const [formObject, setFormObject] = useState({});
 
   const handleOpen = () => {
     setOpen(true);
@@ -106,22 +107,24 @@ const Subscription = () => {
     setOpen(false);
   };
 
-  const getValue = (e) => {
-    setNewValue(e.target.value);
-  }
-  const handleSubmit = (e) => {
-    e.preventDefault();
 
-    console.log(getValue);
+  function handleInputChange(event) {
+    const { name, value } = event.target;
+    setFormObject({...formObject, [name]: value})
+  };
 
-    axios
-      .post("/api/auth/subscription")
-      .then((res) => {
-        console.log(res);
+  function handleFormSubmit(event) {
+    event.preventDefault();
+    if (formObject.SubscriptionName && formObject.cost && formObject.satisfaction && formObject.expirationDate) {
+      API.saveSubs({
+        SubscriptionName: formObject.SubscriptionName,
+        cost: formObject.cost,
+        satisfaction: formObject.satisfaction,
+        expirationDate: formObject.expirationDate
       })
-      .catch((error) => {
-        console.err(error);
-      });
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
+    }
   };
 
   const classes = useStyles();
@@ -196,6 +199,7 @@ const Subscription = () => {
               <p id="new-subscription">
                 To create a new Subscription please enter the details below.
               </p>
+              <form onClick={handleFormSubmit}>
               <TextField
                 variant="outlined"
                 margin="normal"
@@ -203,10 +207,10 @@ const Subscription = () => {
                 fullWidth
                 id="subscription-name"
                 label="Subscription Name"
-                name={newValue}
+                name="SubscriptionName"
                 value="Netflix"
                 autoFocus
-                onChange={getValue}
+                onChange={handleInputChange}
                 required
               />
               <TextField
@@ -216,10 +220,10 @@ const Subscription = () => {
                 fullWidth
                 id="subscription-cost"
                 label="Subscription Cost"
-                name={newValue}
+                name="cost"
                 value="$9.99"
                 autoFocus
-                onChange={getValue}
+                onChange={handleInputChange}
                 required
               />
               <TextField
@@ -229,10 +233,10 @@ const Subscription = () => {
                 fullWidth
                 id="subscription-rating"
                 label="Subscription Rating"
-                name={newValue}
+                name="satisfaction"
                 value="5 stars"
                 autoFocus
-                onChange={getValue}
+                onChange={handleInputChange}
                 required
               />
               <TextField
@@ -242,13 +246,15 @@ const Subscription = () => {
                 fullWidth
                 id="subscription-expire"
                 label="Subscription Expire Date"
-                name={newValue}
+                name="expirationDate"
                 value="2/22/2021"
                 autoFocus
-                onChange={getValue}
+                onChange={handleInputChange}
                 required
               />
-              <Button variant="contained" color="primary" onSubmit={handleSubmit}>Submit</Button>
+              <Button type="submit"
+                fullWidth variant="contained" color="primary">Submit</Button>
+              </form>
             </div>
           </Fade>
         </Modal>

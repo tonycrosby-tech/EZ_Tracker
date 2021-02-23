@@ -1,15 +1,15 @@
-// import axios from 'axios';
+import axios from 'axios';
 
-// export default {
+export default {
 //   getSubs: function () {
 //     return axios.get('/api/subs');
 //   },
 //   deleteSubs: function () {
 //     return axios.delete('/api/subs/' + id);
 //   },
-//   saveSubs: function (subsData) {
-//     return axios.post('/api/subs', subsData);
-//   },
+  saveSubs: function (subsData) {
+    return axios.post('/api/auth/subscription', subsData);
+  },
 //   updateSubs: function (updateInfo) {
 //     return axios.post('/api/subs/' + id, updateInfo);
 //   },
@@ -27,4 +27,4 @@
 //   deleteUser: function () {
 //     return axios.delete('/api/user' + id);
 //   },
-// };
+};
