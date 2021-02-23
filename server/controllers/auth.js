@@ -6,12 +6,15 @@ const login = async (req, res) => {
 
 exports.login = login;
 
-// module.exports = {
-//   findOne: function(req, res) {
-//     db.User
-//       .find(req.query)
-//       .sort({ date: -1 })
-//       .then(dbUser => res.json(dbUser))
-//       .catch(err => res.status(422).json(err));
-//   }
-// }
+module.exports = {
+
+  logout: function (req, res) {
+    try {
+      req.logout();
+      res.json({ "send to login": true });
+    }
+    catch (ex) {
+      res.status(401).send({ success: false, msg: 'logout failed.' });
+    }
+  }
+}  
