@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 const NewSubscription = () => {
   const classes = useStyles();
 
-  const [value, setValue] = React.useState(30);
+  // const [value, setValue] = React.useState(30);
 
   // const handleSliderChange = (event, newValue) => {
   //   setValue(newValue);
@@ -65,7 +65,6 @@ const NewSubscription = () => {
   const handleFormSubmit = (event) =>  {
     event.preventDefault();
     const mergedObj = {...formObject, ...numObject, ...dateObject};
-    console.log(mergedObj);
     axios.post("/api/auth/subscription", mergedObj)
       .then(res => console.log(res))
       .catch(err => console.log(err));
