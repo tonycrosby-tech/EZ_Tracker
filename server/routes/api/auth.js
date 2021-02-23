@@ -96,7 +96,7 @@ router.post('/subscription', isAuthenticated, function (req, res) {
 // creates a subscription without being tied to the user.
 router.post('/addSubscription',isAuthenticated, function (req, res) {
 
-  Subscription.create(req.body.subscription)
+  Subscription.create(req.body)
 
     .then((result) => {
       res.json(result);
