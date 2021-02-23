@@ -151,7 +151,7 @@ const NewSubscription = () => {
                     value={typeof value === 'number' ? value : 0}
                     onChange={handleSliderChange}
                     aria-labelledby="input-slider"
-                    name="satisfaction"
+                    name="rating"
                   />
                 </Grid>
                 <Grid item>
@@ -159,7 +159,7 @@ const NewSubscription = () => {
                     className={classes.input}
                     value={value}
                     margin="dense"
-                    name="satisfaction"
+                    name="rating"
                     onChange={handleInputChange}
                     onBlur={handleBlur}
                     inputProps={{
