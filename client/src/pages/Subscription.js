@@ -19,7 +19,9 @@ import Button from '@material-ui/core/Button';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
+import TextField from '@material-ui/core/TextField';
 import 'react-calendar/dist/Calendar.css';
+import axios from 'axios';
 import NewSubscription from '../components/Model';
 
 const columns = [
@@ -95,7 +97,9 @@ const useStyles = makeStyles((theme) => ({
 const Subscription = () => {
   const [value, onChange] = useState(new Date());
   const [open, setOpen] = React.useState(false);
-  const [formObject, setFormObject] = useState({});
+  // const [numObject, setNumObject] = useState();
+  // const [formObject, setFormObject] = useState();
+  // const [dateObject, setDateObject] = useState();
 
   const handleOpen = () => {
     setOpen(true);
@@ -105,29 +109,30 @@ const Subscription = () => {
     setOpen(false);
   };
 
-  function handleInputChange(event) {
-    const { name, value } = event.target;
-    setFormObject({ ...formObject, [name]: value });
-  }
 
-  function handleFormSubmit(event) {
-    event.preventDefault();
-    if (
-      formObject.SubscriptionName &&
-      formObject.cost &&
-      formObject.satisfaction &&
-      formObject.expirationDate
-    ) {
-      API.saveSubs({
-        SubscriptionName: formObject.SubscriptionName,
-        cost: formObject.cost,
-        satisfaction: formObject.satisfaction,
-        expirationDate: formObject.expirationDate,
-      })
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err));
-    }
-  }
+  // const numInputChange = (event) => {
+  //   const { name, value } = event.target;
+  //   setNumObject({...numObject, [name]: Number.parseFloat(value)})
+  // };
+
+  // const handleInputChange = (event) => {
+  //   const { name, value } = event.target;
+  //   setFormObject({...formObject, [name]: (value)})
+  // };
+  
+  // const dateInputChange = (event) => {
+  //   const {name, value} = event.target;
+  //   setDateObject({...dateObject, [name]: (value)})
+  // };
+
+  // const handleFormSubmit = (event) =>  {
+  //   event.preventDefault();
+  //   const mergedObj = {...formObject, ...numObject, ...dateObject};
+  //   console.log(mergedObj);
+  //   axios.post("/api/auth/subscription", mergedObj)
+  //     .then(res => console.log(res))
+  //     .catch(err => console.log(err));
+  // };
 
   const classes = useStyles();
 
@@ -181,11 +186,11 @@ const Subscription = () => {
         </Grid>
 
         <Grid item xs>
-          <div style={{ height: 600, width: '100%' }}>
+          <div style={{ height: 600, width: '80%' }}>
             <DataGrid
               rows={rows}
               columns={columns}
-              pageSize={6}
+              pageSize={4}
               checkboxSelection
             />
           </div>
@@ -207,12 +212,12 @@ const Subscription = () => {
         >
           <Fade in={open}>
             <div className={classes.paper}>
-              <NewSubscription />
+          <NewSubscription />
             </div>
           </Fade>
         </Modal>
+        </div>
       </div>
-    </div>
   );
 };
 

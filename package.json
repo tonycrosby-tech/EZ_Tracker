@@ -44,6 +44,7 @@
     "if-env": "^1.0.4",
     "jsonwebtoken": "^8.5.1",
     "material-ui": "^0.20.2",
+    "moment": "^2.29.1",
     "mongoose": "^5.11.17",
     "morgan": "^1.10.0",
     "passport": "^0.4.1",
