@@ -34,7 +34,7 @@ async function sendMail(user) {
 
     const mailOptions = {
       from: ' EXTracker <logan.pippin32@gmail.com>',
-      to: 'tonycrosby96@gmail.com',
+      to: user.email,
       subject: 'Subscription almost expired',
       text: `Your subscription(s) are about to expire.`,
     };

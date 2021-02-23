@@ -95,6 +95,7 @@ const useStyles = makeStyles((theme) => ({
 const Subscription = () => {
   const [value, onChange] = useState(new Date());
   const [open, setOpen] = React.useState(false);
+  const [formObject, setFormObject] = useState({});
 
   const handleOpen = () => {
     setOpen(true);
@@ -103,6 +104,30 @@ const Subscription = () => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  function handleInputChange(event) {
+    const { name, value } = event.target;
+    setFormObject({ ...formObject, [name]: value });
+  }
+
+  function handleFormSubmit(event) {
+    event.preventDefault();
+    if (
+      formObject.SubscriptionName &&
+      formObject.cost &&
+      formObject.satisfaction &&
+      formObject.expirationDate
+    ) {
+      API.saveSubs({
+        SubscriptionName: formObject.SubscriptionName,
+        cost: formObject.cost,
+        satisfaction: formObject.satisfaction,
+        expirationDate: formObject.expirationDate,
+      })
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+    }
+  }
 
   const classes = useStyles();
 

@@ -12,7 +12,9 @@ import MenuIcon from "@material-ui/icons/Menu";
 
 const DrawerComponent = () => {
   const useStyles = makeStyles((theme) => ({
-    drawerContainer: {},
+    drawerContainer: {
+      backgroundColor: "#d3d3d3",
+    },
     iconButtonContainer: {
       marginLeft: "auto",
       color: "white",
@@ -43,7 +45,7 @@ const DrawerComponent = () => {
       <Drawer
         anchor="left"
         classes={{ paper: classes.drawerContainer }}
-        onClose={() => setOpenDrawer(false)}
+        onClick={() => setOpenDrawer(false)}
         open={openDrawer}
         onOpen={() => setOpenDrawer(true)}
       >
