@@ -76,6 +76,7 @@ const Navbar = function () {
       .catch((error) => {
         console.error(error)
       });
+      setAnchorEl(null);
   }
 
   const handleMenu = (event) => {
