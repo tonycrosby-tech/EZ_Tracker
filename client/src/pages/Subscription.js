@@ -1,63 +1,61 @@
-import React, { useState } from "react";
-import { DataGrid } from "@material-ui/data-grid";
-import Calendar from "react-calendar";
-import { makeStyles } from "@material-ui/core/styles";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import Avatar from "@material-ui/core/Avatar";
-import AddCircleIcon from "@material-ui/icons/AddCircle";
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardContent from "@material-ui/core/CardContent";
-import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
-import { red } from "@material-ui/core/colors";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
-import Modal from "@material-ui/core/Modal";
-import Backdrop from "@material-ui/core/Backdrop";
-import Fade from "@material-ui/core/Fade";
-import TextField from "@material-ui/core/TextField";
-import "react-calendar/dist/Calendar.css";
-import axios from "axios";
-import API from '../utils/API';
+import React, { useState } from 'react';
+import { DataGrid } from '@material-ui/data-grid';
+import Calendar from 'react-calendar';
+import { makeStyles } from '@material-ui/core/styles';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Avatar from '@material-ui/core/Avatar';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardContent from '@material-ui/core/CardContent';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import { red } from '@material-ui/core/colors';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
+import 'react-calendar/dist/Calendar.css';
+import NewSubscription from '../components/Model';
 
 const columns = [
   {
-    field: "id",
-    headerName: "ID",
+    field: 'id',
+    headerName: 'ID',
     description:
-      "This column is for the id to keep count of your subscriptions.",
+      'This column is for the id to keep count of your subscriptions.',
     sortable: false,
     width: 100,
   },
   {
-    field: "name",
-    headerName: "Name",
-    description: "This column is for the name of your subscription.",
+    field: 'name',
+    headerName: 'Name',
+    description: 'This column is for the name of your subscription.',
     sortable: false,
     width: 300,
   },
   {
-    field: "price",
-    headerName: "Price",
-    description: "This column is for the price of your subscription.",
+    field: 'price',
+    headerName: 'Price',
+    description: 'This column is for the price of your subscription.',
     sortable: false,
     width: 150,
   },
   {
-    field: "expiration",
-    headerName: "Expiration Date",
-    description: "This column is for when your subscription expires.",
+    field: 'expiration',
+    headerName: 'Expiration Date',
+    description: 'This column is for when your subscription expires.',
     sortable: false,
     width: 250,
   },
 ];
 
 const rows = [
-  { id: 1, name: "Netflix", price: "$9.99", expiration: "2.21.2021" },
+  { id: 1, name: 'Netflix', price: '$9.99', expiration: '2.21.2021' },
 ];
 
 const useStyles = makeStyles((theme) => ({
@@ -66,29 +64,29 @@ const useStyles = makeStyles((theme) => ({
   },
   media: {
     height: 0,
-    paddingTop: "56.25%",
+    paddingTop: '56.25%',
   },
   expand: {
-    transform: "rotate(0deg)",
-    marginLeft: "auto",
-    transition: theme.transitions.create("transform", {
+    transform: 'rotate(0deg)',
+    marginLeft: 'auto',
+    transition: theme.transitions.create('transform', {
       duration: theme.transitions.duration.shortest,
     }),
   },
   expandOpen: {
-    transform: "rotate(180deg)",
+    transform: 'rotate(180deg)',
   },
   avatar: {
     backgroundColor: red[500],
   },
   modal: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
+    border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
@@ -107,39 +105,53 @@ const Subscription = () => {
     setOpen(false);
   };
 
-
   function handleInputChange(event) {
     const { name, value } = event.target;
-    setFormObject({...formObject, [name]: value})
-  };
+    setFormObject({ ...formObject, [name]: value });
+  }
 
   function handleFormSubmit(event) {
     event.preventDefault();
-    if (formObject.SubscriptionName && formObject.cost && formObject.satisfaction && formObject.expirationDate) {
+    if (
+      formObject.SubscriptionName &&
+      formObject.cost &&
+      formObject.satisfaction &&
+      formObject.expirationDate
+    ) {
       API.saveSubs({
         SubscriptionName: formObject.SubscriptionName,
         cost: formObject.cost,
         satisfaction: formObject.satisfaction,
-        expirationDate: formObject.expirationDate
+        expirationDate: formObject.expirationDate,
       })
-        .then(res => console.log(res))
-        .catch(err => console.log(err));
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
     }
-  };
+  }
 
   const classes = useStyles();
 
   return (
     <div>
-      <h1>Hello, User</h1>
-      <h1>Subscriptions - Amount Spent: $0 </h1>
-      <h3>Remaining Balance - $0</h3>
+      <Grid container spacing={2}>
+        <Grid
+          container
+          spacing={0}
+          direction="column"
+          alignItems="center"
+          justify="center"
+        >
+          <h1>Hello, User</h1>
+          <h1>Subscriptions - Amount Spent: $0 </h1>
+          <h3>Remaining Balance - $0</h3>
+        </Grid>
+      </Grid>
       <List className={classes.root}>
         <ListItem>
           <Button onClick={handleOpen}>
             <AddCircleIcon />
           </Button>
-          <ListItemText primary="Add a new Subscription" />
+          <ListItemText color="primary" primary="Add a new Subscription" />
         </ListItem>
       </List>
       <Grid container direction="row" justify="center" alignItems="center">
@@ -169,7 +181,7 @@ const Subscription = () => {
         </Grid>
 
         <Grid item xs>
-          <div style={{ height: 600, width: "100%" }}>
+          <div style={{ height: 600, width: '100%' }}>
             <DataGrid
               rows={rows}
               columns={columns}
@@ -195,66 +207,7 @@ const Subscription = () => {
         >
           <Fade in={open}>
             <div className={classes.paper}>
-              <h2 id="NewSubscription">New Subscription</h2>
-              <p id="new-subscription">
-                To create a new Subscription please enter the details below.
-              </p>
-              <form onClick={handleFormSubmit}>
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                id="subscription-name"
-                label="Subscription Name"
-                name="SubscriptionName"
-                value="Netflix"
-                autoFocus
-                onChange={handleInputChange}
-                required
-              />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                id="subscription-cost"
-                label="Subscription Cost"
-                name="cost"
-                value="$9.99"
-                autoFocus
-                onChange={handleInputChange}
-                required
-              />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                id="subscription-rating"
-                label="Subscription Rating"
-                name="satisfaction"
-                value="5 stars"
-                autoFocus
-                onChange={handleInputChange}
-                required
-              />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                id="subscription-expire"
-                label="Subscription Expire Date"
-                name="expirationDate"
-                value="2/22/2021"
-                autoFocus
-                onChange={handleInputChange}
-                required
-              />
-              <Button type="submit"
-                fullWidth variant="contained" color="primary">Submit</Button>
-              </form>
+              <NewSubscription />
             </div>
           </Fade>
         </Modal>
