@@ -10,6 +10,9 @@ import Menu from "@material-ui/core/Menu";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import DrawerComponent from "./DrawerComponent";
+import Button from '@material-ui/core/Button';
+import axios from 'axios';
+
 const useStyles = makeStyles((theme) => ({
   "@global": {
     ul: {
@@ -52,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Navbar = function () {
   const classes = useStyles();
-  const [auth, setAuth] = React.useState(false);
+  const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
@@ -60,12 +63,26 @@ const Navbar = function () {
     setAuth(event.target.checked);
   };
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    axios
+      .get("/api/auth/logout")
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.error(error)
+      });
+  }
+
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
   const handleClose = () => {
     setAnchorEl(null);
+
   };
   return (
     <div className={classes.root}>
@@ -170,7 +187,7 @@ const Navbar = function () {
                   <MenuItem onClick={handleClose}>Subscriptions</MenuItem>
                 </Link>
                 <Link style={{ textDecoration: "none" }} href="/logout">
-                  <MenuItem onClick={handleClose}>Logout</MenuItem>
+                  <MenuItem onClick={onSubmit}>Logout</MenuItem>
                 </Link>
               </Menu>
               {/* <Button
