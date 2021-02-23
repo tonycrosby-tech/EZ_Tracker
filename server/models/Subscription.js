@@ -8,6 +8,7 @@ const subscriptionSchema = new Schema({
     cost: {type: Number, required: false, unique: false},
     satisfaction: {type: Number, required: false, unique: false},
     dateCreated: {type: Date, default: Date.now},
+    expirationDate: { type: Date, required: true },
 });
 
 //const Book = mongoose.model("Book", bookSchema);

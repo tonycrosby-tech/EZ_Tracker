@@ -19,7 +19,9 @@ import Button from "@material-ui/core/Button";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
+import TextField from "@material-ui/core/TextField";
 import "react-calendar/dist/Calendar.css";
+import axios from "axios";
 
 const columns = [
   {
@@ -94,6 +96,7 @@ const useStyles = makeStyles((theme) => ({
 const Subscription = () => {
   const [value, onChange] = useState(new Date());
   const [open, setOpen] = React.useState(false);
+  const [newValue, setNewValue] = useState("");
 
   const handleOpen = () => {
     setOpen(true);
@@ -101,6 +104,22 @@ const Subscription = () => {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const getValue = (e) => {
+    setNewValue(e.target.value);
+  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    axios
+      .post("/api/auth/subscription")
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.err(error);
+      });
   };
 
   const classes = useStyles();
@@ -118,10 +137,7 @@ const Subscription = () => {
           <ListItemText primary="Add a new Subscription" />
         </ListItem>
       </List>
-      <Grid   container
-  direction="row"
-  justify="center"
-  alignItems="center">
+      <Grid container direction="row" justify="center" alignItems="center">
         <Grid item xs>
           <Card className={classes.root}>
             <CardHeader
@@ -178,6 +194,59 @@ const Subscription = () => {
               <p id="new-subscription">
                 To create a new Subscription please enter the details below.
               </p>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="subscription-name"
+                label="Subscription Name"
+                name={newValue}
+                value="Netflix"
+                autoFocus
+                onChange={getValue}
+                required
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="subscription-cost"
+                label="Subscription Cost"
+                name={newValue}
+                value="$9.99"
+                autoFocus
+                onChange={getValue}
+                required
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="subscription-rating"
+                label="Subscription Rating"
+                name={newValue}
+                value="5 stars"
+                autoFocus
+                onChange={getValue}
+                required
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="subscription-expire"
+                label="Subscription Expire Date"
+                name={newValue}
+                value="2/22/2021"
+                autoFocus
+                onChange={getValue}
+                required
+              />
+              <Button variant="contained" color="primary" onSubmit={handleSubmit}>Submit</Button>
             </div>
           </Fade>
         </Modal>
