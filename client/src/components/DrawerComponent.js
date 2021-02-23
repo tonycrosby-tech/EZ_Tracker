@@ -25,7 +25,7 @@ const DrawerComponent = () => {
   }));
 
   const [openDrawer, setOpenDrawer] = useState(false);
-  const [auth, setAuth] = useState(false);
+  const [auth, setAuth] = useState(true);
 
   const handleChange = (event) => {
     setAuth(event.target.checked);
@@ -57,6 +57,19 @@ const DrawerComponent = () => {
               <ListItemText> Home</ListItemText>
             </Link>
           </ListItem>
+          {auth && (
+            <div>
+              <ListItem divider button onClick={() => setOpenDrawer(false)}>
+                <Link
+                  style={{ textDecoration: "none" }}
+                  href="/profile"
+                  color="inherit"
+                >
+                  <ListItemText> Profile</ListItemText>
+                </Link>
+              </ListItem>
+            </div>
+          )}
 
           <ListItem divider button onClick={() => setOpenDrawer(false)}>
             <Link
@@ -77,28 +90,6 @@ const DrawerComponent = () => {
               <ListItemText> Contact</ListItemText>
             </Link>
           </ListItem>
-          {auth && (
-            <div>
-              <ListItem divider button onClick={() => setOpenDrawer(false)}>
-                <Link
-                  style={{ textDecoration: "none" }}
-                  href="/profile"
-                  color="inherit"
-                >
-                  <ListItemText> Profile</ListItemText>
-                </Link>
-              </ListItem>
-              <ListItem divider button onClick={() => setOpenDrawer(false)}>
-                <Link
-                  style={{ textDecoration: "none" }}
-                  href="/logout"
-                  color="inherit"
-                >
-                  <ListItemText> Logout</ListItemText>
-                </Link>
-              </ListItem>
-            </div>
-          )}
         </List>
       </Drawer>
       {/* Since this is inside our toolbar we can push it to the end of the toolbar */}
