@@ -8,6 +8,46 @@ import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
+import { withStyles } from '@material-ui/core/styles';
+// const useStyles = makeStyles((theme) => ({
+//   paper: {
+//     marginTop: theme.spacing(8),
+//     display: 'flex',
+//     flexDirection: 'column',
+//     alignItems: 'center',
+//   },
+//   avatar: {
+//     margin: theme.spacing(1),
+//     backgroundColor: theme.palette.secondary.main,
+//   },
+//   form: {
+//     width: '100%', // Fix IE 11 issue.
+//     marginTop: theme.spacing(1),
+//   },
+//   submit: {
+//     margin: theme.spacing(3, 0, 2),
+//   },
+// }));
+
+const styles = theme => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: "#00008b",
+  },
+  form: {
+    width: '90%', // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+});
 class Login extends Component {
   constructor() {
     super();
@@ -17,7 +57,6 @@ class Login extends Component {
       message: "",
     };
   }
-  
   onChange = (e) => {
     const state = this.state;
     state[e.target.name] = e.target.value;
@@ -43,20 +82,21 @@ class Login extends Component {
   };
 
   render() {
+    const { classes } = this.props;
     const { username, password, message } = this.state;
     return (
       <Grid container component="main">
         <CssBaseline />
         <Grid item xs={false} sm={4} md={7} />
         <Grid item xs={12} sm={8} md={5} elevation={6}>
-          <div>
-            <Avatar>
+          <div className={classes.paper}>
+            <Avatar className={classes.avatar}>
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <form onSubmit={this.onSubmit}>
+            <form className={classes.form} onSubmit={this.onSubmit}>
               {message !== "" && <p>{message}</p>}
               <TextField
                 variant="outlined"
@@ -95,6 +135,7 @@ class Login extends Component {
                 label="Remember me"
               /> */}
               <Button
+                className={classes.submit}
                 type="submit"
                 fullWidth
                 variant="contained"
@@ -120,4 +161,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default withStyles(styles, { withTheme: true })(Login);
