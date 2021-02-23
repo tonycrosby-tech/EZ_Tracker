@@ -11,6 +11,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import DrawerComponent from "./DrawerComponent";
 import Button from '@material-ui/core/Button';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
@@ -58,6 +59,7 @@ const Navbar = function () {
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  const history = useHistory();
 
   const handleChange = (event) => {
     setAuth(event.target.checked);
@@ -69,11 +71,12 @@ const Navbar = function () {
     axios
       .get("/api/auth/logout")
       .then((res) => {
-        console.log(res);
+        history.push("/");
       })
       .catch((error) => {
         console.error(error)
       });
+      setAnchorEl(null);
   }
 
   const handleMenu = (event) => {
