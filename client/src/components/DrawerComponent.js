@@ -43,9 +43,9 @@ const DrawerComponent = () => {
       <Drawer
         anchor="left"
         classes={{ paper: classes.drawerContainer }}
-        onClose={() => setOpenDrawer(false)}
+        onClick={() => setOpenDrawer(false)}
         open={openDrawer}
-        onOpen={() => setOpenDrawer(true)}
+        onClick={() => setOpenDrawer(true)}
       >
         <List>
           <ListItem divider button onClick={() => setOpenDrawer(false)}>

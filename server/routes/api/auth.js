@@ -260,7 +260,6 @@ router.get('/logout', function(req, res) {
   catch(ex){
     res.status(401).send({ success: false, msg: 'logout failed.' });
   }
-  //res.redirect('/');
 });
 
 
