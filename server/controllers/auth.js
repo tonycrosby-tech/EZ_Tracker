@@ -1,12 +1,18 @@
 const db = require('../models');
+const passport = require('passport');
 
-const login = async (req, res) => {
-  res.json(req.user);
-};
+// const login = async (req, res) => {
+//   res.json(req.user);
+// };
 
-exports.login = login;
+// exports.login = login;
 
 module.exports = {
+
+  login:  (req, res) => {
+
+    passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login', })(req, res);
+  },
 
   logout: function (req, res) {
     try {
