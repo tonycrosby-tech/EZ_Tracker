@@ -9,6 +9,9 @@ import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import backgroundImage from './Background.jpg';
+
 // const useStyles = makeStyles((theme) => ({
 //   paper: {
 //     marginTop: theme.spacing(8),
@@ -30,8 +33,19 @@ import { withStyles } from '@material-ui/core/styles';
 // }));
 
 const styles = theme => ({
+  root: {
+    height: '100vh',
+  },
+  image: {
+    backgroundImage: `url("${backgroundImage}")`,
+    backgroundRepeat: 'no-repeat',
+    backgroundColor:
+      theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+  },
   paper: {
-    marginTop: theme.spacing(8),
+    margin: theme.spacing(8, 4),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -85,10 +99,10 @@ class Login extends Component {
     const { classes } = this.props;
     const { username, password, message } = this.state;
     return (
-      <Grid container component="main">
+      <Grid container className={classes.root} component="main">
         <CssBaseline />
-        <Grid item xs={false} sm={4} md={7} />
-        <Grid item xs={12} sm={8} md={5} elevation={6}>
+        <Grid item xs={false} sm={4} md={7} className={classes.image}/>
+        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <div className={classes.paper}>
             <Avatar className={classes.avatar}>
               <LockOutlinedIcon />
