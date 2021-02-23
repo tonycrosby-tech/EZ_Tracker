@@ -97,7 +97,8 @@ const useStyles = makeStyles((theme) => ({
 const Subscription = () => {
   const [value, onChange] = useState(new Date());
   const [open, setOpen] = React.useState(false);
-  const [formObject, setFormObject] = useState({});
+  const [numObject, setNumObject] = useState();
+  const [formObject, setFormObject] = useState();
 
   const handleOpen = () => {
     setOpen(true);
@@ -108,23 +109,27 @@ const Subscription = () => {
   };
 
 
-  function handleInputChange(event) {
+  const numInputChange = (event) => {
     const { name, value } = event.target;
-    setFormObject({...formObject, [name]: value})
+    setNumObject({...numObject, [name]: Number.parseFloat(value)})
   };
 
-  function handleFormSubmit(event) {
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormObject({...formObject, [name]: (value)})
+  };
+
+  const newArr = [];
+
+res.render("/");
+
+  const handleFormSubmit = (event) =>  {
     event.preventDefault();
-    if (formObject.SubscriptionName && formObject.cost && formObject.satisfaction && formObject.expirationDate) {
-      API.saveSubs({
-        SubscriptionName: formObject.SubscriptionName,
-        cost: formObject.cost,
-        satisfaction: formObject.satisfaction,
-        expirationDate: formObject.expirationDate
-      })
-        .then(res => console.log(res))
-        .catch(err => console.log(err));
-    }
+    console.log(formObject);
+    console.log(numObject);
+    axios.post("/api/auth/subscription")
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
   };
 
   const classes = useStyles();
@@ -199,7 +204,7 @@ const Subscription = () => {
               <p id="new-subscription">
                 To create a new Subscription please enter the details below.
               </p>
-              <form onClick={handleFormSubmit}>
+              <form>
               <TextField
                 variant="outlined"
                 margin="normal"
@@ -208,7 +213,6 @@ const Subscription = () => {
                 id="subscription-name"
                 label="Subscription Name"
                 name="SubscriptionName"
-                value="Netflix"
                 autoFocus
                 onChange={handleInputChange}
                 required
@@ -221,9 +225,8 @@ const Subscription = () => {
                 id="subscription-cost"
                 label="Subscription Cost"
                 name="cost"
-                value="$9.99"
                 autoFocus
-                onChange={handleInputChange}
+                onChange={numInputChange}
                 required
               />
               <TextField
@@ -234,9 +237,8 @@ const Subscription = () => {
                 id="subscription-rating"
                 label="Subscription Rating"
                 name="satisfaction"
-                value="5 stars"
                 autoFocus
-                onChange={handleInputChange}
+                onChange={numInputChange}
                 required
               />
               <TextField
@@ -247,13 +249,12 @@ const Subscription = () => {
                 id="subscription-expire"
                 label="Subscription Expire Date"
                 name="expirationDate"
-                value="2/22/2021"
                 autoFocus
-                onChange={handleInputChange}
+                onChange={numInputChange}
                 required
               />
-              <Button type="submit"
-                fullWidth variant="contained" color="primary">Submit</Button>
+              <button type="submit"
+                variant="contained" color="primary" onClick={handleFormSubmit}>Submit</button>
               </form>
             </div>
           </Fade>
