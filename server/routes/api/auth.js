@@ -9,9 +9,9 @@ const isAuthenticated = require('../../config/middleware/isAuthenticated');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 // api/auth/register
-// input: email, username, password
 // output: registered user, send back email and username, and id of user
 router.post("/register", function (req, res) {
+  // input: email, username, password
 
   Users = new User({ email: req.body.email, username: req.body.username });
 
@@ -190,7 +190,7 @@ router.put('/updateSubCost/:id',isAuthenticated, function (req, res) {
 //api/auth/login
 // input: username and password
 // output: authenticated password and found username
-router.post('/login', (req, res) => passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login', })(req, res));
+//router.post('/login', (req, res) => passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login', })(req, res));
 // {
 //   const { username, password } = req.body;
 
@@ -220,19 +220,10 @@ router.post('/login', (req, res) => passport.authenticate('local', { successRedi
 //     }
 //   });
 
-// router.post()
+router.route("/login")
+ .post(authController.login);
 
-
-
-  // findById: function(req, res) {
-  //   db.Book
-  //     .findById(req.params.id)
-  //     .then(dbModel => res.json(dbModel))
-  //     .catch(err => res.status(422).json(err));
-  // },
-// });
-
-// input: id of subscription and name of user
+// input: id of subscription 
 router.put('/addSubAlreadyExistToUser',isAuthenticated, function (req, res) {
   const filter = { _id: req.user.id };
 
