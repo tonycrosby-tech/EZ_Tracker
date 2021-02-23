@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -7,6 +7,8 @@ import Slider from '@material-ui/core/Slider';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
+import axios from 'axios';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     '& .MuiTextField-root': {
@@ -41,9 +43,38 @@ const NewSubscription = () => {
     }
   };
 
+  const [numObject, setNumObject] = useState();
+  const [formObject, setFormObject] = useState();
+  const [dateObject, setDateObject] = useState();
+
+  const numInputChange = (event) => {
+    const { name, value } = event.target;
+    setNumObject({...numObject, [name]: Number.parseFloat(value)})
+  };
+
+  const getInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormObject({...formObject, [name]: (value)})
+  };
+  
+  const dateInputChange = (event) => {
+    const {name, value} = event.target;
+    setDateObject({...dateObject, [name]: (value)})
+  };
+
+  const handleFormSubmit = (event) =>  {
+    event.preventDefault();
+    const mergedObj = {...formObject, ...numObject, ...dateObject};
+    console.log(mergedObj);
+    axios.post("/api/auth/subscription", mergedObj)
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+  };
+
+
   return (
     <Container component="main" maxWidth="xs">
-      <form color="#212121">
+      <form color="#212121" onSubmit={handleFormSubmit}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <div>
@@ -56,21 +87,24 @@ const NewSubscription = () => {
             <TextField
               id="Name"
               label="Subscription Name"
+              name="SubscriptionName"
               Value="subcription"
               variant="outlined"
+              onChange={getInputChange}
               fullWidth
             />
           </Grid>
           <Grid item xs={12}>
             <TextField
-              id="Cost"
+              id="cost"
               label="Cost"
-              name="price"
+              name="cost"
               Value="0"
               min="0"
               step=".01"
               variant="outlined"
               input
+              onChange={numInputChange}
               type="number decimal"
               sufix="$"
               fullWidth
@@ -78,12 +112,14 @@ const NewSubscription = () => {
           </Grid>
           <Grid item xs={12}>
             <div>
-              <Typography>start Date</Typography>
+              <Typography>Start Date</Typography>
               <TextField
                 id="Startdate "
                 Value="Startdate "
                 variant="outlined"
+                name="startDate"
                 input
+                onChange={dateInputChange}
                 type="date"
                 fullWidth
               />
@@ -96,7 +132,9 @@ const NewSubscription = () => {
                 id="Renew date"
                 Value="Renew date"
                 variant="outlined"
+                name="expirationDate"
                 input
+                onChange={dateInputChange}
                 type="date"
                 fullWidth
               />
@@ -113,6 +151,7 @@ const NewSubscription = () => {
                     value={typeof value === 'number' ? value : 0}
                     onChange={handleSliderChange}
                     aria-labelledby="input-slider"
+                    name="satisfaction"
                   />
                 </Grid>
                 <Grid item>
@@ -120,6 +159,7 @@ const NewSubscription = () => {
                     className={classes.input}
                     value={value}
                     margin="dense"
+                    name="satisfaction"
                     onChange={handleInputChange}
                     onBlur={handleBlur}
                     inputProps={{
