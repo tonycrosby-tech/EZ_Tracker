@@ -112,6 +112,8 @@ const Subscription = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    console.log(getValue);
+
     axios
       .post("/api/auth/subscription")
       .then((res) => {
@@ -190,7 +192,7 @@ const Subscription = () => {
         >
           <Fade in={open}>
             <div className={classes.paper}>
-              <h2 id="New Subscription">New Subscription</h2>
+              <h2 id="NewSubscription">New Subscription</h2>
               <p id="new-subscription">
                 To create a new Subscription please enter the details below.
               </p>
