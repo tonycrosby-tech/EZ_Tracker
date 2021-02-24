@@ -192,36 +192,6 @@ router.put('/updateSubCost/:id',isAuthenticated, function (req, res) {
 //api/auth/login
 // input: username and password
 // output: authenticated password and found username
-//router.post('/login', (req, res) => passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login', })(req, res));
-// {
-//   const { username, password } = req.body;
-
-//   User.findOne({
-//     username: req.body.username
-//   }, function (err, user) {
-//     if (err) {
-//       res.status(500);
-//     }
-
-//     else if (!user) {
-//      // res.status(401).send({ success: false, msg: 'Authentication failed. User not found.' });
-//       res.json({"send to login": true});
-//     }
-//     else {
-//       //validPassword
-//       console.log(user);
-//       user.authenticate(req.body.password, (err, result) => {
-//         if (err)
-//           res.status(401).send({ success: false, msg: 'login failed.' });
-//         else if (result === false)
-//           res.status(401).send({ success: false, msg: 'login failed.' });
-//         else
-//           res.json(result);
-
-//       });
-//     }
-//   });
-
 router.route("/login")
  .post(authController.login);
 
@@ -238,18 +208,6 @@ router.put('/addSubAlreadyExistToUser',isAuthenticated, function (req, res) {
     })
     .catch(err => res.status(439).json(err));
 });
-
-// router.get('/logout', function(req, res) {
-//   try{
-//     req.logout();
-//     res.json({"send to login" : true});
-//     //res.json({"logged out successfully" : "true"});
-
-//   }
-//   catch(ex){
-//     res.status(401).send({ success: false, msg: 'logout failed.' });
-//   }
-// });
 
 router.route("/logout")
   .get(authController.logout);
