@@ -61,6 +61,9 @@ router.get('/getAllsubscriptions', isAuthenticated, function (req, res) {
 // input: subscription id in the body
 // output: deleted subscription id in the user document: note: this does not
 // delete a subscription out of the subscription document
+// {
+//   "subscription_id": "603534a5aeb8367228ef6ff4"
+// }
 router.delete('/deleteSubscription',isAuthenticated,  function (req, res) {
   const ider = req.user.id;
   User.updateOne({ _id: ider }, { $pull: { subscriptions: req.body.subscription_id } }, function (err, result) {
@@ -80,6 +83,12 @@ router.delete('/deleteSubscription',isAuthenticated,  function (req, res) {
 // input: subscription properties you want to insert  (see model for specifics)
 // output: a new subscription with a pointer in the user document; you get 
 // the user and the pointer(s) to the subscription(s). Go to Robo3T to see new subscription
+// {
+//   "SubscriptionName": "wh7799at",
+//   "startDate": "2021-02-05",
+//   "cost": "50",
+//   "expirationDate": "2021-02-22"
+// }
 router.post('/subscription', isAuthenticated, function (req, res) {
   const filter = { _id: req.user.id };
 
@@ -96,6 +105,12 @@ router.post('/subscription', isAuthenticated, function (req, res) {
 
 // creates a subscription WITHOUT being tied to the user. 
 // Input: properties of the subscription
+// {
+//   "SubscriptionName" : "whatever",
+//   "cost": 100,
+//   "startDate": "2021-02-01",
+//   "expirationDate": "2021-05-01"
+// }
 router.post('/addSubscription',isAuthenticated, function (req, res) {
 
   Subscription.create(req.body)
@@ -157,6 +172,9 @@ router.get('/getAllUsersAndSubs',isAuthenticated, function (req, res) {
 // updated value of satisfaction
 // input: key of the subscription and value of satisfaction we want to update to
 // output: updated subscription
+// {
+//   "satisfaction" : 39
+// }
 router.put('/updateSubSat/:id',isAuthenticated, function (req, res) {
   
   const setter = { satisfaction: req.body.satisfaction };
@@ -175,6 +193,9 @@ router.put('/updateSubSat/:id',isAuthenticated, function (req, res) {
 //api/auth/updateSub with key of the subscription in the uri and value of updated cost in the body
 // input: id of subscription and value of cost
 // output: updated subscription
+// {
+//   "cost" : 60
+// }
 router.put('/updateSubCost/:id',isAuthenticated, function (req, res) {
   const ider = req.params.id;
   const setter = { cost: req.body.cost };
@@ -192,6 +213,9 @@ router.put('/updateSubCost/:id',isAuthenticated, function (req, res) {
 //api/auth/updateSubDateExp with key of the subscription in the uri and value of updated expiration date in the body
 // input: id of subscription and value of cost
 // output: updated subscription (expiration date)
+// {
+//   "expirationDate" : "2021-05-01"
+// }
 router.put('/updateSubDateExp/:id',isAuthenticated, function (req, res) {
   const ider = req.params.id;
   const setter = { expirationDate: req.body.expirationDate };
@@ -214,7 +238,6 @@ router.put('/updateSubDateExp/:id',isAuthenticated, function (req, res) {
 //   "cost": "900",
 //   "expirationDate": "2022-01-01",
 //   "startDate": "2021-01-01"
-  
 // }
 router.put('/updateAllPropsForOneSub/:id',isAuthenticated, function (req, res) {
   const ider = req.params.id;
@@ -247,6 +270,9 @@ router.route("/login")
  .post(authController.login);
 
 // input: id of subscription 
+// {
+//   "subscription": "60345e075b196f6a3414815b"
+// }
 router.put('/addSubAlreadyExistToUser',isAuthenticated, function (req, res) {
   const filter = { _id: req.user.id };
 
