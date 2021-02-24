@@ -11,7 +11,6 @@ import Typography from "@material-ui/core/Typography";
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import backgroundImage from './Background.jpg';
-
 // const useStyles = makeStyles((theme) => ({
 //   paper: {
 //     marginTop: theme.spacing(8),
@@ -68,7 +67,7 @@ class Login extends Component {
     this.state = {
       username: "",
       password: "",
-      message: "",
+      message: ""
     };
   }
   onChange = (e) => {
