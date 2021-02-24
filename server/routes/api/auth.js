@@ -189,6 +189,24 @@ router.put('/updateSubCost/:id',isAuthenticated, function (req, res) {
     });
 });
 
+//api/auth/updateSub with key of the subscription in the uri and value of updated cost in the body
+// input: id of subscription and value of cost
+// output: updated subscription
+router.put('/updateSubDateExp/:id',isAuthenticated, function (req, res) {
+  const ider = req.params.id;
+  const setter = { expirationDate: req.body.expirationDate };
+  Subscription.findOneAndUpdate({ _id: ider }, setter,
+    { returnOriginal: false }, (err, result) => {
+      if (err) {
+        res.status(439).json(err);
+      }
+      else {
+        res.json(result);
+      }
+    });
+});
+
+
 //api/auth/login
 // input: username and password
 // output: authenticated password and found username
