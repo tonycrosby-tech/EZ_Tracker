@@ -27,7 +27,7 @@ const DrawerComponent = () => {
   }));
 
   const [openDrawer, setOpenDrawer] = useState(false);
-  const [auth, setAuth] = useState(true);
+  const [auth, setAuth] = useState(false);
 
   const handleChange = (event) => {
     setAuth(event.target.checked);
@@ -47,7 +47,7 @@ const DrawerComponent = () => {
         classes={{ paper: classes.drawerContainer }}
         onClick={() => setOpenDrawer(false)}
         open={openDrawer}
-        onOpen={() => setOpenDrawer(true)}
+        onSubmit={() => setOpenDrawer(true)}
       >
         <List>
           <ListItem divider button onClick={() => setOpenDrawer(false)}>

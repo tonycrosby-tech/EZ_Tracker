@@ -19,13 +19,13 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      loggedIn: false,
+      loggedIn: true,
       username: null
     }
-
-    this.updateUser = this.updateUser.bind(this);
-    this.getUser = this.getUser.bind(this);
   }
+  //   this.updateUser = this.updateUser.bind(this);
+  //   this.getUser = this.getUser.bind(this);
+  // }
 
   componentDidMount() {
     this.getUser();
@@ -37,16 +37,11 @@ class App extends Component {
 
   getUser() {
     axios.get("/api/auth/user").then(response => {
-      console.log('Get user response: ')
-      console.log(response.data)
       if (response.data.user) {
-        console.log('Get User: There is a user saved in the server session: ')
-
         this.setState({
           loggedIn: true,
           username: response.data.user.username
         })
-        console.log("Login :" + "Successful");
       } else {
         console.log('Get user: no user');
         this.setState({
@@ -58,12 +53,11 @@ class App extends Component {
   }
 
   render() {
-
     return (
       <React.Fragment>
         <CssBaseline />
         <BrowserRouter>
-          <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn}/>
+          <Navbar/>
           <Switch>
             <Route exact path="/" component={Signup} />
             <Route exact path="/login" component={SignInSide} />
@@ -83,17 +77,17 @@ class App extends Component {
               component={Header}
             />
             <ProtectedRoute
-              isAuthenticated={this.state.loggedIn}
+              LoggedIn={this.state.loggedIn}
               path="/subscription"
               component={Subscription}
             />
             <ProtectedRoute
-              isAuthenticated={this.state.loggedIn}
+              LoggedIn={this.state.loggedIn}
               path="/profile"
               component={Profile}
             />
             <ProtectedRoute
-              isAuthenticated={this.state.loggedIn}
+              LoggedIn={this.state.loggedIn}
               path="/account"
               component={Account}
             />
