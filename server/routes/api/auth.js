@@ -4,6 +4,7 @@ const authController = require('../../controllers/auth');
 const isAuthenticated = require('../../config/middleware/isAuthenticated');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const db = require('../../models');
 // api/auth/register
 // output: registered user, send back email and username, and id of user
 router.post('/register', function(req, res) {
@@ -11,7 +12,7 @@ router.post('/register', function(req, res) {
 
   Users = new User({ email: req.body.email, username: req.body.username });
 
-  User.register(Users, req.body.password, function(err, user) {
+  db.User.register(Users, req.body.password, function(err, user) {
     if (err) {
       res.json({
         success: false,
@@ -33,7 +34,7 @@ router.post('/register', function(req, res) {
 // output: one user
 router.get('/user', isAuthenticated, function(req, res) {
   const ider = req.user.id;
-  User.findById(ider)
+  db.User.findById({ _id: ider })
     .then((user) => res.json(user))
     .catch((err) => res.status(439).json(err));
 });
@@ -65,12 +66,10 @@ router.delete('/deleteSubscription', isAuthenticated, function(req, res) {
     { $pull: { subscriptions: req.body.subscription_id } },
     function(err, result) {
       if (err) {
-        res
-          .status(401)
-          .send({
-            success: false,
-            msg: 'Deletion failed. subscription not found.',
-          });
+        res.status(401).send({
+          success: false,
+          msg: 'Deletion failed. subscription not found.',
+        });
       } else {
         res.json(result);
       }

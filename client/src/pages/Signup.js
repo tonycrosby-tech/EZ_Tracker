@@ -1,53 +1,35 @@
 // import React, { useState } from "react";
-<<<<<<< HEAD
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-// import Link from "@material-ui/core/Link";
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import API from '../utils/API';
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Link from '@material-ui/core/Link';
-=======
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import Grid from "@material-ui/core/Grid";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
-import { withStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
-import React, { Component } from "react";
-import axios from "axios";
-import Link from "@material-ui/core/Link";
-import Paper from "@material-ui/core/Paper";
->>>>>>> 428fc41b1ef14c442a9b6aebdf60a9fa83442b99
+import Paper from '@material-ui/core/Paper';
+import API from '../utils/API';
 
 const styles = (theme) => ({
   root: {
-    height: "50vh",
+    height: '50vh',
   },
   paper: {
     marginTop: theme.spacing(15),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: "#00008b",
+    backgroundColor: '#00008b',
   },
   form: {
-    width: "90%", // Fix IE 11 issue.
+    width: '90%', // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
   submit: {
