@@ -1,34 +1,34 @@
 // import React, { useState } from "react";
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import Grid from "@material-ui/core/Grid";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
-import { withStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
-import React, { Component } from "react";
-import axios from "axios";
-import Link from "@material-ui/core/Link";
-import Paper from "@material-ui/core/Paper";
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import React, { Component } from 'react';
+import axios from 'axios';
+import Link from '@material-ui/core/Link';
+import Paper from '@material-ui/core/Paper';
 
 const styles = (theme) => ({
   root: {
-    height: "50vh",
+    height: '70vh',
   },
   paper: {
     marginTop: theme.spacing(15),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: "#00008b",
+    backgroundColor: '#00008b',
   },
   form: {
-    width: "90%", // Fix IE 11 issue.
+    width: '90%', // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
   submit: {
@@ -39,9 +39,9 @@ class Signup extends Component {
   constructor() {
     super();
     this.state = {
-      username: "",
-      password: "",
-      email: "",
+      username: '',
+      password: '',
+      email: '',
     };
   }
 
@@ -57,14 +57,14 @@ class Signup extends Component {
     const { email, username, password } = this.state;
 
     axios
-      .post("/api/auth/register", {
+      .post('/api/auth/register', {
         email,
         username,
         password,
       })
       .then((result) => {
         console.log(result);
-        this.props.history.push("/login");
+        this.props.history.push('/login');
       });
   };
 
@@ -143,7 +143,7 @@ class Signup extends Component {
                 Sign Up
               </Button>
               <Grid container justify="flex-end">
-                <Grid item>
+                <Grid item xs={12}>
                   <Link href="/login" variant="body1">
                     Already have an account? Sign in
                   </Link>
