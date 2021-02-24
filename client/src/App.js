@@ -57,7 +57,7 @@ class App extends Component {
       <React.Fragment>
         <CssBaseline />
         <BrowserRouter>
-          <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn}/>
+          <Navbar/>
           <Switch>
             <Route exact path="/" component={Signup} />
             <Route exact path="/login" component={SignInSide} />
