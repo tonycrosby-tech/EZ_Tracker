@@ -7,7 +7,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
-import ResponsivePlayer from '../components/ReactPlayer';
+// import ResponsivePlayer from '../components/ReactPlayer';
 
 
 const useStyles = makeStyles({

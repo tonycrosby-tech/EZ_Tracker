@@ -113,10 +113,7 @@ const useStyles = makeStyles((theme) => ({
 const Subscription = () => {
   const [value, onChange] = useState(new Date());
   const [open, setOpen] = React.useState(false);
-  // const [numObject, setNumObject] = useState();
-  // const [formObject, setFormObject] = useState();
-  // const [dateObject, setDateObject] = useState();
-
+  
   const handleOpen = () => {
     setOpen(true);
   };
@@ -124,31 +121,6 @@ const Subscription = () => {
   const handleClose = () => {
     setOpen(false);
   };
-
-
-  // const numInputChange = (event) => {
-  //   const { name, value } = event.target;
-  //   setNumObject({...numObject, [name]: Number.parseFloat(value)})
-  // };
-
-  // const handleInputChange = (event) => {
-  //   const { name, value } = event.target;
-  //   setFormObject({...formObject, [name]: (value)})
-  // };
-  
-  // const dateInputChange = (event) => {
-  //   const {name, value} = event.target;
-  //   setDateObject({...dateObject, [name]: (value)})
-  // };
-
-  // const handleFormSubmit = (event) =>  {
-  //   event.preventDefault();
-  //   const mergedObj = {...formObject, ...numObject, ...dateObject};
-  //   console.log(mergedObj);
-  //   axios.post("/api/auth/subscription", mergedObj)
-  //     .then(res => console.log(res))
-  //     .catch(err => console.log(err));
-  // };
 
   const classes = useStyles();
 

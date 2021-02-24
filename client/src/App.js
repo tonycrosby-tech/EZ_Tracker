@@ -14,14 +14,14 @@ import Profile from "./pages/Profile";
 import Account from "./pages/Settings";
 import API from "./utils/API";
 
-
 function App() {
-  const [auth, setAuth] = useState(''); // should be global state, probably context
 
-  const isAuthenticated = !!auth;
+  // const [auth, setAuth] = useState(''); // should be global state, probably context
+
+  // const isAuthenticated = !!auth;
 
   // useEffect(() => {
-    
+
   // }, [auth]);
 
   // const isLoggedIn = () => {
@@ -34,15 +34,13 @@ function App() {
   // }
   // console.log(isLoggedIn);
 
-
-
   // if (!isAuthenticated) return <Redirect to="/" />;
   // console.log(isAuthenticated);
   return (
     <React.Fragment>
       <CssBaseline />
       <BrowserRouter>
-        <Navbar />
+        <Navbar/>
         <Switch>
           <Route exact path="/" component={Signup} />
           <Route exact path="/login" component={SignInSide} />
@@ -62,3 +60,4 @@ function App() {
 }
 
 export default App;
+
