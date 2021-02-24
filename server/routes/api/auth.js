@@ -8,10 +8,10 @@ const authController = require('../../controllers/auth');
 const isAuthenticated = require('../../config/middleware/isAuthenticated');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+
 // api/auth/register
 // output: registered user, send back email and username, and id of user
 router.post("/register", function (req, res) {
-  // input: email, username, password
 
   Users = new User({ email: req.body.email, username: req.body.username });
 
@@ -50,14 +50,15 @@ router.get('/users', isAuthenticated,  function (req, res) {
 
 });
 
+// get all subscriptions not attached to any user
 router.get('/getAllsubscriptions', isAuthenticated, function (req, res) {
   Subscription.find(req.query)
     .then(subscript => res.json(subscript))
     .catch(err => res.status(439).json(err));
 });
 
-// pass the user id in the uri and the subscription id in the body
-// input: user id in uri and id of the subscription in the body
+// pass the subscription id in the body
+// input: subscription id in the body
 // output: deleted subscription id in the user document: note: this does not
 // delete a subscription out of the subscription document
 router.delete('/deleteSubscription',isAuthenticated,  function (req, res) {
@@ -76,9 +77,9 @@ router.delete('/deleteSubscription',isAuthenticated,  function (req, res) {
 // this takes a username and a subscription, saves the subscription,
 // and returns the username, email, and ids of the subscriptions that
 //are attached to the user
-// input: username and subscription you want to insert
+// input: subscription properties you want to insert  (see model for specifics)
 // output: a new subscription with a pointer in the user document; you get 
-// the user and the pointer(s) to the subscription(s)
+// the user and the pointer(s) to the subscription(s). Go to Robo3T to see new subscription
 router.post('/subscription', isAuthenticated, function (req, res) {
   const filter = { _id: req.user.id };
 
@@ -93,7 +94,8 @@ router.post('/subscription', isAuthenticated, function (req, res) {
     .catch(err => res.status(439).json(err));
 });
 
-// creates a subscription without being tied to the user.
+// creates a subscription WITHOUT being tied to the user. 
+// Input: properties of the subscription
 router.post('/addSubscription',isAuthenticated, function (req, res) {
 
   Subscription.create(req.body)
@@ -118,7 +120,7 @@ router.get('/getAll',isAuthenticated, function (req, res) {
 });
 
 // given the user id, get all of its subscriptions
-// input: user id
+// input: none
 // output: values of subscriptions
 router.get('/getAllSubs',isAuthenticated, function (req, res) {
 
@@ -170,12 +172,11 @@ router.put('/updateSubSat/:id',isAuthenticated, function (req, res) {
 });
 
 
-//api/auth/updateSub with key of the subscription in the uri and the desired
-// updated value of satisfaction
+//api/auth/updateSub with key of the subscription in the uri and value of updated cost in the body
 // input: id of subscription and value of cost
 // output: updated subscription
 router.put('/updateSubCost/:id',isAuthenticated, function (req, res) {
-  const ider = req.user.id;
+  const ider = req.params.id;
   const setter = { cost: req.body.cost };
   Subscription.findOneAndUpdate({ _id: ider }, setter,
     { returnOriginal: false }, (err, result) => {
