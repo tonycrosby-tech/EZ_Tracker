@@ -189,9 +189,9 @@ router.put('/updateSubCost/:id',isAuthenticated, function (req, res) {
     });
 });
 
-//api/auth/updateSub with key of the subscription in the uri and value of updated cost in the body
+//api/auth/updateSubDateExp with key of the subscription in the uri and value of updated expiration date in the body
 // input: id of subscription and value of cost
-// output: updated subscription
+// output: updated subscription (expiration date)
 router.put('/updateSubDateExp/:id',isAuthenticated, function (req, res) {
   const ider = req.params.id;
   const setter = { expirationDate: req.body.expirationDate };
@@ -205,6 +205,39 @@ router.put('/updateSubDateExp/:id',isAuthenticated, function (req, res) {
       }
     });
 });
+
+// update all properties, except creation date, in one fell swoop
+//input: id of subscription in params and values to update the subscription with in the body.
+// {
+    
+//   "SubscriptionName": "newone",
+//   "cost": "900",
+//   "expirationDate": "2022-01-01",
+//   "startDate": "2021-01-01"
+  
+// }
+router.put('/updateAllPropsForOneSub/:id',isAuthenticated, function (req, res) {
+  const ider = req.params.id;
+  const setter = { "$set":  req.body};
+  Subscription.findOneAndUpdate({ _id: ider }, setter,
+    { returnOriginal: false }, (err, result) => {
+      if (err) {
+        res.status(439).json(err);     
+      }
+      else {
+        res.json(result);
+      }
+    });
+});
+
+
+
+// SubscriptionName: {type: String, required: true, unique: false},
+//     cost: {type: Number, required: false, unique: false},
+//     // rating: {type: Number, required: false, unique: false},
+//     dateCreated: {type: Date, default: Date.now},
+//     expirationDate: {type: String, required:true},
+//     startDate: {type: String, required:true},
 
 
 //api/auth/login
