@@ -11,20 +11,24 @@ import Container from "@material-ui/core/Container";
 import React, { Component } from "react";
 import axios from "axios";
 import Link from "@material-ui/core/Link";
+import Paper from "@material-ui/core/Paper";
 
-const styles = theme => ({
+const styles = (theme) => ({
+  root: {
+    height: "50vh",
+  },
   paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    marginTop: theme.spacing(15),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: "#00008b",
   },
   form: {
-    width: '90%', // Fix IE 11 issue.
+    width: "90%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
   submit: {
@@ -68,13 +72,18 @@ class Signup extends Component {
     const { classes } = this.props;
     const { email, username, password } = this.state;
     return (
-      <Container component="main" maxWidth="xs">
+      <Container
+        className={classes.root}
+        component={Paper}
+        elevation={3}
+        maxWidth="xs"
+      >
         <CssBaseline />
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography  component="h1" variant="h5">
+          <Typography component="h1" variant="h5">
             Sign up
           </Typography>
           <form className={classes.form} onSubmit={this.onSubmit}>
