@@ -25,23 +25,23 @@ const useStyles = makeStyles((theme) => ({
 const NewSubscription = () => {
   const classes = useStyles();
 
-  // const [value, setValue] = React.useState(30);
+  const [rating, setRating] = React.useState(30);
 
-  // const handleSliderChange = (event, newValue) => {
-  //   setValue(newValue);
-  // };
+  const handleSliderChange = (event, newValue) => {
+    setRating(newValue);
+  };
 
-  // const handleInputChange = (event) => {
-  //   setValue(event.target.value === '' ? '' : Number(event.target.value));
-  // };
+  const handleInputChange = (event, newValue) => {
+    setRating(event.target.value === '' ? '' : Number(event.target.value));
+  };
 
-  // const handleBlur = () => {
-  //   if (value < 0) {
-  //     setValue(0);
-  //   } else if (value > 100) {
-  //     setValue(100);
-  //   }
-  // };
+  const handleBlur = () => {
+    if (rating < 0) {
+      setRating(0);
+    } else if (rating > 100) {
+      setRating(100);
+    }
+  };
 
   const [numObject, setNumObject] = useState();
   const [formObject, setFormObject] = useState();
@@ -64,7 +64,9 @@ const NewSubscription = () => {
 
   const handleFormSubmit = (event) =>  {
     event.preventDefault();
-    const mergedObj = {...formObject, ...numObject, ...dateObject};
+
+    const mergedObj = {...formObject, ...numObject, ...dateObject, rating: rating};
+    console.log(mergedObj);
     axios.post("/api/auth/subscription", mergedObj)
       .then(res => console.log(res))
       .catch(err => console.log(err));
@@ -139,7 +141,7 @@ const NewSubscription = () => {
               />
             </div>
           </Grid>
-          {/* <Grid item xs={12}>
+          <Grid item xs={12}>
             <div className={classes.root}>
               <Typography id="input-slider" gutterBottom>
                 Rating
@@ -147,7 +149,7 @@ const NewSubscription = () => {
               <Grid container spacing={2} alignItems="center">
                 <Grid item xs>
                   <Slider
-                    value={typeof value === 'number' ? value : 0}
+                    value={typeof rating === 'number' ? rating : 0}
                     onChange={handleSliderChange}
                     aria-labelledby="input-slider"
                     name="rating"
@@ -156,13 +158,13 @@ const NewSubscription = () => {
                 <Grid item>
                   <Input
                     className={classes.input}
-                    value={value}
+                    value={rating}
                     margin="dense"
                     name="rating"
                     onChange={handleInputChange}
                     onBlur={handleBlur}
                     inputProps={{
-                      step: 10,
+                      step: 1,
                       min: 0,
                       max: 100,
                       type: 'number',
@@ -172,7 +174,7 @@ const NewSubscription = () => {
                 </Grid>
               </Grid>
             </div>
-          </Grid> */}
+          </Grid>
           <Button type="submit" fullWidth variant="contained" color="primary">
             Create
           </Button>

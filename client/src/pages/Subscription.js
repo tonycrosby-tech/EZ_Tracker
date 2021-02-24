@@ -21,6 +21,8 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import 'react-calendar/dist/Calendar.css';
 import NewSubscription from '../components/Model';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import Paper from '@material-ui/core/Paper';
 
 const columns = [
   {
@@ -36,7 +38,7 @@ const columns = [
     headerName: 'Name',
     description: 'This column is for the name of your subscription.',
     sortable: false,
-    width: 300,
+    width: 150,
   },
   {
     field: 'price',
@@ -44,6 +46,13 @@ const columns = [
     description: 'This column is for the price of your subscription.',
     sortable: false,
     width: 150,
+  },
+  {
+    field: 'startDate',
+    headerName: 'Start Date',
+    description: 'This column is for when your subscription starts.',
+    sortable: false,
+    width: 250,
   },
   {
     field: 'expiration',
@@ -55,12 +64,15 @@ const columns = [
 ];
 
 const rows = [
-  { id: 1, name: 'Netflix', price: '$9.99', expiration: '2.21.2021' },
+  { id: 1, name: 'Netflix', price: '$9.99', expiration: '2/21/2021', startDate: '2/21/2021' },
 ];
 
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
+  },
+  root1: {
+    maxWidth: 900,
   },
   media: {
     height: 0,
@@ -88,7 +100,13 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
+    padding: theme.spacing(2, 3, 4),
+  },
+    button1: {
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 3, 4),
   },
 }));
 
@@ -150,9 +168,9 @@ const Subscription = () => {
         </Grid>
       </Grid>
       <List className={classes.root}>
-        <ListItem>
+        <ListItem className={classes.button1}>
           <Button onClick={handleOpen}>
-            <AddCircleIcon />
+            <AddCircleIcon color="primary" />
           </Button>
           <ListItemText color="primary" primary="Add a new Subscription" />
         </ListItem>
@@ -181,10 +199,12 @@ const Subscription = () => {
               </Typography>
             </CardContent>
           </Card>
+          
         </Grid>
 
-        <Grid item xs>
-          <div style={{ height: 400, width: '80%' }}>
+        <Grid className={classes.root1} item xs>
+          <Card> 
+          <div style={{ height: 357, width: '100%' }}>
             <DataGrid
               rows={rows}
               columns={columns}
@@ -192,7 +212,19 @@ const Subscription = () => {
               checkboxSelection
             />
           </div>
+          </Card>
         </Grid>
+
+        {/* <Grid className={classes.paper} item xs>
+          <div style={{ height: 357, width: '100%' }}>
+            <DataGrid
+              rows={rows}
+              columns={columns}
+              pageSize={4}
+              checkboxSelection
+            />
+          </div>
+        </Grid> */}
       </Grid>
 
       <div>
