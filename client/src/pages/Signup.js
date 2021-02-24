@@ -1,4 +1,5 @@
 // import React, { useState } from "react";
+<<<<<<< HEAD
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -15,7 +16,44 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Link from '@material-ui/core/Link';
+=======
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import Grid from "@material-ui/core/Grid";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Typography from "@material-ui/core/Typography";
+import { withStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import React, { Component } from "react";
+import axios from "axios";
+import Link from "@material-ui/core/Link";
+import Paper from "@material-ui/core/Paper";
+>>>>>>> 428fc41b1ef14c442a9b6aebdf60a9fa83442b99
 
+const styles = (theme) => ({
+  root: {
+    height: "50vh",
+  },
+  paper: {
+    marginTop: theme.spacing(15),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: "#00008b",
+  },
+  form: {
+    width: "90%", // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+});
 class Signup extends Component {
   constructor() {
     super();
@@ -48,18 +86,24 @@ class Signup extends Component {
   };
 
   render() {
+    const { classes } = this.props;
     const { email, username, password } = this.state;
     return (
-      <Container component="main" maxWidth="xs">
+      <Container
+        className={classes.root}
+        component={Paper}
+        elevation={3}
+        maxWidth="xs"
+      >
         <CssBaseline />
-        <div>
-          <Avatar>
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <form onSubmit={this.onSubmit}>
+          <form className={classes.form} onSubmit={this.onSubmit}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
@@ -111,6 +155,7 @@ class Signup extends Component {
                 variant="contained"
                 color="primary"
                 fullWidth
+                className={classes.submit}
               >
                 Sign Up
               </Button>
@@ -132,4 +177,4 @@ class Signup extends Component {
   }
 }
 
-export default Signup;
+export default withStyles(styles, { withTheme: true })(Signup);

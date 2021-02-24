@@ -34,9 +34,39 @@ async function sendMail(user) {
 
     const mailOptions = {
       from: ' EXTracker <logan.pippin32@gmail.com>',
-      to: 'tonycrosby96@gmail.com',
+      to: user.email,
       subject: 'Subscription almost expired',
       text: `Your subscription(s) are about to expire.`,
+    };
+
+    const result = await transport.sendMail(mailOptions);
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+async function signUpMail(user) {
+  try {
+    const transport = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        type: 'OAuth2',
+        user: 'logan.pippin32@gmail.com',
+        clientID: CLIENT_ID,
+        clientSecret: CLIENT_SECRET,
+        refreshToken: REFRESH_TOKEN,
+        accessToken:
+          'ya29.A0AfH6SMARvoXbn3I53xsK5bhDe4avMXXV9CMIATSrV9hvb3VnQuaBfhzFz9FcPPszGrrIOe3uy6eroqZnu2lPiPJohg7HZic1G64i0qNZlAV422KoogWqragR8E7E-XT_GvKJMJfySNLYcoE9og_yencaF23D',
+      },
+    });
+
+    const mailOptions = {
+      from: 'EZTracker <messages-noreply@eztracker.com>',
+      to: user.email,
+      subject: 'Thanks For Singing Up!',
+      text:
+        'We really appreciate you, and think that your choice in subscription tracking apps was the right one we look forward to your continued use and enjoy. Thank You.',
     };
 
     const result = await transport.sendMail(mailOptions);
