@@ -66,7 +66,16 @@ const NewSubscription = () => {
     event.preventDefault();
     const mergedObj = {...formObject, ...numObject, ...dateObject};
     axios.post("/api/auth/subscription", mergedObj)
-      .then(res => console.log(res))
+      .then(res => {
+        if (res.data["send to login"] !== undefined && res.data["send to login"] === true){
+          console.log("redirect to login");
+          //history.push("/home")
+        }
+        else{
+          console.log(res);
+        }
+
+      })
       .catch(err => console.log(err));
   };
 
