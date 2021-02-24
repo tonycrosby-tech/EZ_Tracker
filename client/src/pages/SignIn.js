@@ -1,23 +1,24 @@
-import React, { Component } from "react";
-import axios from "axios";
-import Link from "@material-ui/core/Link";
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import Grid from "@material-ui/core/Grid";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
+import React, { Component } from 'react';
+import axios from 'axios';
+import Link from '@material-ui/core/Link';
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Typography from '@material-ui/core/Typography';
+import API from '../utils/API';
 class Login extends Component {
   constructor() {
     super();
     this.state = {
-      username: "",
-      password: "",
-      message: "",
+      username: '',
+      password: '',
+      message: '',
     };
   }
-  
+
   onChange = (e) => {
     const state = this.state;
     state[e.target.name] = e.target.value;
@@ -29,15 +30,14 @@ class Login extends Component {
 
     const { username, password } = this.state;
 
-    axios
-      .post("/api/auth/login",{ username, password })
+    API.login({ username, password })
       .then((res) => {
-        this.setState({ message: "" });
-        this.props.history.push("/home");
+        this.setState({ message: '' });
+        this.props.history.push('/home');
       })
       .catch((error) => {
         this.setState({
-          message: "Login failed. Username or password do not match",
+          message: 'Login failed. Username or password do not match',
         });
       });
   };
@@ -57,7 +57,7 @@ class Login extends Component {
               Sign in
             </Typography>
             <form onSubmit={this.onSubmit}>
-              {message !== "" && <p>{message}</p>}
+              {message !== '' && <p>{message}</p>}
               <TextField
                 variant="outlined"
                 margin="normal"
