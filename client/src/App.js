@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from "react";
-import "./App.css";
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import SignInSide from "./pages/SignIn";
-import About from "./pages/About";
-import Signup from "./pages/Signup";
-import Header from "./components/Header";
-import Subscription from "./pages/Subscription";
-import Navbar from "./components/Navbar";
-import NotFoundPage from "./pages/NotFoundPage";
-import Contact from "./pages/Contact";
-import Profile from "./pages/Profile";
-import Account from "./pages/Settings";
-import API from "./utils/API";
-
+import React, { useEffect, useState } from 'react';
+import './App.css';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import SignInSide from './pages/SignIn';
+import About from './pages/About';
+import Signup from './pages/Signup';
+import Header from './components/Header';
+import Subscription from './pages/Subscription';
+import Navbar from './components/Navbar';
+import NotFoundPage from './pages/NotFoundPage';
+import Contact from './pages/Contact';
+import Profile from './pages/Profile';
+import Account from './pages/Settings';
+import API from './utils/API';
+import Footer from './components/Footer';
 
 function App() {
   const [auth, setAuth] = useState(''); // should be global state, probably context
@@ -21,7 +21,7 @@ function App() {
   const isAuthenticated = !!auth;
 
   // useEffect(() => {
-    
+
   // }, [auth]);
 
   // const isLoggedIn = () => {
@@ -33,8 +33,6 @@ function App() {
   //   .catch(err => console.log(err));
   // }
   // console.log(isLoggedIn);
-
-
 
   // if (!isAuthenticated) return <Redirect to="/" />;
   // console.log(isAuthenticated);
@@ -55,7 +53,7 @@ function App() {
           <Route path="/404" component={NotFoundPage} />
           <Redirect to="/404" />
         </Switch>
-        {/* <Footer /> */}
+        <Footer />
       </BrowserRouter>
     </React.Fragment>
   );
