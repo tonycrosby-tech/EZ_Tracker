@@ -107,6 +107,7 @@ const NewSubscription = () => {
             <TextField
               id="cost"
               label="Cost"
+              placeholder="NO SYMBOLS !!"
               name="cost"
               min="0"
               step=".01"

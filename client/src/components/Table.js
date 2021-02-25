@@ -211,6 +211,57 @@ export default function newTable() {
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
+  const [subscriptions, setSubscriptions] = useState([]);
+
+  useEffect(() => {
+    loadSubscription();
+    // loadBooks() // this would have loaded the books
+  }, []);
+
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const loadSubscription = () => {
+    axios
+      .get("/api/auth/getAllSubs")
+      .then((res) => {
+        const subs = res.data.subscriptions;
+        setSubscriptions(subs);
+        console.log(subscription);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  const getSubscription = (e) => {
+    e.preventDefault();
+
+    axios
+      .get("/api/auth/getAllSubs")
+      .then((res) => {
+        const subs = res.data.subscriptions;
+        setSubscriptions(subs);
+        // for (let i = 0; i < subs.length; i++) {
+        //   const element = subs[i];
+        //   console.log(element);
+        // }
+        // setSubscription(element);
+        console.log(subscription);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  
+  
+  
   const rows = [getSubscription(bName, calories, fat, carbs, protein)];
 
   const headCells = [
@@ -225,26 +276,6 @@ export default function newTable() {
       label: "Expire Date",
     },
   ];
-
-  const [subscription, setSubscription] = useState();
-
-  const getSubscription = (bName, calories, fat, carbs, protein) => {
-    e.preventDefault();
-
-    axios
-      .get("/api/auth/getAllSubs")
-      .then((res) => {
-        const subs = res.data.subscriptions;
-        for (let i = 0; i < subs.length; i++) {
-          const element = subs[i];
-          console.log(element);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    return { name, calories, fat, carbs, protein };
-  };
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -300,6 +331,7 @@ export default function newTable() {
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
   return (
+
     <div className={classes.root}>
       <Paper className={classes.paper}>
         <EnhancedTableToolbar numSelected={selected.length} />

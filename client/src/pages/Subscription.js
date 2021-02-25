@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { DataGrid } from "@material-ui/data-grid";
 import Calendar from "react-calendar";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -22,15 +22,47 @@ import Fade from "@material-ui/core/Fade";
 import "react-calendar/dist/Calendar.css";
 import NewSubscription from "../components/Model";
 import axios from "axios";
-import NewTable from "../components/Table";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableRow from "@material-ui/core/TableRow";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+
+const StyledTableCell = withStyles((theme) => ({
+  head: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  body: {
+    fontSize: 14,
+  },
+}))(TableCell);
+
+const StyledTableRow = withStyles((theme) => ({
+  root: {
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.action.hover,
+    },
+  },
+}))(TableRow);
 
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
   },
+  center1: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    color: "#00008b"
+  },
   root1: {
-    maxWidth: 900,
+    maxWidth: 500,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
   media: {
     height: 0,
@@ -71,6 +103,12 @@ const useStyles = makeStyles((theme) => ({
 const Subscription = () => {
   const [value, onChange] = useState(new Date());
   const [open, setOpen] = useState(false);
+  const [subscriptions, setSubscriptions] = useState([]);
+
+  useEffect(() => {
+    loadSubscription();
+    // loadBooks() // this would have loaded the books
+  }, []);
 
   const handleOpen = () => {
     setOpen(true);
@@ -80,6 +118,19 @@ const Subscription = () => {
     setOpen(false);
   };
 
+  const loadSubscription = () => {
+    axios
+      .get("/api/auth/getAllSubs")
+      .then((res) => {
+        const subs = res.data.subscriptions;
+        setSubscriptions(subs);
+        console.log(subscription);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const getSubscription = (e) => {
     e.preventDefault();
 
@@ -87,10 +138,13 @@ const Subscription = () => {
       .get("/api/auth/getAllSubs")
       .then((res) => {
         const subs = res.data.subscriptions;
-        for (let i = 0; i < subs.length; i++) {
-          const element = subs[i];
-          console.log(element);
-        }
+        setSubscriptions(subs);
+        // for (let i = 0; i < subs.length; i++) {
+        //   const element = subs[i];
+        //   console.log(element);
+        // }
+        // setSubscription(element);
+        console.log(subscription);
       })
       .catch((err) => {
         console.log(err);
@@ -101,11 +155,10 @@ const Subscription = () => {
 
   return (
     <div>
-      <Button onClick={getSubscription}>Get Subs</Button>
-      <Grid container spacing={2}>
+      <Grid flexDirection="row" container spacing={5}>
         <Grid
           container
-          spacing={0}
+          spacing={1}
           direction="column"
           alignItems="center"
           justify="center"
@@ -148,9 +201,58 @@ const Subscription = () => {
             </CardContent>
           </Card>
         </Grid>
-      </Grid>
-      <Grid className={classes.root1} item xs>
-        <NewTable />
+        <Grid flexDirection="row" className={classes.root1} item xs>
+          <Card>
+            <div>
+              {subscriptions.length ? (
+                <div>
+                  <h1 className={classes.center1}>Subscriptions</h1>
+                  <TableContainer>
+                    <Table
+                      className={classes.table}
+                      aria-labelledby="tableTitle"
+                      aria-label="enhanced table"
+                    >
+                      <TableHead>
+                        <TableRow>
+                          <StyledTableCell>Name</StyledTableCell>
+                          <StyledTableCell>Cost</StyledTableCell>
+                          <StyledTableCell>Rating</StyledTableCell>
+                          <StyledTableCell>Start Date</StyledTableCell>
+                          <StyledTableCell>Expiration Date</StyledTableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                          {subscriptions.map((sub) => (
+                            <StyledTableRow>
+                              <TableCell>{sub.SubscriptionName}</TableCell>
+                              <TableCell>${sub.cost}</TableCell>
+                              <TableCell>{sub.rating}</TableCell>
+                              <TableCell>{sub.startDate}</TableCell>
+                              <TableCell>{sub.expirationDate}</TableCell>
+                            </StyledTableRow>
+                          ))}
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
+                </div>
+              ) : (
+                <h3>No Results to Display</h3>
+              )}
+            </div>
+          </Card>
+        </Grid>
+
+        {/* <Grid className={classes.paper} item xs>
+          <div style={{ height: 357, width: '100%' }}>
+            <DataGrid
+              rows={rows}
+              columns={columns}
+              pageSize={4}
+              checkboxSelection
+            />
+          </div>
+        </Grid> */}
       </Grid>
 
       <div>
@@ -179,7 +281,7 @@ const Subscription = () => {
 
 export default Subscription;
 
-{
+// {
   /* <Card>
   <div style={{ height: 357, width: "100%" }}>
     <DataGrid
@@ -239,4 +341,4 @@ export default Subscription;
     />
   </div>
 </Card> */
-}
+// }

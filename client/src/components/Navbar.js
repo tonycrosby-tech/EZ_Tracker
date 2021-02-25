@@ -91,7 +91,7 @@ const Navbar = function () {
           [classes.appBarShift]: open,
         })}
       >
-        <Toolbar>
+        <Toolbar >
           <DrawerComponent />
           <Typography variant="h6" className={classes.title} noWrap>
             EZ Tracker
@@ -114,7 +114,7 @@ const Navbar = function () {
           >
             Profile
           </Link>
-          <Link
+          <Link 
             style={{ textDecoration: "none" }}
             variant="button"
             color="textPrimary"
