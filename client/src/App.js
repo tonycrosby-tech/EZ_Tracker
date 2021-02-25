@@ -14,6 +14,7 @@ import Profile from './pages/Profile';
 import Account from './pages/Settings';
 import ProtectedRoute from './utils/PrivateRoute';
 import axios from 'axios';
+import DrawerComponent from './components/DrawerComponent';
 
 class App extends Component {
   constructor(props) {
@@ -57,7 +58,7 @@ class App extends Component {
       <React.Fragment>
         <CssBaseline />
         <BrowserRouter>
-          <Navbar />
+          <Navbar LoggedIn={this.state.loggedIn} />
           <Switch>
             <Route exact path="/" component={Signup} />
             <Route exact path="/login" component={SignInSide} />

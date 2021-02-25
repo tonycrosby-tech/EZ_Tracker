@@ -19,7 +19,7 @@ router.post("/register", function(req, res) {
       res.json({
         success: false,
         message:
-          "Your account could  not be saved. You need a unique email probably: ",
+          "Your account could not be saved. You need a unique email probably: ",
         err,
       });
     } else {
@@ -35,17 +35,15 @@ router.post("/register", function(req, res) {
 // input: id
 // output: one user
 
-// router.get("/user", function(req, res) {
-//   const ider = req.username;
+// router.get("/user/:id", function(req, res) {
+//   const ider = req.user.id;
 //   User.findOne(ider)
 //     .then((user) => res.json(user))
 //     .catch((err) => res.status(439).json(err));
 // });
 
 router.get("/user", isAuthenticated, (req,res)=>{
-
-  User.find(req.user.id);
-  
+  User.find(req.username)
   if (req.user) {
       res.json({ user: req.user })
   } else {
