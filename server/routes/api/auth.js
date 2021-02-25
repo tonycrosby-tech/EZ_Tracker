@@ -43,7 +43,9 @@ router.post("/register", function(req, res) {
 // });
 
 router.get("/user", isAuthenticated, (req,res)=>{
-  User.find(req.username)
+
+  User.find(req.user.id);
+  
   if (req.user) {
       res.json({ user: req.user })
   } else {
