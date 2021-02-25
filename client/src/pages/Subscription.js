@@ -25,55 +25,6 @@ import axios from 'axios';
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import Paper from "@material-ui/core/Paper";
 
-const columns = [
-  {
-    field: "id",
-    headerName: "ID",
-    description:
-      "This column is for the id to keep count of your subscriptions.",
-    sortable: false,
-    width: 100,
-  },
-  {
-    field: "name",
-    headerName: "Name",
-    description: "This column is for the name of your subscription.",
-    sortable: false,
-    width: 150,
-  },
-  {
-    field: "price",
-    headerName: "Price",
-    description: "This column is for the price of your subscription.",
-    sortable: false,
-    width: 150,
-  },
-  {
-    field: "startDate",
-    headerName: "Start Date",
-    description: "This column is for when your subscription starts.",
-    sortable: false,
-    width: 250,
-  },
-  {
-    field: "expiration",
-    headerName: "Expiration Date",
-    description: "This column is for when your subscription expires.",
-    sortable: false,
-    width: 250,
-  },
-];
-
-const rows = [
-  {
-    id: 1,
-    name: "Netflix",
-    price: "$9.99",
-    expiration: "2/21/2021",
-    startDate: "2/21/2021",
-  },
-];
-
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
@@ -119,7 +70,8 @@ const useStyles = makeStyles((theme) => ({
 
 const Subscription = () => {
   const [value, onChange] = useState(new Date());
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [subscription, setSubscription] = useState();
 
   const handleOpen = () => {
     setOpen(true);
@@ -131,7 +83,7 @@ const Subscription = () => {
 
   const getSubscription = (e) => {
     e.preventDefault();
-
+  
     axios
       .get("/api/auth/getAllSubs")
       .then((res) => {
@@ -139,8 +91,9 @@ const Subscription = () => {
         for (let i = 0; i < subs.length; i++) {
           const element = subs[i];
           console.log(element);
-          
         }
+        setSubscription(element);
+        console.log(subscription);
       })
       .catch((err) => {
         console.log(err);
@@ -198,13 +151,59 @@ const Subscription = () => {
             </CardContent>
           </Card>
         </Grid>
-
         <Grid className={classes.root1} item xs>
+
           <Card>
             <div style={{ height: 357, width: "100%" }}>
               <DataGrid
-                rows={rows}
-                columns={columns}
+                rows = {[
+                  {
+                    id: 1,
+                    name: '{subscription}',
+                    price: '',
+                    expiration: '',
+                    startDate: '',
+                  },
+                ]}
+                columns={[
+                  {
+                    field: "id",
+                    headerName: "ID",
+                    description:
+                      "This column is for the id to keep count of your subscriptions.",
+                    sortable: false,
+                    width: 100,
+                  },
+                  {
+                    field: "name",
+                    headerName: "Name",
+                    description: "This column is for the name of your subscription.",
+                    sortable: false,
+                    width: 150,
+                  },
+                  {
+                    field: "price",
+                    headerName: "Price",
+                    description: "This column is for the price of your subscription.",
+                    sortable: false,
+                    width: 150,
+                  },
+                  {
+                    field: "startDate",
+                    headerName: "Start Date",
+                    description: "This column is for when your subscription starts.",
+                    sortable: false,
+                    width: 250,
+                  },
+                  {
+                    field: "expiration",
+                    headerName: "Expiration Date",
+                    description: "This column is for when your subscription expires.",
+                    sortable: false,
+                    width: 250,
+                  },
+                ]}
+                
                 pageSize={4}
                 checkboxSelection
               />
