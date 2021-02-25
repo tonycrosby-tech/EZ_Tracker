@@ -135,8 +135,12 @@ const Subscription = () => {
     axios
       .get("/api/auth/getAllSubs")
       .then((res) => {
-        console.log(res);
-        const subscriptions = res.data.subscriptions[0];
+        const subs = res.data.subscriptions;
+        for (let i = 0; i < subs.length; i++) {
+          const element = subs[i];
+          console.log(element);
+          
+        }
       })
       .catch((err) => {
         console.log(err);
