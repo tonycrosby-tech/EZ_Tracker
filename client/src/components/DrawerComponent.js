@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Component } from "react";
 import {
   List,
   ListItem,
@@ -27,17 +27,6 @@ const DrawerComponent = () => {
   }));
 
   const [openDrawer, setOpenDrawer] = useState(false);
-  const [auth, setAuth] = useState(false);
-
-  const handleChange = (event) => {
-    setAuth(event.target.checked);
-  };
-  //Css
-  // const [user, setUser] = useState(null); // should be global state, probably context
-
-  // const isAuthenticated = !!user;
-
-  // if(!isAuthenticated) return <Redirect to='/' />;
 
   const classes = useStyles();
   return (
@@ -59,19 +48,17 @@ const DrawerComponent = () => {
               <ListItemText> Home</ListItemText>
             </Link>
           </ListItem>
-          {auth && (
-            <div>
-              <ListItem divider button onClick={() => setOpenDrawer(false)}>
-                <Link
-                  style={{ textDecoration: "none" }}
-                  href="/profile"
-                  color="inherit"
-                >
-                  <ListItemText> Profile</ListItemText>
-                </Link>
-              </ListItem>
-            </div>
-          )}
+          <div>
+            <ListItem divider button onClick={() => setOpenDrawer(false)}>
+              <Link
+                style={{ textDecoration: "none" }}
+                href="/profile"
+                color="inherit"
+              >
+                <ListItemText> Profile</ListItemText>
+              </Link>
+            </ListItem>
+          </div>
 
           <ListItem divider button onClick={() => setOpenDrawer(false)}>
             <Link

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { AppBar } from "@material-ui/core";
 import { Toolbar } from "@material-ui/core";
 import { Typography } from "@material-ui/core";
@@ -10,9 +10,9 @@ import Menu from "@material-ui/core/Menu";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import DrawerComponent from "./DrawerComponent";
-import Button from '@material-ui/core/Button';
-import { useHistory } from 'react-router-dom';
-import axios from 'axios';
+import Button from "@material-ui/core/Button";
+import { useHistory } from "react-router-dom";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   "@global": {
@@ -56,14 +56,9 @@ const useStyles = makeStyles((theme) => ({
 
 const Navbar = function () {
   const classes = useStyles();
-  const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const history = useHistory();
-
-  const handleChange = (event) => {
-    setAuth(event.target.checked);
-  };
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -74,10 +69,10 @@ const Navbar = function () {
         history.push("/");
       })
       .catch((error) => {
-        console.error(error)
+        console.error(error);
       });
-      setAnchorEl(null);
-  }
+    setAnchorEl(null);
+  };
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -85,7 +80,6 @@ const Navbar = function () {
 
   const handleClose = () => {
     setAnchorEl(null);
-
   };
   return (
     <div className={classes.root}>
@@ -102,7 +96,8 @@ const Navbar = function () {
           <Typography variant="h6" className={classes.title} noWrap>
             EZ Tracker
           </Typography>
-          <Link style={{ textDecoration: "none" }}
+          <Link
+            style={{ textDecoration: "none" }}
             variant="button"
             color="textPrimary"
             href="/home"
@@ -110,8 +105,8 @@ const Navbar = function () {
           >
             Home
           </Link>
-          {auth && (
-          <Link style={{ textDecoration: "none" }}
+          <Link
+            style={{ textDecoration: "none" }}
             variant="button"
             color="textPrimary"
             href="/profile"
@@ -119,8 +114,8 @@ const Navbar = function () {
           >
             Profile
           </Link>
-          )}
-          <Link style={{ textDecoration: "none" }}
+          <Link
+            style={{ textDecoration: "none" }}
             variant="button"
             color="textPrimary"
             href="/about"
@@ -128,7 +123,8 @@ const Navbar = function () {
           >
             About
           </Link>
-          <Link style={{ textDecoration: "none" }}
+          <Link
+            style={{ textDecoration: "none" }}
             variant="button"
             color="textPrimary"
             href="/contact"
@@ -153,47 +149,46 @@ const Navbar = function () {
           >
             Login
           </Link> */}
-          {auth && (
-            <div>
-              <IconButton
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
-                color="inherit"
-                className={classes.profileButton}
-              >
-                <AccountCircle />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={open}
-                onClose={handleClose}
-              >
-                {/* <Link style={{ textDecoration: "none" }} href="/profile">
+          <div>
+            <IconButton
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleMenu}
+              color="inherit"
+              className={classes.profileButton}
+            >
+              <AccountCircle />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              open={open}
+              onClose={handleClose}
+            >
+              {/* <Link style={{ textDecoration: "none" }} href="/profile">
                   <MenuItem onClick={handleClose}>Profile</MenuItem>
                 </Link> */}
-                <Link style={{ textDecoration: "none" }} href="/account">
-                  <MenuItem onClick={handleClose}>My account</MenuItem>
-                </Link >
-                <Link style={{ textDecoration: "none" }} href="/subscription">
-                  <MenuItem onClick={handleClose}>Subscriptions</MenuItem>
-                </Link>
-                <Link style={{ textDecoration: "none" }} href="/logout">
-                  <MenuItem onClick={onSubmit}>Logout</MenuItem>
-                </Link>
-              </Menu>
-              {/* <Button
+              <Link style={{ textDecoration: "none" }} href="/account">
+                <MenuItem onClick={handleClose}>My account</MenuItem>
+              </Link>
+              <Link style={{ textDecoration: "none" }} href="/subscription">
+                <MenuItem onClick={handleClose}>Subscriptions</MenuItem>
+              </Link>
+              <Link style={{ textDecoration: "none" }} href="/logout">
+                <MenuItem onClick={onSubmit}>Logout</MenuItem>
+              </Link>
+            </Menu>
+            {/* <Button
                 href="/logout"
                 color="primary"
                 variant="outlined"
@@ -201,8 +196,7 @@ const Navbar = function () {
               >
                 Logout
               </Button> */}
-            </div>
-          )}
+          </div>
         </Toolbar>
       </AppBar>
     </div>
