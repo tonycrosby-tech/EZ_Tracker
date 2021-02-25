@@ -57,14 +57,16 @@ class Signup extends Component {
 
     const { email, username, password } = this.state;
 
-    API.saveUser({
-      email,
-      username,
-      password,
-    }).then((result) => {
-      console.log(result);
-      this.props.history.push('/login');
-    });
+    axios
+      .post('/api/auth/register', {
+        email,
+        username,
+        password,
+      })
+      .then((result) => {
+        console.log(result);
+        this.props.history.push('/login');
+      });
   };
 
   render() {

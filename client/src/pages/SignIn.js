@@ -11,7 +11,6 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import backgroundImage from './Background.jpg';
-
 // const useStyles = makeStyles((theme) => ({
 //   paper: {
 //     marginTop: theme.spacing(8),
@@ -84,7 +83,8 @@ class Login extends Component {
 
     const { username, password } = this.state;
 
-    API.login({ username, password })
+    axios
+      .post('/api/auth/login', { username, password })
       .then((res) => {
         this.setState({ message: '' });
         this.props.history.push('/home');

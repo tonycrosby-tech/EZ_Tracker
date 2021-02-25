@@ -1,13 +1,22 @@
 const router = require('express').Router();
-const passport = require('../../config/passport');
+const User = require('../../models/User');
+const Subscription = require('../../models/Subscription');
+const passport = require('passport');
+var parser = require('body-parser');
+var urlencodedParser = parser.urlencoded({ extended: false });
 const authController = require('../../controllers/auth');
 const isAuthenticated = require('../../config/middleware/isAuthenticated');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const db = require('../../models');
+const nodemailer = require('nodemailer');
+const signUpMailer = require('./signUpMail');
 
 // api/auth/register
 // output: registered user, send back email and username, and id of user
 router.post('/register', function(req, res) {
+  //signUpMailer(req.body.email);
+
   Users = new User({ email: req.body.email, username: req.body.username });
 
   User.register(Users, req.body.password, function(err, user) {
@@ -19,9 +28,7 @@ router.post('/register', function(req, res) {
         err,
       });
     } else {
-      res.json({
-        user,
-      });
+      res.json({ user });
     }
   });
 });
@@ -30,16 +37,27 @@ router.post('/register', function(req, res) {
 // find user by id
 // input: id
 // output: one user
-router.get('/user', isAuthenticated, function(req, res) {
-  const ider = req.user.id;
-  User.findById({ _id: ider })
-    .then((user) => res.json(user))
-    .catch((err) => res.status(439).json(err));
+
+// router.get("/user", function(req, res) {
+//   const ider = req.username;
+//   User.findOne(ider)
+//     .then((user) => res.json(user))
+//     .catch((err) => res.status(439).json(err));
+// });
+
+router.get('/user', isAuthenticated, (req, res) => {
+  db.User.find(req.username);
+  if (req.user) {
+    res.json({ user: req.user });
+  } else {
+    res.json({ user: null });
+  }
 });
 
 //api/auth/users  : all users
 // input: nothing
 // output: all users, no subscriptions
+
 router.get('/users', isAuthenticated, function(req, res) {
   const test = req.user;
   User.find(req.query)
@@ -297,5 +315,15 @@ router.put('/addSubAlreadyExistToUser', isAuthenticated, function(req, res) {
 });
 
 router.route('/logout').get(authController.logout);
+
+// router.get("/", (req, res) => {
+//   console.log("===== user!!======");
+//   console.log(req.user);
+//   if (req.user) {
+//     res.json({ user: req.user });
+//   } else {
+//     res.json({ user: null });
+//   }
+// });
 
 module.exports = router;

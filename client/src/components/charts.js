@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Chart from 'chart.js';
 import API from '../utils/API';
+import axios from 'axios';
 
 export default function Graph() {
   const [user, setUser] = useState({});
@@ -9,7 +10,8 @@ export default function Graph() {
     chartRef = React.createRef();
     const myChartRef = this.chartRef.current.getContext('2d');
 
-    API.getUser()
+    axios
+      .get('/api/auth/getAllSubs')
       .then((res) => setUser(res.data))
       .catch((err) => console.error(err));
 
