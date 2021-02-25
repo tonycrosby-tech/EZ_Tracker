@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
     color: "#00008b"
   },
   root1: {
-    maxWidth: 500,
+    maxWidth: "auto",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
