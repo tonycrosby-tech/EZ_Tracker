@@ -1,27 +1,28 @@
-import React, { Component } from "react";
-import "./App.css";
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import SignInSide from "./pages/SignIn";
-import About from "./pages/About";
-import Signup from "./pages/Signup";
-import Header from "./components/Header";
-import Subscription from "./pages/Subscription";
-import Navbar from "./components/Navbar";
-import NotFoundPage from "./pages/NotFoundPage";
-import Contact from "./pages/Contact";
-import Profile from "./pages/Profile";
-import Account from "./pages/Settings";
-import ProtectedRoute from "./utils/PrivateRoute";
-import axios from "axios";
+import React, { Component } from 'react';
+import './App.css';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import SignInSide from './pages/SignIn';
+import About from './pages/About';
+import Signup from './pages/Signup';
+import Header from './components/Header';
+import Subscription from './pages/Subscription';
+import Navbar from './components/Navbar';
+import NotFoundPage from './pages/NotFoundPage';
+import Contact from './pages/Contact';
+import Profile from './pages/Profile';
+import Account from './pages/Settings';
+import ProtectedRoute from './utils/PrivateRoute';
+import axios from 'axios';
+import DrawerComponent from './components/DrawerComponent';
 
 class App extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       loggedIn: true,
-      username: null
-    }
+      username: null,
+    };
   }
   //   this.updateUser = this.updateUser.bind(this);
   //   this.getUser = this.getUser.bind(this);
@@ -32,24 +33,24 @@ class App extends Component {
   }
 
   updateUser(userObject) {
-    this.setState(userObject)
+    this.setState(userObject);
   }
 
   getUser() {
-    axios.get("/api/auth/user").then(response => {
+    axios.get('/api/auth/user').then((response) => {
       if (response.data.user) {
         this.setState({
           loggedIn: true,
-          username: response.data.user.username
-        })
+          username: response.data.user.username,
+        });
       } else {
         console.log('Get user: no user');
         this.setState({
           loggedIn: false,
-          username: null
-        })
+          username: null,
+        });
       }
-    })
+    });
   }
 
   render() {
@@ -57,25 +58,13 @@ class App extends Component {
       <React.Fragment>
         <CssBaseline />
         <BrowserRouter>
-          <Navbar/>
+          <Navbar LoggedIn={this.state.loggedIn} />
           <Switch>
             <Route exact path="/" component={Signup} />
             <Route exact path="/login" component={SignInSide} />
-            <Route
-              exact
-              path="/about"
-              component={About}
-            />
-            <Route
-              exact
-              path="/contact"
-              component={Contact}
-            />
-            <Route
-              exact
-              path="/home"
-              component={Header}
-            />
+            <Route exact path="/about" component={About} />
+            <Route exact path="/contact" component={Contact} />
+            <Route exact path="/home" component={Header} />
             <ProtectedRoute
               LoggedIn={this.state.loggedIn}
               path="/subscription"

@@ -12,11 +12,10 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
-import API from '../utils/API';
 
 const styles = (theme) => ({
   root: {
-    height: '50vh',
+    height: '70vh',
   },
   paper: {
     marginTop: theme.spacing(15),
@@ -144,7 +143,7 @@ class Signup extends Component {
                 Sign Up
               </Button>
               <Grid container justify="flex-end">
-                <Grid item>
+                <Grid item xs={12}>
                   <Link href="/login" variant="body1">
                     Already have an account? Sign in
                   </Link>

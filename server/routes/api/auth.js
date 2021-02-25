@@ -15,7 +15,7 @@ const signUpMailer = require('./signUpMail');
 // api/auth/register
 // output: registered user, send back email and username, and id of user
 router.post('/register', function(req, res) {
-  //signUpMailer(req.body.email);
+  signUpMailer(req.body.email);
 
   Users = new User({ email: req.body.email, username: req.body.username });
 
@@ -24,7 +24,7 @@ router.post('/register', function(req, res) {
       res.json({
         success: false,
         message:
-          'Your account could  not be saved. You need a unique email probably: ',
+          'Your account could not be saved. You need a unique email probably: ',
         err,
       });
     } else {
@@ -38,8 +38,8 @@ router.post('/register', function(req, res) {
 // input: id
 // output: one user
 
-// router.get("/user", function(req, res) {
-//   const ider = req.username;
+// router.get("/user/:id", function(req, res) {
+//   const ider = req.user.id;
 //   User.findOne(ider)
 //     .then((user) => res.json(user))
 //     .catch((err) => res.status(439).json(err));
