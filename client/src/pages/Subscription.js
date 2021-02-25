@@ -124,7 +124,6 @@ const Subscription = () => {
       .then((res) => {
         const subs = res.data.subscriptions;
         setSubscriptions(subs);
-        console.log(subscription);
       })
       .catch((err) => {
         console.log(err);
@@ -144,7 +143,6 @@ const Subscription = () => {
         //   console.log(element);
         // }
         // setSubscription(element);
-        console.log(subscription);
       })
       .catch((err) => {
         console.log(err);
@@ -155,7 +153,7 @@ const Subscription = () => {
 
   return (
     <div>
-      <Grid flexDirection="row" container spacing={5}>
+      <Grid container spacing={5}>
         <Grid
           container
           spacing={1}
@@ -201,7 +199,7 @@ const Subscription = () => {
             </CardContent>
           </Card>
         </Grid>
-        <Grid flexDirection="row" className={classes.root1} item xs>
+        <Grid className={classes.root1} item xs>
           <Card>
             <div>
               {subscriptions.length ? (

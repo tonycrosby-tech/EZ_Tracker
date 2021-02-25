@@ -10,26 +10,9 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import backgroundImage from './Background.jpg';
-// const useStyles = makeStyles((theme) => ({
-//   paper: {
-//     marginTop: theme.spacing(8),
-//     display: 'flex',
-//     flexDirection: 'column',
-//     alignItems: 'center',
-//   },
-//   avatar: {
-//     margin: theme.spacing(1),
-//     backgroundColor: theme.palette.secondary.main,
-//   },
-//   form: {
-//     width: '100%', // Fix IE 11 issue.
-//     marginTop: theme.spacing(1),
-//   },
-//   submit: {
-//     margin: theme.spacing(3, 0, 2),
-//   },
-// }));
+import backgroundImage from './images/Background.jpg';
+import Copyright from '../components/Copyright';
+import Box from '@material-ui/core/Box';
 
 const styles = theme => ({
   root: {
@@ -59,6 +42,7 @@ const styles = theme => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    backgroundColor: "#00008b",
   },
 });
 class Login extends Component {
@@ -163,9 +147,9 @@ class Login extends Component {
                   </Link>
                 </Grid>
               </Grid> */}
-              {/* <Box mt={5}>
+              <Box mt={4} mb={2}>
               <Copyright />
-            </Box> */}
+            </Box>
             </form>
           </div>
         </Grid>

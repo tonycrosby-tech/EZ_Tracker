@@ -5,7 +5,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import SignInSide from './pages/SignIn';
 import About from './pages/About';
 import Signup from './pages/Signup';
-import Header from './components/Header';
+import Header from './pages/Header';
 import Subscription from './pages/Subscription';
 import Navbar from './components/Navbar';
 import NotFoundPage from './pages/NotFoundPage';
@@ -44,7 +44,6 @@ class App extends Component {
           username: response.data.user.username,
         });
       } else {
-        console.log('Get user: no user');
         this.setState({
           loggedIn: false,
           username: null,

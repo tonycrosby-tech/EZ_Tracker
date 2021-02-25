@@ -1,6 +1,4 @@
-// import React, { useState } from "react";
 import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
@@ -12,13 +10,25 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
+import Box from '@material-ui/core/Box';
+import Copyright from '../components/Copyright';
+import backgroundImage from './images/download.jpg';
+import Button from "@material-ui/core/Button";
 
 const styles = (theme) => ({
   root: {
-    height: '70vh',
+    height: '100vh',
+  },
+  image: {
+    backgroundImage: `url("${backgroundImage}")`,
+    backgroundRepeat: 'no-repeat',
+    backgroundColor:
+      theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
   },
   paper: {
-    marginTop: theme.spacing(15),
+    margin: theme.spacing(8, 4),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -33,6 +43,10 @@ const styles = (theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    backgroundColor: "#00008b",
+  },
+  copyright: {
+    marginTop: theme.spacing(6),
   },
 });
 class Signup extends Component {
@@ -63,7 +77,6 @@ class Signup extends Component {
         password,
       })
       .then((result) => {
-        console.log(result);
         this.props.history.push('/login');
       });
   };
@@ -72,13 +85,14 @@ class Signup extends Component {
     const { classes } = this.props;
     const { email, username, password } = this.state;
     return (
-      <Container
+      <div className={classes.image}>
+      <Grid container component="main"
         className={classes.root}
-        component={Paper}
         elevation={3}
-        maxWidth="xs"
       >
         <CssBaseline />
+        <Grid item xs={false} sm={4} md={7} className={classes.image}/>
+        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
@@ -133,29 +147,30 @@ class Signup extends Component {
                   required
                 />
               </Grid>
+              <Grid container justify="flex-end">
+                <Grid item>
+                  <Link href="/login">Already have an Account? Sign In</Link>
+                </Grid>
+              </Grid>
               <Button
+                className={classes.submit}
                 type="submit"
+                fullWidth
                 variant="contained"
                 color="primary"
-                fullWidth
-                className={classes.submit}
               >
                 Sign Up
               </Button>
-              <Grid container justify="flex-end">
-                <Grid item xs={12}>
-                  <Link href="/login" variant="body1">
-                    Already have an account? Sign in
-                  </Link>
-                </Grid>
-              </Grid>
             </Grid>
           </form>
-          {/* <Box mt={2} mb={2}>
+          <Box mt={4} mb={2}>
           <Copyright />
-        </Box> */}
+        </Box>
         </div>
-      </Container>
+      </Grid>
+      </Grid>
+      
+      </div>
     );
   }
 }

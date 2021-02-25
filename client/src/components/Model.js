@@ -73,10 +73,6 @@ const NewSubscription = () => {
           console.log("redirect to login");
           //history.push("/home")
         }
-        else{
-          console.log(res);
-        }
-
       })
       .catch(err => console.log(err));
   };
