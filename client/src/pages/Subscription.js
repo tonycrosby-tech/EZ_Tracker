@@ -21,9 +21,9 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import "react-calendar/dist/Calendar.css";
 import NewSubscription from "../components/Model";
-import axios from 'axios';
+import axios from "axios";
+import NewTable from "../components/Table";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
-import Paper from "@material-ui/core/Paper";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -64,14 +64,13 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     border: "2px solid #000",
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 3, 4),
+    padding: theme.spacing(1, 2, 1),
   },
 }));
 
 const Subscription = () => {
   const [value, onChange] = useState(new Date());
   const [open, setOpen] = useState(false);
-  const [subscription, setSubscription] = useState();
 
   const handleOpen = () => {
     setOpen(true);
@@ -83,7 +82,7 @@ const Subscription = () => {
 
   const getSubscription = (e) => {
     e.preventDefault();
-  
+
     axios
       .get("/api/auth/getAllSubs")
       .then((res) => {
@@ -118,9 +117,9 @@ const Subscription = () => {
       </Grid>
       <List className={classes.root}>
         <ListItem className={classes.button1}>
-          <Button onClick={handleOpen}>
+          <ListItemIcon onClick={handleOpen}>
             <AddCircleIcon color="primary" />
-          </Button>
+          </ListItemIcon>
           <ListItemText color="primary" primary="Add a new Subscription" />
         </ListItem>
       </List>
@@ -149,76 +148,9 @@ const Subscription = () => {
             </CardContent>
           </Card>
         </Grid>
-        <Grid className={classes.root1} item xs>
-
-          <Card>
-            <div style={{ height: 357, width: "100%" }}>
-              <DataGrid
-                rows = {[
-                  {
-                    id: 1,
-                    name: '{subscription}',
-                    price: '',
-                    expiration: '',
-                    startDate: '',
-                  },
-                ]}
-                columns={[
-                  {
-                    field: "id",
-                    headerName: "ID",
-                    description:
-                      "This column is for the id to keep count of your subscriptions.",
-                    sortable: false,
-                    width: 100,
-                  },
-                  {
-                    field: "name",
-                    headerName: "Name",
-                    description: "This column is for the name of your subscription.",
-                    sortable: false,
-                    width: 150,
-                  },
-                  {
-                    field: "price",
-                    headerName: "Price",
-                    description: "This column is for the price of your subscription.",
-                    sortable: false,
-                    width: 150,
-                  },
-                  {
-                    field: "startDate",
-                    headerName: "Start Date",
-                    description: "This column is for when your subscription starts.",
-                    sortable: false,
-                    width: 250,
-                  },
-                  {
-                    field: "expiration",
-                    headerName: "Expiration Date",
-                    description: "This column is for when your subscription expires.",
-                    sortable: false,
-                    width: 250,
-                  },
-                ]}
-                
-                pageSize={4}
-                checkboxSelection
-              />
-            </div>
-          </Card>
-        </Grid>
-
-        {/* <Grid className={classes.paper} item xs>
-          <div style={{ height: 357, width: '100%' }}>
-            <DataGrid
-              rows={rows}
-              columns={columns}
-              pageSize={4}
-              checkboxSelection
-            />
-          </div>
-        </Grid> */}
+      </Grid>
+      <Grid className={classes.root1} item xs>
+        <NewTable />
       </Grid>
 
       <div>
@@ -246,3 +178,65 @@ const Subscription = () => {
 };
 
 export default Subscription;
+
+{
+  /* <Card>
+  <div style={{ height: 357, width: "100%" }}>
+    <DataGrid
+      rows={[
+        {
+          id: 1,
+          name: "{subscription}",
+          price: "",
+          expiration: "",
+          startDate: "",
+        },
+      ]}
+      columns={[
+        {
+          field: "id",
+          headerName: "ID",
+          description:
+            "This column is for the id to keep count of your subscriptions.",
+          sortable: false,
+          width: 100,
+        },
+        {
+          field: "name",
+          headerName: "Name",
+          description:
+            "This column is for the name of your subscription.",
+          sortable: false,
+          width: 150,
+        },
+        {
+          field: "price",
+          headerName: "Price",
+          description:
+            "This column is for the price of your subscription.",
+          sortable: false,
+          width: 150,
+        },
+        {
+          field: "startDate",
+          headerName: "Start Date",
+          description:
+            "This column is for when your subscription starts.",
+          sortable: false,
+          width: 250,
+        },
+        {
+          field: "expiration",
+          headerName: "Expiration Date",
+          description:
+            "This column is for when your subscription expires.",
+          sortable: false,
+          width: 250,
+        },
+      ]}
+      pageSize={4}
+      checkboxSelection
+    />
+  </div>
+</Card> */
+}
