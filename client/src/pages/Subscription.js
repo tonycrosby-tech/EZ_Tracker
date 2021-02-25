@@ -92,8 +92,6 @@ const Subscription = () => {
           const element = subs[i];
           console.log(element);
         }
-        setSubscription(element);
-        console.log(subscription);
       })
       .catch((err) => {
         console.log(err);
