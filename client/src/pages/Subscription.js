@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { DataGrid } from "@material-ui/data-grid";
 import Calendar from "react-calendar";
 import { makeStyles } from "@material-ui/core/styles";
@@ -72,6 +72,13 @@ const Subscription = () => {
   const [value, onChange] = useState(new Date());
   const [open, setOpen] = useState(false);
   const [subscription, setSubscription] = useState();
+  const [subscriptions, setSubscriptions] = useState([]);
+
+  useEffect(() => {
+    loadSubscription();
+    // loadBooks() // this would have loaded the books
+  }, []);
+
 
   const handleOpen = () => {
     setOpen(true);
@@ -81,18 +88,32 @@ const Subscription = () => {
     setOpen(false);
   };
 
-  const getSubscription = (e) => {
-    e.preventDefault();
-  
+  const loadSubscription = () => {
     axios
       .get("/api/auth/getAllSubs")
       .then((res) => {
         const subs = res.data.subscriptions;
-        for (let i = 0; i < subs.length; i++) {
-          const element = subs[i];
-          console.log(element);
-        }
-        setSubscription(element);
+        setSubscriptions(subs);
+        console.log(subscription);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  const getSubscription = (e) => {
+    e.preventDefault();
+
+    axios
+      .get("/api/auth/getAllSubs")
+      .then((res) => {
+        const subs = res.data.subscriptions;
+        setSubscriptions(subs);
+        // for (let i = 0; i < subs.length; i++) {
+        //   const element = subs[i];
+        //   console.log(element);
+        // }
+        // setSubscription(element);
         console.log(subscription);
       })
       .catch((err) => {
@@ -155,58 +176,22 @@ const Subscription = () => {
 
           <Card>
             <div style={{ height: 357, width: "100%" }}>
-              <DataGrid
-                rows = {[
-                  {
-                    id: 1,
-                    name: '{subscription}',
-                    price: '',
-                    expiration: '',
-                    startDate: '',
-                  },
-                ]}
-                columns={[
-                  {
-                    field: "id",
-                    headerName: "ID",
-                    description:
-                      "This column is for the id to keep count of your subscriptions.",
-                    sortable: false,
-                    width: 100,
-                  },
-                  {
-                    field: "name",
-                    headerName: "Name",
-                    description: "This column is for the name of your subscription.",
-                    sortable: false,
-                    width: 150,
-                  },
-                  {
-                    field: "price",
-                    headerName: "Price",
-                    description: "This column is for the price of your subscription.",
-                    sortable: false,
-                    width: 150,
-                  },
-                  {
-                    field: "startDate",
-                    headerName: "Start Date",
-                    description: "This column is for when your subscription starts.",
-                    sortable: false,
-                    width: 250,
-                  },
-                  {
-                    field: "expiration",
-                    headerName: "Expiration Date",
-                    description: "This column is for when your subscription expires.",
-                    sortable: false,
-                    width: 250,
-                  },
-                ]}
-                
-                pageSize={4}
-                checkboxSelection
-              />
+
+              {
+              subscriptions.length ? (
+
+                <ul>
+                  {subscriptions.map(sub => (
+                    <li>
+                      {sub.SubscriptionName}
+                    </li>
+                  ))}
+                </ul>
+              ) :
+                (
+                  <h3>No Results to Display</h3>
+                )}
+
             </div>
           </Card>
         </Grid>
