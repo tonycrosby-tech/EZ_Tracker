@@ -4,15 +4,13 @@ const authController = require('../../controllers/auth');
 const isAuthenticated = require('../../config/middleware/isAuthenticated');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const db = require('../../models');
+
 // api/auth/register
 // output: registered user, send back email and username, and id of user
 router.post('/register', function(req, res) {
-  // input: email, username, password
-
   Users = new User({ email: req.body.email, username: req.body.username });
 
-  db.User.register(Users, req.body.password, function(err, user) {
+  User.register(Users, req.body.password, function(err, user) {
     if (err) {
       res.json({
         success: false,
@@ -34,7 +32,7 @@ router.post('/register', function(req, res) {
 // output: one user
 router.get('/user', isAuthenticated, function(req, res) {
   const ider = req.user.id;
-  db.User.findById({ _id: ider })
+  User.findById({ _id: ider })
     .then((user) => res.json(user))
     .catch((err) => res.status(439).json(err));
 });
@@ -49,16 +47,20 @@ router.get('/users', isAuthenticated, function(req, res) {
     .catch((err) => res.status(439).json(err));
 });
 
+// get all subscriptions not attached to any user
 router.get('/getAllsubscriptions', isAuthenticated, function(req, res) {
   Subscription.find(req.query)
     .then((subscript) => res.json(subscript))
     .catch((err) => res.status(439).json(err));
 });
 
-// pass the user id in the uri and the subscription id in the body
-// input: user id in uri and id of the subscription in the body
+// pass the subscription id in the body
+// input: subscription id in the body
 // output: deleted subscription id in the user document: note: this does not
 // delete a subscription out of the subscription document
+// {
+//   "subscription_id": "603534a5aeb8367228ef6ff4"
+// }
 router.delete('/deleteSubscription', isAuthenticated, function(req, res) {
   const ider = req.user.id;
   User.updateOne(
@@ -81,9 +83,15 @@ router.delete('/deleteSubscription', isAuthenticated, function(req, res) {
 // this takes a username and a subscription, saves the subscription,
 // and returns the username, email, and ids of the subscriptions that
 //are attached to the user
-// input: username and subscription you want to insert
+// input: subscription properties you want to insert  (see model for specifics)
 // output: a new subscription with a pointer in the user document; you get
-// the user and the pointer(s) to the subscription(s)
+// the user and the pointer(s) to the subscription(s). Go to Robo3T to see new subscription
+// {
+//   "SubscriptionName": "wh7799at",
+//   "startDate": "2021-02-05",
+//   "cost": "50",
+//   "expirationDate": "2021-02-22"
+// }
 router.post('/subscription', isAuthenticated, function(req, res) {
   const filter = { _id: req.user.id };
 
@@ -102,7 +110,14 @@ router.post('/subscription', isAuthenticated, function(req, res) {
     .catch((err) => res.status(439).json(err));
 });
 
-// creates a subscription without being tied to the user.
+// creates a subscription WITHOUT being tied to the user.
+// Input: properties of the subscription
+// {
+//   "SubscriptionName" : "whatever",
+//   "cost": 100,
+//   "startDate": "2021-02-01",
+//   "expirationDate": "2021-05-01"
+// }
 router.post('/addSubscription', isAuthenticated, function(req, res) {
   Subscription.create(req.body)
 
@@ -125,7 +140,7 @@ router.get('/getAll', isAuthenticated, function(req, res) {
 });
 
 // given the user id, get all of its subscriptions
-// input: user id
+// input: none
 // output: values of subscriptions
 router.get('/getAllSubs', isAuthenticated, function(req, res) {
   const ider = req.user.id;
@@ -159,6 +174,9 @@ router.get('/getAllUsersAndSubs', isAuthenticated, function(req, res) {
 // updated value of satisfaction
 // input: key of the subscription and value of satisfaction we want to update to
 // output: updated subscription
+// {
+//   "satisfaction" : 39
+// }
 router.put('/updateSubSat/:id', isAuthenticated, function(req, res) {
   const setter = { satisfaction: req.body.satisfaction };
   Subscription.findOneAndUpdate(
@@ -175,12 +193,14 @@ router.put('/updateSubSat/:id', isAuthenticated, function(req, res) {
   );
 });
 
-//api/auth/updateSub with key of the subscription in the uri and the desired
-// updated value of satisfaction
+//api/auth/updateSub with key of the subscription in the uri and value of updated cost in the body
 // input: id of subscription and value of cost
 // output: updated subscription
+// {
+//   "cost" : 60
+// }
 router.put('/updateSubCost/:id', isAuthenticated, function(req, res) {
-  const ider = req.user.id;
+  const ider = req.params.id;
   const setter = { cost: req.body.cost };
   Subscription.findOneAndUpdate(
     { _id: ider },
@@ -196,42 +216,71 @@ router.put('/updateSubCost/:id', isAuthenticated, function(req, res) {
   );
 });
 
+//api/auth/updateSubDateExp with key of the subscription in the uri and value of updated expiration date in the body
+// input: id of subscription and value of cost
+// output: updated subscription (expiration date)
+// {
+//   "expirationDate" : "2021-05-01"
+// }
+router.put('/updateSubDateExp/:id', isAuthenticated, function(req, res) {
+  const ider = req.params.id;
+  const setter = { expirationDate: req.body.expirationDate };
+  Subscription.findOneAndUpdate(
+    { _id: ider },
+    setter,
+    { returnOriginal: false },
+    (err, result) => {
+      if (err) {
+        res.status(439).json(err);
+      } else {
+        res.json(result);
+      }
+    }
+  );
+});
+
+// update all properties, except creation date, in one fell swoop
+//input: id of subscription in params and values to update the subscription with in the body.
+// {
+
+//   "SubscriptionName": "newone",
+//   "cost": "900",
+//   "expirationDate": "2022-01-01",
+//   "startDate": "2021-01-01"
+// }
+router.put('/updateAllPropsForOneSub/:id', isAuthenticated, function(req, res) {
+  const ider = req.params.id;
+  const setter = { $set: req.body };
+  Subscription.findOneAndUpdate(
+    { _id: ider },
+    setter,
+    { returnOriginal: false },
+    (err, result) => {
+      if (err) {
+        res.status(439).json(err);
+      } else {
+        res.json(result);
+      }
+    }
+  );
+});
+
+// SubscriptionName: {type: String, required: true, unique: false},
+//     cost: {type: Number, required: false, unique: false},
+//     // rating: {type: Number, required: false, unique: false},
+//     dateCreated: {type: Date, default: Date.now},
+//     expirationDate: {type: String, required:true},
+//     startDate: {type: String, required:true},
+
 //api/auth/login
 // input: username and password
 // output: authenticated password and found username
-//router.post('/login', (req, res) => passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login', })(req, res));
-// {
-//   const { username, password } = req.body;
-
-//   User.findOne({
-//     username: req.body.username
-//   }, function (err, user) {
-//     if (err) {
-//       res.status(500);
-//     }
-
-//     else if (!user) {
-//      // res.status(401).send({ success: false, msg: 'Authentication failed. User not found.' });
-//       res.json({"send to login": true});
-//     }
-//     else {
-//       //validPassword
-//       console.log(user);
-//       user.authenticate(req.body.password, (err, result) => {
-//         if (err)
-//           res.status(401).send({ success: false, msg: 'login failed.' });
-//         else if (result === false)
-//           res.status(401).send({ success: false, msg: 'login failed.' });
-//         else
-//           res.json(result);
-
-//       });
-//     }
-//   });
-
 router.route('/login').post(authController.login);
 
 // input: id of subscription
+// {
+//   "subscription": "60345e075b196f6a3414815b"
+// }
 router.put('/addSubAlreadyExistToUser', isAuthenticated, function(req, res) {
   const filter = { _id: req.user.id };
 
@@ -246,18 +295,6 @@ router.put('/addSubAlreadyExistToUser', isAuthenticated, function(req, res) {
     })
     .catch((err) => res.status(439).json(err));
 });
-
-// router.get('/logout', function(req, res) {
-//   try{
-//     req.logout();
-//     res.json({"send to login" : true});
-//     //res.json({"logged out successfully" : "true"});
-
-//   }
-//   catch(ex){
-//     res.status(401).send({ success: false, msg: 'logout failed.' });
-//   }
-// });
 
 router.route('/logout').get(authController.logout);
 

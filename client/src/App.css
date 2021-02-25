@@ -1,3 +1,7 @@
+body {
+  background-image: url('./assets/images/leaves-pattern.png');
+  font-family: Georgia, Times, 'Merriweather', 'Times New Roman', serif;
+}
 .App {
   text-align: center;
 }
@@ -22,13 +26,10 @@
 .App-link {
   color: #61dafb;
 }
-
-/* body {
-  background: url(./images/subscription-tracker.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+/* 
+.body {
+  background: url(./images/subscription-tracker.jpg) no-repeat center center
+    fixed;
 } */
 
 @keyframes App-logo-spin {
