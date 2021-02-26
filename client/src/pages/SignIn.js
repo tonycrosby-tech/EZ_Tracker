@@ -63,6 +63,7 @@ class Login extends Component {
   };
 
   onSubmit = (e) => {
+    e.preventDefault();
 
     const { username, password } = this.state;
 
