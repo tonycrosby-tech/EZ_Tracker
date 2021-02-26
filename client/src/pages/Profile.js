@@ -12,7 +12,7 @@ import BarGraph from '../components/BarGraph';
 import Grid from '@material-ui/core/Grid';
 // import ResponsivePlayer from '../components/ReactPlayer';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 500,
   },
@@ -23,7 +23,7 @@ const useStyles = makeStyles({
     padding: theme.spacing(4),
     marginLeft: theme.spacing(10),
   },
-});
+}));
 
 export default function Profile() {
   const classes = useStyles();
