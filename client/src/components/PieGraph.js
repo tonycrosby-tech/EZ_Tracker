@@ -5,12 +5,14 @@ import axios from 'axios';
 axios.get('/api/auth/getAllSubs').then((res) => {
   const subs = res.data.subscriptions;
 
-  subs.map((item) => {
-    let joy = item.rating;
-    let name = item.SubscriptionName;
-    enjoyment.push(joy);
-    title.push(name);
-  });
+  if (subs) {
+    subs.map((item) => {
+      let joy = item.rating;
+      let name = item.SubscriptionName;
+      enjoyment.push(joy);
+      title.push(name);
+    });
+  }
 });
 
 const enjoyment = [];
