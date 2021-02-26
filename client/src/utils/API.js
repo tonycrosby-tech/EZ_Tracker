@@ -1,21 +1,22 @@
-// import axios from 'axios';
+import axios from 'axios';
 
-// export default {
+export default {
 //   getSubs: function () {
 //     return axios.get('/api/subs');
 //   },
-//   deleteSubs: function () {
-//     return axios.delete('/api/subs/' + id);
-//   },
-//   saveSubs: function (subsData) {
-//     return axios.post('/api/subs', subsData);
-//   },
+  deleteSubs: function (id) {
+    return axios.delete('/api/auth/deleteSubscription/' + id);
+  },
+  // saveSubs: function (subsData) {
+  //   console.log(subsData);
+  //   return axios.post('/api/auth/subscription', { subsData });
+  // },
 //   updateSubs: function (updateInfo) {
 //     return axios.post('/api/subs/' + id, updateInfo);
 //   },
-//   getUser: function () {
-//     return axios.get('/api/user');
-//   },
+// getUser: function () {
+//   return axios.get('/api/user/');
+// },
 //   updateUser: function (updateInfo) {
 //     return axios.post('/api/user/' + id, updateInfo);
 //   },
@@ -27,4 +28,4 @@
 //   deleteUser: function () {
 //     return axios.delete('/api/user' + id);
 //   },
-// };
+};

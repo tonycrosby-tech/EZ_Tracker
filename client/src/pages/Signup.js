@@ -1,29 +1,61 @@
-// import React, { useState } from "react";
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-// import Link from "@material-ui/core/Link";
-import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
-import API from "../utils/API";
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
-import axios from "axios";
+import Avatar from '@material-ui/core/Avatar';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import React, { Component } from 'react';
+import axios from 'axios';
 import Link from '@material-ui/core/Link';
+import Paper from '@material-ui/core/Paper';
+import Box from '@material-ui/core/Box';
+import Copyright from '../components/Copyright';
+import backgroundImage from './images/download.jpg';
+import Button from "@material-ui/core/Button";
 
-
+const styles = (theme) => ({
+  root: {
+    height: '100vh',
+  },
+  image: {
+    backgroundImage: `url("${backgroundImage}")`,
+    backgroundRepeat: 'no-repeat',
+    backgroundColor:
+      theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+  },
+  paper: {
+    margin: theme.spacing(8, 4),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: '#00008b',
+  },
+  form: {
+    width: '90%', // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+    backgroundColor: "#00008b",
+  },
+  copyright: {
+    marginTop: theme.spacing(6),
+  },
+});
 class Signup extends Component {
   constructor() {
     super();
     this.state = {
-      username: "",
-      password: "",
-      email: "",
+      username: '',
+      password: '',
+      email: '',
     };
   }
 
@@ -39,43 +71,36 @@ class Signup extends Component {
     const { email, username, password } = this.state;
 
     axios
-      .post("/api/auth/register", {
+      .post('/api/auth/register', {
         email,
         username,
         password,
       })
       .then((result) => {
-        console.log(result);
-        this.props.history.push("/login");
-
+        this.props.history.push('/login');
       });
   };
 
   render() {
+    const { classes } = this.props;
     const { email, username, password } = this.state;
     return (
-      // <div className="container">
-      //   <form className="form-signin" onSubmit={this.onSubmit}>
-      //     <h2 className="form-signin-heading">Register</h2>
-      //     <label htmlFor="inputPassword" className="sr-only">Username</label>
-      //     <input type="username" className="form-control" placeholder="Username" name="username" value={username} onChange={this.onChange} required/>
-      //     <label htmlFor="inputEmail" className="sr-only">Email address</label>
-      //     <input type="email" className="form-control" placeholder="Email address" name="email" value={email} onChange={this.onChange} required/>
-      //     <label htmlFor="inputPassword" className="sr-only">Password</label>
-      //     <input type="password" className="form-control" placeholder="Password" name="password" value={password} onChange={this.onChange} required/>
-      //     <button className="btn btn-lg btn-primary btn-block" type="submit">Register</button>
-      //   </form>
-      // </div>
-      <Container component="main" maxWidth="xs">
+      <div className={classes.image}>
+      <Grid container component="main"
+        className={classes.root}
+        elevation={3}
+      >
         <CssBaseline />
-        <div>
-          <Avatar>
+        <Grid item xs={false} sm={4} md={7} className={classes.image}/>
+        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <form onSubmit={this.onSubmit}>
+          <form className={classes.form} onSubmit={this.onSubmit}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
@@ -122,25 +147,32 @@ class Signup extends Component {
                   required
                 />
               </Grid>
-              <Button type="submit" variant='contained' color='primary' fullWidth>
-                Sign Up
-              </Button>
               <Grid container justify="flex-end">
                 <Grid item>
-                  <Link href="/login" variant="body1">
-                    Already have an account? Sign in
-                  </Link>
+                  <Link href="/login">Already have an Account? Sign In</Link>
                 </Grid>
               </Grid>
+              <Button
+                className={classes.submit}
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+              >
+                Sign Up
+              </Button>
             </Grid>
           </form>
-          {/* <Box mt={2} mb={2}>
+          <Box mt={4} mb={2}>
           <Copyright />
-        </Box> */}
+        </Box>
         </div>
-      </Container>
+      </Grid>
+      </Grid>
+      
+      </div>
     );
   }
 }
 
-export default Signup;
+export default withStyles(styles, { withTheme: true })(Signup);

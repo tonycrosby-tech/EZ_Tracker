@@ -1,6 +1,8 @@
 # OS File
 .DS_Store
 
+# .vscode
+./.vscode
 # Logs
 logs
 *.log

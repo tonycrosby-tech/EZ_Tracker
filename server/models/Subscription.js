@@ -4,10 +4,12 @@ const mongoose = require('mongoose');
 
 const subscriptionSchema = new Schema({
     
-    name: {type: String, required: true, unique: false},
+    SubscriptionName: {type: String, required: true, unique: false},
     cost: {type: Number, required: false, unique: false},
-    satisfaction: {type: Number, required: false, unique: false},
+    rating: {type: Number, required: false, unique: false},
     dateCreated: {type: Date, default: Date.now},
+    expirationDate: {type: String, required:true},
+    startDate: {type: String, required:true},
 });
 
 //const Book = mongoose.model("Book", bookSchema);
