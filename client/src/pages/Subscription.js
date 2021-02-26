@@ -166,19 +166,7 @@ const Subscription = () => {
 
   return (
     <div>
-      <Grid container spacing={5}>
-        <Grid
-          container
-          spacing={1}
-          direction="column"
-          alignItems="center"
-          justify="center"
-        >
-          <h1>Hello, User</h1>
-          <h1>Subscriptions - Amount Spent: $0 </h1>
-          <h3>Remaining Balance - $0</h3>
-        </Grid>
-      </Grid>
+      <Grid container spacing={2}>
       <List className={classes.root}>
         <ListItem onClick={handleOpen} className={classes.button1}>
           <ListItemIcon>
@@ -226,9 +214,7 @@ const Subscription = () => {
                     >
                       <TableHead>
                         <TableRow>
-                          <TableCell padding="checkbox">
-                            <CheckBox></CheckBox>
-                          </TableCell>
+                        <StyledTableCell></StyledTableCell>
                           <StyledTableCell>Name</StyledTableCell>
                           <StyledTableCell>Cost</StyledTableCell>
                           <StyledTableCell>Rating</StyledTableCell>
@@ -304,7 +290,9 @@ const Subscription = () => {
           </Fade>
         </Modal>
       </div>
+      </Grid>
     </div>
+    
   );
 };
 
