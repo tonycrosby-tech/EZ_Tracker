@@ -29,6 +29,7 @@ import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
+import CheckBox from "@material-ui/core/Checkbox";
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -42,7 +43,7 @@ const StyledTableCell = withStyles((theme) => ({
 
 const StyledTableRow = withStyles((theme) => ({
   root: {
-    '&:nth-of-type(odd)': {
+    "&:nth-of-type(odd)": {
       backgroundColor: theme.palette.action.hover,
     },
   },
@@ -56,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    color: "#00008b"
+    color: "#00008b",
   },
   root1: {
     maxWidth: "auto",
@@ -205,7 +206,7 @@ const Subscription = () => {
               {subscriptions.length ? (
                 <div>
                   <h1 className={classes.center1}>Subscriptions</h1>
-                  <TableContainer>
+                  <TableContainer padding="checkbox">
                     <Table
                       className={classes.table}
                       aria-labelledby="tableTitle"
@@ -213,6 +214,7 @@ const Subscription = () => {
                     >
                       <TableHead>
                         <TableRow>
+                          <StyledTableCell></StyledTableCell>
                           <StyledTableCell>Name</StyledTableCell>
                           <StyledTableCell>Cost</StyledTableCell>
                           <StyledTableCell>Rating</StyledTableCell>
@@ -221,15 +223,18 @@ const Subscription = () => {
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                          {subscriptions.map((sub) => (
-                            <StyledTableRow>
-                              <TableCell>{sub.SubscriptionName}</TableCell>
-                              <TableCell>${sub.cost}</TableCell>
-                              <TableCell>{sub.rating}</TableCell>
-                              <TableCell>{sub.startDate}</TableCell>
-                              <TableCell>{sub.expirationDate}</TableCell>
-                            </StyledTableRow>
-                          ))}
+                        {subscriptions.map((sub) => (
+                          <StyledTableRow>
+                            <TableCell padding="checkbox">
+                              <CheckBox color='primary'/>
+                            </TableCell>
+                            <TableCell>{sub.SubscriptionName}</TableCell>
+                            <TableCell>${sub.cost}</TableCell>
+                            <TableCell>{sub.rating}</TableCell>
+                            <TableCell>{sub.startDate}</TableCell>
+                            <TableCell>{sub.expirationDate}</TableCell>
+                          </StyledTableRow>
+                        ))}
                       </TableBody>
                     </Table>
                   </TableContainer>
@@ -280,7 +285,7 @@ const Subscription = () => {
 export default Subscription;
 
 // {
-  /* <Card>
+/* <Card>
   <div style={{ height: 357, width: "100%" }}>
     <DataGrid
       rows={[
