@@ -45,6 +45,7 @@ const FORCE_SCHEMA = process.env.NODE_ENV === 'test';
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/project3', {
   useNewUrlParser: true,
   useFindAndModify: false,
+  useCreateIndex: true,
   useUnifiedTopology: true,
 });
 
