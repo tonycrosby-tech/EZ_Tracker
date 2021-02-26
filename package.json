@@ -1,8 +1,8 @@
 {
-  "name": "TBD",
+  "name": "EZTracker",
   "version": "1.0.0",
-  "description": "TBD",
-  "author": "TBD",
+  "description": "Subscription Tracking App",
+  "author": "Logan Pippin, Tony Crosby, Path Patel, Mario Thompson",
   "license": "MIT",
   "main": "server/server.js",
   "repository": {
