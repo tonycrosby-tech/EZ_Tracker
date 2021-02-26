@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { DataGrid } from '@material-ui/data-grid';
 import Calendar from 'react-calendar';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
@@ -30,6 +29,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import CheckBox from '@material-ui/core/Checkbox';
+import API from '../utils/API';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -99,6 +99,12 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(1, 2, 1),
   },
+  button2: {
+    backgroundColor: "#00008b",
+    border: "2px solid #000",
+    hover: "white",
+    color: "white"
+  },
 }));
 
 const Subscription = () => {
@@ -150,6 +156,12 @@ const Subscription = () => {
       });
   };
 
+  function deleteSubscription(id) {
+    API.deleteSubs(id)
+      .then(res => loadSubscription())
+      .catch(err => console.log(err));
+  }
+
   const classes = useStyles();
 
   return (
@@ -168,9 +180,9 @@ const Subscription = () => {
         </Grid>
       </Grid>
       <List className={classes.root}>
-        <ListItem className={classes.button1}>
-          <ListItemIcon onClick={handleOpen}>
-            <AddCircleIcon color="primary" />
+        <ListItem onClick={handleOpen} className={classes.button1}>
+          <ListItemIcon>
+            <AddCircleIcon color="none" />
           </ListItemIcon>
           <ListItemText color="primary" primary="Add a new Subscription" />
         </ListItem>
@@ -214,12 +226,15 @@ const Subscription = () => {
                     >
                       <TableHead>
                         <TableRow>
-                          <StyledTableCell></StyledTableCell>
+                          <TableCell padding="checkbox">
+                            <CheckBox></CheckBox>
+                          </TableCell>
                           <StyledTableCell>Name</StyledTableCell>
                           <StyledTableCell>Cost</StyledTableCell>
                           <StyledTableCell>Rating</StyledTableCell>
                           <StyledTableCell>Start Date</StyledTableCell>
                           <StyledTableCell>Expiration Date</StyledTableCell>
+                          <StyledTableCell></StyledTableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>
@@ -233,6 +248,18 @@ const Subscription = () => {
                             <TableCell>{sub.rating}</TableCell>
                             <TableCell>{sub.startDate}</TableCell>
                             <TableCell>{sub.expirationDate}</TableCell>
+                            <TableCell>
+                              {" "}
+                              <Button
+                                data-id={sub._id}
+                                variant="contained"
+                                color="none"
+                                className={classes.button2}
+                                onClick={() => deleteSubscription(sub._id)}
+                              >
+                                Delete
+                              </Button>
+                            </TableCell>
                           </StyledTableRow>
                         ))}
                       </TableBody>

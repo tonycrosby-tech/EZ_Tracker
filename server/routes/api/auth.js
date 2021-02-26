@@ -79,10 +79,10 @@ router.get('/getAllsubscriptions', isAuthenticated, function(req, res) {
 // {
 //   "subscription_id": "603534a5aeb8367228ef6ff4"
 // }
-router.delete('/deleteSubscription/:id', isAuthenticated, function(req, res) {
+router.delete("/deleteSubscription/:id", isAuthenticated, function (req, res) {
   const ider = req.user.id;
 
-  Subscription.deleteOne({ _id: req.params.id }, function(err) {
+  Subscription.deleteOne({ _id: req.params.id }, function (err) {
     if (err) {
       res.status(401).send({
         success: false,
@@ -92,7 +92,7 @@ router.delete('/deleteSubscription/:id', isAuthenticated, function(req, res) {
       User.updateOne(
         { _id: ider },
         { $pull: { subscriptions: req.params.id } },
-        function(err, result) {
+        function (err, result) {
           if (err) {
             res.status(401).send({
               success: false,
