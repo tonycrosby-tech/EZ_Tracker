@@ -178,8 +178,8 @@ const Navbar = function () {
               {/* <Link style={{ textDecoration: "none" }} href="/profile">
                   <MenuItem onClick={handleClose}>Profile</MenuItem>
                 </Link> */}
-              <Link style={{ textDecoration: "none" }} href="/account">
-                <MenuItem onClick={handleClose}>My account</MenuItem>
+              <Link style={{ textDecoration: "none" }} href="/profile">
+                <MenuItem onClick={handleClose}>Profile</MenuItem>
               </Link>
               <Link style={{ textDecoration: "none" }} href="/subscription">
                 <MenuItem onClick={handleClose}>Subscriptions</MenuItem>
