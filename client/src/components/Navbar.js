@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
   },
   menuButton: {
     marginRight: theme.spacing(2),
-    color: "white",
+    color: "orange",
   },
   title: {
     flexGrow: 1,
@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
     background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
   },
   profileButton: {
-    color: "white",
+    color: "orange",
   },
 }));
 
@@ -91,7 +91,7 @@ const Navbar = function () {
           [classes.appBarShift]: open,
         })}
       >
-        <Toolbar>
+        <Toolbar >
           <DrawerComponent />
           <Typography variant="h6" className={classes.title} noWrap>
             EZ Tracker
@@ -114,7 +114,7 @@ const Navbar = function () {
           >
             Profile
           </Link>
-          <Link
+          <Link 
             style={{ textDecoration: "none" }}
             variant="button"
             color="textPrimary"

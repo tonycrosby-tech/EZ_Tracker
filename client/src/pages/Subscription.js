@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { DataGrid } from "@material-ui/data-grid";
 import Calendar from "react-calendar";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -21,16 +21,48 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import "react-calendar/dist/Calendar.css";
 import NewSubscription from "../components/Model";
-import axios from 'axios';
+import axios from "axios";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
-import Paper from "@material-ui/core/Paper";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableRow from "@material-ui/core/TableRow";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+
+const StyledTableCell = withStyles((theme) => ({
+  head: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  body: {
+    fontSize: 14,
+  },
+}))(TableCell);
+
+const StyledTableRow = withStyles((theme) => ({
+  root: {
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.action.hover,
+    },
+  },
+}))(TableRow);
 
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
   },
+  center1: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    color: "#00008b"
+  },
   root1: {
-    maxWidth: 900,
+    maxWidth: "auto",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
   media: {
     height: 0,
@@ -64,14 +96,19 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     border: "2px solid #000",
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 3, 4),
+    padding: theme.spacing(1, 2, 1),
   },
 }));
 
 const Subscription = () => {
   const [value, onChange] = useState(new Date());
   const [open, setOpen] = useState(false);
-  const [subscription, setSubscription] = useState();
+  const [subscriptions, setSubscriptions] = useState([]);
+
+  useEffect(() => {
+    loadSubscription();
+    // loadBooks() // this would have loaded the books
+  }, []);
 
   const handleOpen = () => {
     setOpen(true);
@@ -81,19 +118,31 @@ const Subscription = () => {
     setOpen(false);
   };
 
-  const getSubscription = (e) => {
-    e.preventDefault();
-  
+  const loadSubscription = () => {
     axios
       .get("/api/auth/getAllSubs")
       .then((res) => {
         const subs = res.data.subscriptions;
-        for (let i = 0; i < subs.length; i++) {
-          const element = subs[i];
-          console.log(element);
-        }
-        setSubscription(element);
-        console.log(subscription);
+        setSubscriptions(subs);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getSubscription = (e) => {
+    e.preventDefault();
+
+    axios
+      .get("/api/auth/getAllSubs")
+      .then((res) => {
+        const subs = res.data.subscriptions;
+        setSubscriptions(subs);
+        // for (let i = 0; i < subs.length; i++) {
+        //   const element = subs[i];
+        //   console.log(element);
+        // }
+        // setSubscription(element);
       })
       .catch((err) => {
         console.log(err);
@@ -104,11 +153,10 @@ const Subscription = () => {
 
   return (
     <div>
-      <Button onClick={getSubscription}>Get Subs</Button>
-      <Grid container spacing={2}>
+      <Grid container spacing={5}>
         <Grid
           container
-          spacing={0}
+          spacing={1}
           direction="column"
           alignItems="center"
           justify="center"
@@ -120,9 +168,9 @@ const Subscription = () => {
       </Grid>
       <List className={classes.root}>
         <ListItem className={classes.button1}>
-          <Button onClick={handleOpen}>
+          <ListItemIcon onClick={handleOpen}>
             <AddCircleIcon color="primary" />
-          </Button>
+          </ListItemIcon>
           <ListItemText color="primary" primary="Add a new Subscription" />
         </ListItem>
       </List>
@@ -152,61 +200,43 @@ const Subscription = () => {
           </Card>
         </Grid>
         <Grid className={classes.root1} item xs>
-
           <Card>
-            <div style={{ height: 357, width: "100%" }}>
-              <DataGrid
-                rows = {[
-                  {
-                    id: 1,
-                    name: '{subscription}',
-                    price: '',
-                    expiration: '',
-                    startDate: '',
-                  },
-                ]}
-                columns={[
-                  {
-                    field: "id",
-                    headerName: "ID",
-                    description:
-                      "This column is for the id to keep count of your subscriptions.",
-                    sortable: false,
-                    width: 100,
-                  },
-                  {
-                    field: "name",
-                    headerName: "Name",
-                    description: "This column is for the name of your subscription.",
-                    sortable: false,
-                    width: 150,
-                  },
-                  {
-                    field: "price",
-                    headerName: "Price",
-                    description: "This column is for the price of your subscription.",
-                    sortable: false,
-                    width: 150,
-                  },
-                  {
-                    field: "startDate",
-                    headerName: "Start Date",
-                    description: "This column is for when your subscription starts.",
-                    sortable: false,
-                    width: 250,
-                  },
-                  {
-                    field: "expiration",
-                    headerName: "Expiration Date",
-                    description: "This column is for when your subscription expires.",
-                    sortable: false,
-                    width: 250,
-                  },
-                ]}
-                
-                pageSize={4}
-                checkboxSelection
-              />
+            <div>
+              {subscriptions.length ? (
+                <div>
+                  <h1 className={classes.center1}>Subscriptions</h1>
+                  <TableContainer>
+                    <Table
+                      className={classes.table}
+                      aria-labelledby="tableTitle"
+                      aria-label="enhanced table"
+                    >
+                      <TableHead>
+                        <TableRow>
+                          <StyledTableCell>Name</StyledTableCell>
+                          <StyledTableCell>Cost</StyledTableCell>
+                          <StyledTableCell>Rating</StyledTableCell>
+                          <StyledTableCell>Start Date</StyledTableCell>
+                          <StyledTableCell>Expiration Date</StyledTableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                          {subscriptions.map((sub) => (
+                            <StyledTableRow>
+                              <TableCell>{sub.SubscriptionName}</TableCell>
+                              <TableCell>${sub.cost}</TableCell>
+                              <TableCell>{sub.rating}</TableCell>
+                              <TableCell>{sub.startDate}</TableCell>
+                              <TableCell>{sub.expirationDate}</TableCell>
+                            </StyledTableRow>
+                          ))}
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
+                </div>
+              ) : (
+                <h3>No Results to Display</h3>
+              )}
             </div>
           </Card>
         </Grid>
@@ -248,3 +278,65 @@ const Subscription = () => {
 };
 
 export default Subscription;
+
+// {
+  /* <Card>
+  <div style={{ height: 357, width: "100%" }}>
+    <DataGrid
+      rows={[
+        {
+          id: 1,
+          name: "{subscription}",
+          price: "",
+          expiration: "",
+          startDate: "",
+        },
+      ]}
+      columns={[
+        {
+          field: "id",
+          headerName: "ID",
+          description:
+            "This column is for the id to keep count of your subscriptions.",
+          sortable: false,
+          width: 100,
+        },
+        {
+          field: "name",
+          headerName: "Name",
+          description:
+            "This column is for the name of your subscription.",
+          sortable: false,
+          width: 150,
+        },
+        {
+          field: "price",
+          headerName: "Price",
+          description:
+            "This column is for the price of your subscription.",
+          sortable: false,
+          width: 150,
+        },
+        {
+          field: "startDate",
+          headerName: "Start Date",
+          description:
+            "This column is for when your subscription starts.",
+          sortable: false,
+          width: 250,
+        },
+        {
+          field: "expiration",
+          headerName: "Expiration Date",
+          description:
+            "This column is for when your subscription expires.",
+          sortable: false,
+          width: 250,
+        },
+      ]}
+      pageSize={4}
+      checkboxSelection
+    />
+  </div>
+</Card> */
+// }

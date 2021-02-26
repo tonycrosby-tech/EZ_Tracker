@@ -73,10 +73,6 @@ const NewSubscription = () => {
           console.log("redirect to login");
           //history.push("/home")
         }
-        else{
-          console.log(res);
-        }
-
       })
       .catch(err => console.log(err));
   };
@@ -98,7 +94,6 @@ const NewSubscription = () => {
               id="Name"
               label="Subscription Name"
               name="SubscriptionName"
-              Value="subcription"
               variant="outlined"
               onChange={getInputChange}
               fullWidth
@@ -108,8 +103,8 @@ const NewSubscription = () => {
             <TextField
               id="cost"
               label="Cost"
+              placeholder="NO SYMBOLS !!"
               name="cost"
-              Value="0"
               min="0"
               step=".01"
               variant="outlined"
@@ -125,7 +120,6 @@ const NewSubscription = () => {
               <Typography>Start Date</Typography>
               <TextField
                 id="Startdate "
-                Value="Startdate "
                 variant="outlined"
                 name="startDate"
                 input
@@ -140,7 +134,6 @@ const NewSubscription = () => {
               <Typography>Renew Date</Typography>
               <TextField
                 id="Renew date"
-                Value="Renew date"
                 variant="outlined"
                 name="expirationDate"
                 input
