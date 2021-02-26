@@ -133,7 +133,7 @@ const useStyles = makeStyles((theme) => ({
 
   reactplayer: {
     position: "absolute",
-    top: 290,
+    top: 350,
     left: 800,
     display: "flex",
     alignItems: "center",
