@@ -1,40 +1,43 @@
-import React, { useState, useEffect } from 'react';
-import Calendar from 'react-calendar';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Avatar from '@material-ui/core/Avatar';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import { red } from '@material-ui/core/colors';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
-import Fade from '@material-ui/core/Fade';
-import 'react-calendar/dist/Calendar.css';
-import NewSubscription from '../components/Model';
-import axios from 'axios';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableRow from '@material-ui/core/TableRow';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import CheckBox from '@material-ui/core/Checkbox';
-import API from '../utils/API';
+import React, { useState, useEffect } from "react";
+import Calendar from "react-calendar";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
+import List from "@material-ui/core/List";
+import ListItemText from "@material-ui/core/ListItemText";
+import Avatar from "@material-ui/core/Avatar";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
+import Card from "@material-ui/core/Card";
+import TextField from "@material-ui/core/TextField";
+import CardHeader from "@material-ui/core/CardHeader";
+import CardContent from "@material-ui/core/CardContent";
+import IconButton from "@material-ui/core/IconButton";
+import Typography from "@material-ui/core/Typography";
+import { red } from "@material-ui/core/colors";
+import { relativeTimeRounding } from "moment";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
+import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
+import Modal from "@material-ui/core/Modal";
+import Backdrop from "@material-ui/core/Backdrop";
+import Fade from "@material-ui/core/Fade";
+import "react-calendar/dist/Calendar.css";
+import NewSubscription from "../components/Model";
+import axios from "axios";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableRow from "@material-ui/core/TableRow";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import CheckBox from "@material-ui/core/Checkbox";
+import API from "../utils/API";
+import ReactPlayer from "react-player";
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
     backgroundColor: theme.palette.common.black,
     color: theme.palette.common.white,
+    marginTop: theme.spacing(5),
   },
   body: {
     fontSize: 14,
@@ -43,7 +46,7 @@ const StyledTableCell = withStyles((theme) => ({
 
 const StyledTableRow = withStyles((theme) => ({
   root: {
-    '&:nth-of-type(odd)': {
+    "&:nth-of-type(odd)": {
       backgroundColor: theme.palette.action.hover,
     },
   },
@@ -53,49 +56,67 @@ const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
   },
+  blue: {
+    backgroundColor: "#00008b",
+    padding: theme.spacing(2, 1, 2),
+    marginLeft: theme.spacing(1)
+  },
+  title: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  subCard: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "left",
+  },
   center1: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: '#00008b',
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    color: "#00008b",
   },
   root1: {
-    maxWidth: 'auto',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    maxWidth: "auto",
+    display: "flex",
+    alignItems: "right",
+    justifyContent: "right",
   },
   media: {
     height: 0,
-    paddingTop: '56.25%',
+    paddingTop: "56.25%",
   },
   expand: {
-    transform: 'rotate(0deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
+    transform: "rotate(0deg)",
+    marginLeft: "auto",
+    transition: theme.transitions.create("transform", {
       duration: theme.transitions.duration.shortest,
     }),
   },
   expandOpen: {
-    transform: 'rotate(180deg)',
+    transform: "rotate(180deg)",
   },
   avatar: {
     backgroundColor: red[500],
   },
   modal: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  videoInput: {
+    width: "50%"
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
+    border: "2px solid #000",
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 3, 4),
   },
   button1: {
     backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
+    border: "2px solid #000",
     boxShadow: theme.shadows[5],
     padding: theme.spacing(1, 2, 1),
   },
@@ -103,7 +124,21 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#00008b",
     border: "2px solid #000",
     hover: "white",
-    color: "white"
+    color: "white",
+  },
+  playerwrapper: {
+    position: relativeTimeRounding,
+    paddingTop: "56.25%",
+  },
+
+  reactplayer: {
+    position: "absolute",
+    top: 290,
+    left: 800,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    
   },
 }));
 
@@ -111,6 +146,7 @@ const Subscription = () => {
   const [value, onChange] = useState(new Date());
   const [open, setOpen] = useState(false);
   const [subscriptions, setSubscriptions] = useState([]);
+  const [url, setUrl] = useState();
 
   useEffect(() => {
     loadSubscription();
@@ -127,7 +163,7 @@ const Subscription = () => {
 
   const loadSubscription = () => {
     axios
-      .get('/api/auth/getAllSubs')
+      .get("/api/auth/getAllSubs")
       .then((res) => {
         const subs = res.data.subscriptions;
         setSubscriptions(subs);
@@ -141,7 +177,7 @@ const Subscription = () => {
     e.preventDefault();
 
     axios
-      .get('/api/auth/getAllSubs')
+      .get("/api/auth/getAllSubs")
       .then((res) => {
         const subs = res.data.subscriptions;
         setSubscriptions(subs);
@@ -156,119 +192,137 @@ const Subscription = () => {
       });
   };
 
+  const handleInput = (event) => {
+    const url_link = event.target.value;
+    const urlStringify = JSON.stringify(url_link); 
+    setUrl(urlStringify);
+  }
+
   function deleteSubscription(id) {
     API.deleteSubs(id)
-      .then(res => loadSubscription())
-      .catch(err => console.log(err));
+      .then((res) => loadSubscription())
+      .catch((err) => console.log(err));
   }
 
   const classes = useStyles();
 
   return (
     <div>
-      <Grid container spacing={2}>
-      <List className={classes.root}>
-        <ListItem onClick={handleOpen} className={classes.button1}>
-          <ListItemIcon>
-            <AddCircleIcon color="none" />
-          </ListItemIcon>
+      <h1 className={classes.title}>EZ Tracker - Subscriptions!</h1>
+      <List className={classes.title}>
+        <ListItemIcon onClick={handleOpen} className={classes.button1}>
+          <AddCircleIcon />
           <ListItemText color="primary" primary="Add a new Subscription" />
-        </ListItem>
+        </ListItemIcon>
+      </List>
+
+      <List className={classes.title}>
+        <TextField
+          className={classes.videoInput}
+          id="url"
+          label="URL for video/song"
+          name="url-link"
+          variant="outlined"
+          placeholder="Video will play once url is in the input"
+          onChange={handleInput}
+        />
+        
       </List>
       <Grid container direction="row" justify="center" alignItems="center">
-        <Grid item xs>
-          <Card className={classes.root}>
-            <CardHeader
-              avatar={
-                <Avatar aria-label="recipe" className={classes.avatar}>
-                  N
-                </Avatar>
-              }
-              action={
-                <IconButton aria-label="settings">
-                  <MoreVertIcon />
-                </IconButton>
-              }
-              title="Expiration for Netflix"
-              subheader="February 21, 2020"
-            />
-            <Calendar onChange={onChange} value={value} />
-            <CardContent>
-              <Typography variant="body2" color="textSecondary" component="p">
-                Your Subscription is set to expire: Februrary 21, 2021
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
         <Grid className={classes.root1} item xs>
-          <Card>
-            <div>
-              {subscriptions.length ? (
-                <div>
-                  <h1 className={classes.center1}>Subscriptions</h1>
-                  <TableContainer padding="checkbox">
-                    <Table
-                      className={classes.table}
-                      aria-labelledby="tableTitle"
-                      aria-label="enhanced table"
-                    >
-                      <TableHead>
-                        <TableRow>
+          <div>
+            {subscriptions.length ? (
+              <div>
+                <h1 className={classes.center1}>Subscriptions</h1>
+                <TableContainer padding="checkbox">
+                  <Table
+                    className={classes.table}
+                    aria-labelledby="tableTitle"
+                    aria-label="enhanced table"
+                  >
+                    <TableHead>
+                      <TableRow>
                         <StyledTableCell></StyledTableCell>
-                          <StyledTableCell>Name</StyledTableCell>
-                          <StyledTableCell>Cost</StyledTableCell>
-                          <StyledTableCell>Rating</StyledTableCell>
-                          <StyledTableCell>Start Date</StyledTableCell>
-                          <StyledTableCell>Expiration Date</StyledTableCell>
-                          <StyledTableCell></StyledTableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {subscriptions.map((sub) => (
-                          <StyledTableRow>
-                            <TableCell padding="checkbox">
-                              <CheckBox color="primary" />
-                            </TableCell>
-                            <TableCell>{sub.SubscriptionName}</TableCell>
-                            <TableCell>${sub.cost}</TableCell>
-                            <TableCell>{sub.rating}</TableCell>
-                            <TableCell>{sub.startDate}</TableCell>
-                            <TableCell>{sub.expirationDate}</TableCell>
-                            <TableCell>
-                              {" "}
-                              <Button
-                                data-id={sub._id}
-                                variant="contained"
-                                color="none"
-                                className={classes.button2}
-                                onClick={() => deleteSubscription(sub._id)}
-                              >
-                                Delete
-                              </Button>
-                            </TableCell>
-                          </StyledTableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
-                </div>
-              ) : (
-                <h3>No Results to Display</h3>
-              )}
-            </div>
-          </Card>
-        </Grid>
-        {/* <Grid className={classes.paper} item xs>
-          <div style={{ height: 357, width: '100%' }}>
-            <DataGrid
-              rows={rows}
-              columns={columns}
-              pageSize={4}
-              checkboxSelection
-            />
+                        <StyledTableCell>Name</StyledTableCell>
+                        <StyledTableCell>Cost</StyledTableCell>
+                        <StyledTableCell>Rating</StyledTableCell>
+                        <StyledTableCell>Start Date</StyledTableCell>
+                        <StyledTableCell>Expiration Date</StyledTableCell>
+                        <StyledTableCell></StyledTableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {subscriptions.map((sub) => (
+                        <StyledTableRow>
+                          <TableCell padding="checkbox">
+                            <CheckBox color="primary" />
+                          </TableCell>
+                          <TableCell>{sub.SubscriptionName}</TableCell>
+                          <TableCell>${sub.cost}</TableCell>
+                          <TableCell>{sub.rating}</TableCell>
+                          <TableCell>{sub.startDate}</TableCell>
+                          <TableCell>{sub.expirationDate}</TableCell>
+                          <TableCell>
+                            {" "}
+                            <Button
+                              data-id={sub._id}
+                              variant="contained"
+                              color="none"
+                              className={classes.button2}
+                              onClick={() => deleteSubscription(sub._id)}
+                            >
+                              Delete
+                            </Button>
+                          </TableCell>
+                        </StyledTableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </div>
+            ) : (
+              <h3 className={classes.title}>No Results to Display</h3>
+            )}
           </div>
-        </Grid> */}
+        </Grid>
       </Grid>
+
+      <div className={classes.playerwrapper}>
+        <ReactPlayer
+          className={classes.reactplayer}
+          height="40%"
+          width="40%"
+          url={url}
+        />
+      </div>
+
+      {/* <Grid container component="main">
+          <Grid item xs
+          className={classes.subCard}>
+            <Card className={classes.root}>
+              <CardHeader
+                avatar={
+                  <Avatar aria-label="recipe" className={classes.avatar}>
+                    N
+                  </Avatar>
+                }
+                action={
+                  <IconButton aria-label="settings">
+                    <MoreVertIcon />
+                  </IconButton>
+                }
+                title="Expiration for Netflix"
+                subheader="February 21, 2020"
+              />
+              <Calendar onChange={onChange} value={value} />
+              <CardContent>
+                <Typography variant="body2" color="textSecondary" component="p">
+                  Your Subscription is set to expire: Februrary 21, 2021
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        </Grid> */}
 
       <div>
         <Modal
@@ -290,72 +344,8 @@ const Subscription = () => {
           </Fade>
         </Modal>
       </div>
-      </Grid>
     </div>
-    
   );
 };
 
 export default Subscription;
-
-// {
-/* <Card>
-  <div style={{ height: 357, width: "100%" }}>
-    <DataGrid
-      rows={[
-        {
-          id: 1,
-          name: "{subscription}",
-          price: "",
-          expiration: "",
-          startDate: "",
-        },
-      ]}
-      columns={[
-        {
-          field: "id",
-          headerName: "ID",
-          description:
-            "This column is for the id to keep count of your subscriptions.",
-          sortable: false,
-          width: 100,
-        },
-        {
-          field: "name",
-          headerName: "Name",
-          description:
-            "This column is for the name of your subscription.",
-          sortable: false,
-          width: 150,
-        },
-        {
-          field: "price",
-          headerName: "Price",
-          description:
-            "This column is for the price of your subscription.",
-          sortable: false,
-          width: 150,
-        },
-        {
-          field: "startDate",
-          headerName: "Start Date",
-          description:
-            "This column is for when your subscription starts.",
-          sortable: false,
-          width: 250,
-        },
-        {
-          field: "expiration",
-          headerName: "Expiration Date",
-          description:
-            "This column is for when your subscription expires.",
-          sortable: false,
-          width: 250,
-        },
-      ]}
-      pageSize={4}
-      checkboxSelection
-    />
-  </div>
-</Card> */
-// }
