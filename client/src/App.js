@@ -11,7 +11,6 @@ import Navbar from './components/Navbar';
 import NotFoundPage from './pages/NotFoundPage';
 import Contact from './pages/Contact';
 import Profile from './pages/Profile';
-import Account from './pages/Settings';
 import ProtectedRoute from './utils/PrivateRoute';
 import axios from 'axios';
 import DrawerComponent from './components/DrawerComponent';
@@ -73,11 +72,6 @@ class App extends Component {
               LoggedIn={this.state.loggedIn}
               path="/profile"
               component={Profile}
-            />
-            <ProtectedRoute
-              LoggedIn={this.state.loggedIn}
-              path="/account"
-              component={Account}
             />
             <Route path="*" component={NotFoundPage} />
             <Redirect to="/404" />
