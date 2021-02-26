@@ -7,6 +7,7 @@ import Slider from '@material-ui/core/Slider';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
+import { useHistory } from "react-router-dom";
 import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
@@ -21,11 +22,10 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-
 const NewSubscription = () => {
   const classes = useStyles();
 
-  const [rating, setRating] = React.useState(30);
+  const [rating, setRating] = useState(30);
 
   const handleSliderChange = (event, newValue) => {
     setRating(newValue);
@@ -64,14 +64,15 @@ const NewSubscription = () => {
 
   const handleFormSubmit = (event) =>  {
     event.preventDefault();
+    const history = useHistory();
 
     const mergedObj = {...formObject, ...numObject, ...dateObject, rating: rating};
     console.log(mergedObj);
     axios.post("/api/auth/subscription", mergedObj)
       .then(res => {
+        // history.push("/subscription");
         if (res.data["send to login"] !== undefined && res.data["send to login"] === true){
           console.log("redirect to login");
-          //history.push("/home")
         }
       })
       .catch(err => console.log(err));
