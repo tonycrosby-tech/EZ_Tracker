@@ -1,34 +1,34 @@
-import React, { useState, useEffect } from "react";
-import { DataGrid } from "@material-ui/data-grid";
-import Calendar from "react-calendar";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import Avatar from "@material-ui/core/Avatar";
-import AddCircleIcon from "@material-ui/icons/AddCircle";
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardContent from "@material-ui/core/CardContent";
-import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
-import { red } from "@material-ui/core/colors";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
-import Modal from "@material-ui/core/Modal";
-import Backdrop from "@material-ui/core/Backdrop";
-import Fade from "@material-ui/core/Fade";
-import "react-calendar/dist/Calendar.css";
-import NewSubscription from "../components/Model";
-import axios from "axios";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableRow from "@material-ui/core/TableRow";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
+import React, { useState, useEffect } from 'react';
+import { DataGrid } from '@material-ui/data-grid';
+import Calendar from 'react-calendar';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Avatar from '@material-ui/core/Avatar';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardContent from '@material-ui/core/CardContent';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import { red } from '@material-ui/core/colors';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
+import 'react-calendar/dist/Calendar.css';
+import NewSubscription from '../components/Model';
+import axios from 'axios';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableRow from '@material-ui/core/TableRow';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -53,50 +53,54 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 345,
   },
   center1: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    color: "#00008b"
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: '#00008b',
   },
   root1: {
-    maxWidth: "auto",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    maxWidth: 'auto',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   media: {
     height: 0,
-    paddingTop: "56.25%",
+    paddingTop: '56.25%',
   },
   expand: {
-    transform: "rotate(0deg)",
-    marginLeft: "auto",
-    transition: theme.transitions.create("transform", {
+    transform: 'rotate(0deg)',
+    marginLeft: 'auto',
+    transition: theme.transitions.create('transform', {
       duration: theme.transitions.duration.shortest,
     }),
   },
   expandOpen: {
-    transform: "rotate(180deg)",
+    transform: 'rotate(180deg)',
   },
   avatar: {
     backgroundColor: red[500],
   },
   modal: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
+    border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 3, 4),
   },
   button1: {
     backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
+    border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(1, 2, 1),
+  },
+  graphs: {
+    padding: theme.spacing(4),
+    marginLeft: theme.spacing(10),
   },
 }));
 
@@ -120,7 +124,7 @@ const Subscription = () => {
 
   const loadSubscription = () => {
     axios
-      .get("/api/auth/getAllSubs")
+      .get('/api/auth/getAllSubs')
       .then((res) => {
         const subs = res.data.subscriptions;
         setSubscriptions(subs);
@@ -134,7 +138,7 @@ const Subscription = () => {
     e.preventDefault();
 
     axios
-      .get("/api/auth/getAllSubs")
+      .get('/api/auth/getAllSubs')
       .then((res) => {
         const subs = res.data.subscriptions;
         setSubscriptions(subs);
@@ -221,15 +225,15 @@ const Subscription = () => {
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                          {subscriptions.map((sub) => (
-                            <StyledTableRow>
-                              <TableCell>{sub.SubscriptionName}</TableCell>
-                              <TableCell>${sub.cost}</TableCell>
-                              <TableCell>{sub.rating}</TableCell>
-                              <TableCell>{sub.startDate}</TableCell>
-                              <TableCell>{sub.expirationDate}</TableCell>
-                            </StyledTableRow>
-                          ))}
+                        {subscriptions.map((sub) => (
+                          <StyledTableRow>
+                            <TableCell>{sub.SubscriptionName}</TableCell>
+                            <TableCell>${sub.cost}</TableCell>
+                            <TableCell>{sub.rating}</TableCell>
+                            <TableCell>{sub.startDate}</TableCell>
+                            <TableCell>{sub.expirationDate}</TableCell>
+                          </StyledTableRow>
+                        ))}
                       </TableBody>
                     </Table>
                   </TableContainer>
@@ -240,7 +244,6 @@ const Subscription = () => {
             </div>
           </Card>
         </Grid>
-
         {/* <Grid className={classes.paper} item xs>
           <div style={{ height: 357, width: '100%' }}>
             <DataGrid
@@ -280,7 +283,7 @@ const Subscription = () => {
 export default Subscription;
 
 // {
-  /* <Card>
+/* <Card>
   <div style={{ height: 357, width: "100%" }}>
     <DataGrid
       rows={[

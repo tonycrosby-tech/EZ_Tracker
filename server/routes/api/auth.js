@@ -9,18 +9,18 @@ const isAuthenticated = require('../../config/middleware/isAuthenticated');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const db = require('../../models');
-const nodemailer = require('nodemailer');
 const signUpMailer = require('./signUpMail');
 
 // api/auth/register
 // output: registered user, send back email and username, and id of user
 router.post('/register', function(req, res) {
-  signUpMailer(req.body.email);
+  //signUpMailer(req.body.email);
 
   Users = new User({ email: req.body.email, username: req.body.username });
 
   User.register(Users, req.body.password, function(err, user) {
     if (err) {
+      console.log(err);
       res.json({
         success: false,
         message:
@@ -28,7 +28,9 @@ router.post('/register', function(req, res) {
         err,
       });
     } else {
-      res.json({ user });
+      res.json({
+        user,
+      });
     }
   });
 });
