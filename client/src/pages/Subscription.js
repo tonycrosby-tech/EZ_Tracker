@@ -106,7 +106,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
   },
   videoInput: {
-    width: "50%"
+    width: "25%"
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
