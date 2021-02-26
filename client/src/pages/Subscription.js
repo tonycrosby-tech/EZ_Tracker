@@ -150,6 +150,18 @@ const Subscription = () => {
       });
   };
 
+  const deleteSubscription = (e) => {
+    e.preventDefault();
+
+    axios
+      .delete("/api/auth/deleteSubscription")
+      .then((res) => {
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const classes = useStyles();
 
   return (
@@ -214,25 +226,39 @@ const Subscription = () => {
                     >
                       <TableHead>
                         <TableRow>
-                          <StyledTableCell></StyledTableCell>
+                          <TableCell padding="checkbox">
+                            <CheckBox></CheckBox>
+                          </TableCell>
                           <StyledTableCell>Name</StyledTableCell>
                           <StyledTableCell>Cost</StyledTableCell>
                           <StyledTableCell>Rating</StyledTableCell>
                           <StyledTableCell>Start Date</StyledTableCell>
                           <StyledTableCell>Expiration Date</StyledTableCell>
+                          <StyledTableCell></StyledTableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>
                         {subscriptions.map((sub) => (
                           <StyledTableRow>
                             <TableCell padding="checkbox">
-                              <CheckBox color='primary'/>
+                              <CheckBox color="primary" />
                             </TableCell>
                             <TableCell>{sub.SubscriptionName}</TableCell>
                             <TableCell>${sub.cost}</TableCell>
                             <TableCell>{sub.rating}</TableCell>
                             <TableCell>{sub.startDate}</TableCell>
                             <TableCell>{sub.expirationDate}</TableCell>
+                            <TableCell>
+                              {" "}
+                              <Button
+                                variant="contained"
+                                color="Secondary"
+                                key={console.log(sub._id)}
+                                onClick={deleteSubscription}
+                              >
+                                Delete
+                              </Button>
+                            </TableCell>
                           </StyledTableRow>
                         ))}
                       </TableBody>
