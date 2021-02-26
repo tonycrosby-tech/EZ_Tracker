@@ -77,8 +77,8 @@ router.get("/getAllsubscriptions", isAuthenticated, function (req, res) {
 
 // pass the subscription id in the body
 // input: subscription id in the body
-// output: deleted subscription id in the user document: note: this does not
-// delete a subscription out of the subscription document
+// output: deleted subscription id in the user document: note: this does deletes both the 
+// pointer and subscription record
 // {
 //   "subscription_id": "603534a5aeb8367228ef6ff4"
 // }
@@ -158,6 +158,18 @@ router.post("/addSubscription", isAuthenticated, function (req, res) {
 // get all users with pointers to subscriptions
 router.get("/getAll", isAuthenticated, function (req, res) {
   User.find({})
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+});
+
+//api/auth/getAll--get all users and subscriptions
+// get all users with pointers to subscriptions
+router.get("/getOneSub/:id", isAuthenticated, function (req, res) {
+  Subscription.findOne({_id : req.params.id})
     .then((result) => {
       res.json(result);
     })
