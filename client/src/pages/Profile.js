@@ -19,6 +19,10 @@ const useStyles = makeStyles({
   media: {
     height: 250,
   },
+  graphs: {
+    padding: theme.spacing(4),
+    marginLeft: theme.spacing(10),
+  },
 });
 
 export default function Profile() {

@@ -14,8 +14,6 @@ const signUpMailer = require('./signUpMail');
 // api/auth/register
 // output: registered user, send back email and username, and id of user
 router.post('/register', function(req, res) {
-  //signUpMailer(req.body.email);
-
   Users = new User({ email: req.body.email, username: req.body.username });
 
   User.register(Users, req.body.password, function(err, user) {
@@ -48,7 +46,7 @@ router.post('/register', function(req, res) {
 // });
 
 router.get('/user', isAuthenticated, (req, res) => {
-  db.User.find(req.username);
+  User.find(req.username);
   if (req.user) {
     res.json({ user: req.user });
   } else {
@@ -76,27 +74,42 @@ router.get('/getAllsubscriptions', isAuthenticated, function(req, res) {
 
 // pass the subscription id in the body
 // input: subscription id in the body
-// output: deleted subscription id in the user document: note: this does not
-// delete a subscription out of the subscription document
+// output: deleted subscription id in the user document: note: this does deletes both the
+// pointer and subscription record
 // {
 //   "subscription_id": "603534a5aeb8367228ef6ff4"
 // }
 router.delete('/deleteSubscription', isAuthenticated, function(req, res) {
   const ider = req.user.id;
-  User.updateOne(
-    { _id: ider },
-    { $pull: { subscriptions: req.body.subscription_id } },
-    function(err, result) {
-      if (err) {
-        res.status(401).send({
+
+  Subscription.deleteOne({ _id: req.body.subscription_id }, function(err) {
+    if (err) {
+      res
+        .status(401)
+        .send({
           success: false,
           msg: 'Deletion failed. subscription not found.',
         });
-      } else {
-        res.json(result);
-      }
+    } else {
+      User.updateOne(
+        { _id: ider },
+        { $pull: { subscriptions: req.body.subscription_id } },
+        function(err, result) {
+          if (err) {
+            res
+              .status(401)
+              .send({
+                success: false,
+                msg: 'Deletion failed. subscription not found.',
+              });
+          } else {
+            // now go delete actual subscription record
+            res.json(result);
+          }
+        }
+      );
     }
-  );
+  });
 });
 
 // api/auth/subscription--add a subscription
@@ -151,6 +164,18 @@ router.post('/addSubscription', isAuthenticated, function(req, res) {
 // get all users with pointers to subscriptions
 router.get('/getAll', isAuthenticated, function(req, res) {
   User.find({})
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+});
+
+//api/auth/getAll--get all users and subscriptions
+// get all users with pointers to subscriptions
+router.get('/getOneSub/:id', isAuthenticated, function(req, res) {
+  Subscription.findOne({ _id: req.params.id })
     .then((result) => {
       res.json(result);
     })

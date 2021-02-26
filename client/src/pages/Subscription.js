@@ -29,6 +29,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
+import CheckBox from '@material-ui/core/Checkbox';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -97,10 +98,6 @@ const useStyles = makeStyles((theme) => ({
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(1, 2, 1),
-  },
-  graphs: {
-    padding: theme.spacing(4),
-    marginLeft: theme.spacing(10),
   },
 }));
 
@@ -209,7 +206,7 @@ const Subscription = () => {
               {subscriptions.length ? (
                 <div>
                   <h1 className={classes.center1}>Subscriptions</h1>
-                  <TableContainer>
+                  <TableContainer padding="checkbox">
                     <Table
                       className={classes.table}
                       aria-labelledby="tableTitle"
@@ -217,6 +214,7 @@ const Subscription = () => {
                     >
                       <TableHead>
                         <TableRow>
+                          <StyledTableCell></StyledTableCell>
                           <StyledTableCell>Name</StyledTableCell>
                           <StyledTableCell>Cost</StyledTableCell>
                           <StyledTableCell>Rating</StyledTableCell>
@@ -227,6 +225,9 @@ const Subscription = () => {
                       <TableBody>
                         {subscriptions.map((sub) => (
                           <StyledTableRow>
+                            <TableCell padding="checkbox">
+                              <CheckBox color="primary" />
+                            </TableCell>
                             <TableCell>{sub.SubscriptionName}</TableCell>
                             <TableCell>${sub.cost}</TableCell>
                             <TableCell>{sub.rating}</TableCell>
