@@ -1,20 +1,20 @@
-import React, { Component } from "react";
-import axios from "axios";
-import Link from "@material-ui/core/Link";
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import Grid from "@material-ui/core/Grid";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
+import React, { Component } from 'react';
+import axios from 'axios';
+import Link from '@material-ui/core/Link';
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import backgroundImage from './images/Background.jpg';
 import Copyright from '../components/Copyright';
 import Box from '@material-ui/core/Box';
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     height: '100vh',
   },
@@ -22,7 +22,9 @@ const styles = theme => ({
     backgroundImage: `url("${backgroundImage}")`,
     backgroundRepeat: 'no-repeat',
     backgroundColor:
-      theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
+      theme.palette.type === 'light'
+        ? theme.palette.grey[50]
+        : theme.palette.grey[900],
     backgroundSize: 'cover',
     backgroundPosition: 'center',
   },
@@ -34,7 +36,7 @@ const styles = theme => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: "#00008b",
+    backgroundColor: '#00008b',
   },
   form: {
     width: '90%', // Fix IE 11 issue.
@@ -49,9 +51,9 @@ class Login extends Component {
   constructor() {
     super();
     this.state = {
-      username: "",
-      password: "",
-      message: ""
+      username: '',
+      password: '',
+      message: '',
     };
   }
   onChange = (e) => {
@@ -66,14 +68,14 @@ class Login extends Component {
     const { username, password } = this.state;
 
     axios
-      .post("/api/auth/login",{ username, password })
+      .post('/api/auth/login', { username, password })
       .then((res) => {
-        this.setState({ message: "" });
-        this.props.history.push("/home");
+        this.setState({ message: '' });
+        this.props.history.push('/home');
       })
       .catch((error) => {
         this.setState({
-          message: "Login failed. Username or password do not match",
+          message: 'Login failed. Username or password do not match',
         });
       });
   };
@@ -84,7 +86,7 @@ class Login extends Component {
     return (
       <Grid container className={classes.root} component="main">
         <CssBaseline />
-        <Grid item xs={false} sm={4} md={7} className={classes.image}/>
+        <Grid item xs={false} sm={4} md={7} className={classes.image} />
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <div className={classes.paper}>
             <Avatar className={classes.avatar}>
@@ -94,7 +96,7 @@ class Login extends Component {
               Sign in
             </Typography>
             <form className={classes.form} onSubmit={this.onSubmit}>
-              {message !== "" && <p>{message}</p>}
+              {message !== '' && <p>{message}</p>}
               <TextField
                 variant="outlined"
                 margin="normal"

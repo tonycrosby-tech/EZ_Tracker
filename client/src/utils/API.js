@@ -14,9 +14,9 @@ export default {
 //   updateSubs: function (updateInfo) {
 //     return axios.post('/api/subs/' + id, updateInfo);
 //   },
-  // getUser: function () {
-  //   return axios.get('/api/user/');
-  // },
+// getUser: function () {
+//   return axios.get('/api/user/');
+// },
 //   updateUser: function (updateInfo) {
 //     return axios.post('/api/user/' + id, updateInfo);
 //   },
