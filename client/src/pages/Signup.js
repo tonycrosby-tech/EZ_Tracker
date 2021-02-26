@@ -66,7 +66,6 @@ class Signup extends Component {
   };
 
   onSubmit = (e) => {
-    e.preventDefault();
 
     const { email, username, password } = this.state;
 
