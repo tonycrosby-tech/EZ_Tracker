@@ -30,6 +30,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import CheckBox from "@material-ui/core/Checkbox";
+import API from '../utils/API';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -99,6 +100,12 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(1, 2, 1),
   },
+  button2: {
+    backgroundColor: "#00008b",
+    border: "2px solid #000",
+    hover: "white",
+    color: "white"
+  },
 }));
 
 const Subscription = () => {
@@ -150,17 +157,11 @@ const Subscription = () => {
       });
   };
 
-  const deleteSubscription = (e) => {
-    e.preventDefault();
-
-    axios
-      .delete("/api/auth/deleteSubscription")
-      .then((res) => {
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  function deleteSubscription(id) {
+    API.deleteSubs(id)
+      .then(res => loadSubscription())
+      .catch(err => console.log(err));
+  }
 
   const classes = useStyles();
 
@@ -180,9 +181,9 @@ const Subscription = () => {
         </Grid>
       </Grid>
       <List className={classes.root}>
-        <ListItem className={classes.button1}>
-          <ListItemIcon onClick={handleOpen}>
-            <AddCircleIcon color="primary" />
+        <ListItem onClick={handleOpen} className={classes.button1}>
+          <ListItemIcon>
+            <AddCircleIcon color="none" />
           </ListItemIcon>
           <ListItemText color="primary" primary="Add a new Subscription" />
         </ListItem>
@@ -251,10 +252,11 @@ const Subscription = () => {
                             <TableCell>
                               {" "}
                               <Button
+                                data-id={sub._id}
                                 variant="contained"
-                                color="Secondary"
-                                key={console.log(sub._id)}
-                                onClick={deleteSubscription}
+                                color="none"
+                                className={classes.button2}
+                                onClick={() => deleteSubscription(sub._id)}
                               >
                                 Delete
                               </Button>
