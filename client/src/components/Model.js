@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -7,7 +7,6 @@ import Slider from '@material-ui/core/Slider';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
-import { useHistory } from "react-router-dom";
 import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
@@ -20,6 +19,9 @@ const useStyles = makeStyles((theme) => ({
     input: {
       width: 42,
     },
+    blue: {
+      backgroundColor: "#00008b",
+    }
   },
 }));
 const NewSubscription = () => {
@@ -62,9 +64,7 @@ const NewSubscription = () => {
     setDateObject({...dateObject, [name]: (value)})
   };
 
-  const handleFormSubmit = (event) =>  {
-    event.preventDefault();
-    const history = useHistory();
+  const handleFormSubmit = () =>  {
 
     const mergedObj = {...formObject, ...numObject, ...dateObject, rating: rating};
     console.log(mergedObj);
@@ -86,7 +86,7 @@ const NewSubscription = () => {
           <Grid item xs={12}>
             <div>
               <Typography component="h1" variant="h5">
-                Create New
+                Create New Subscription
               </Typography>
             </div>
           </Grid>
@@ -178,7 +178,7 @@ const NewSubscription = () => {
               </Grid>
             </div>
           </Grid>
-          <Button type="submit" fullWidth variant="contained" color="primary">
+          <Button type="submit" fullWidth className={classes.blue} variant="contained" color="primary">
             Create
           </Button>
         </Grid>
