@@ -9,11 +9,10 @@ import Header from './pages/Header';
 import Subscription from './pages/Subscription';
 import Navbar from './components/Navbar';
 import NotFoundPage from './pages/NotFoundPage';
-import Contact from './pages/Contact';
 import Profile from './pages/Profile';
 import ProtectedRoute from './utils/PrivateRoute';
 import axios from 'axios';
-import DrawerComponent from './components/DrawerComponent';
+import Footer from './components/Footer';
 
 class App extends Component {
   constructor(props) {
@@ -61,7 +60,6 @@ class App extends Component {
             <Route exact path="/" component={Signup} />
             <Route exact path="/login" component={SignInSide} />
             <Route exact path="/about" component={About} />
-            <Route exact path="/contact" component={Contact} />
             <Route exact path="/home" component={Header} />
             <ProtectedRoute
               LoggedIn={this.state.loggedIn}
@@ -76,7 +74,7 @@ class App extends Component {
             <Route path="*" component={NotFoundPage} />
             <Redirect to="/404" />
           </Switch>
-          {/* <Footer /> */}
+          <Footer />
         </BrowserRouter>
       </React.Fragment>
     );

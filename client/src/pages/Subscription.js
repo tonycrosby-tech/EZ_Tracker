@@ -12,6 +12,7 @@ import CardContent from "@material-ui/core/CardContent";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import { red } from "@material-ui/core/colors";
+import Box from '@material-ui/core/Box';
 import { relativeTimeRounding } from "moment";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Grid from "@material-ui/core/Grid";
@@ -32,6 +33,7 @@ import TableHead from "@material-ui/core/TableHead";
 import CheckBox from "@material-ui/core/Checkbox";
 import API from "../utils/API";
 import ReactPlayer from "react-player";
+import expoMailer from "../utils/expoMail";
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -46,7 +48,7 @@ const StyledTableCell = withStyles((theme) => ({
 
 const StyledTableRow = withStyles((theme) => ({
   root: {
-    "&:nth-of-type(odd)": {
+    '&:nth-of-type(odd)': {
       backgroundColor: theme.palette.action.hover,
     },
   },
@@ -54,91 +56,94 @@ const StyledTableRow = withStyles((theme) => ({
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 345,
+    width: '345vh',
   },
   blue: {
-    backgroundColor: "#00008b",
+    backgroundColor: '#00008b',
     padding: theme.spacing(2, 1, 2),
-    marginLeft: theme.spacing(1)
+    marginLeft: theme.spacing(1),
   },
   title: {
     display: "flex",
-    alignItems: "center",
     justifyContent: "center",
   },
   subCard: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "left",
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'left',
   },
   center1: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    color: "#00008b",
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: '#00008b',
   },
   root1: {
-    maxWidth: "auto",
-    display: "flex",
-    alignItems: "right",
-    justifyContent: "right",
+    maxWidth: 'auto',
+    display: 'flex',
+    alignItems: 'right',
+    justifyContent: 'right',
   },
   media: {
     height: 0,
-    paddingTop: "56.25%",
+    paddingTop: '56.25%',
   },
   expand: {
-    transform: "rotate(0deg)",
-    marginLeft: "auto",
-    transition: theme.transitions.create("transform", {
+    transform: 'rotate(0deg)',
+    marginLeft: 'auto',
+    transition: theme.transitions.create('transform', {
       duration: theme.transitions.duration.shortest,
     }),
   },
   expandOpen: {
-    transform: "rotate(180deg)",
+    transform: 'rotate(180deg)',
   },
   avatar: {
     backgroundColor: red[500],
   },
   modal: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   videoInput: {
-    width: "25%"
+    width: "50vh"
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
+    border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 3, 4),
   },
   button1: {
     backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
+    border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(1, 2, 1),
   },
   button2: {
-    backgroundColor: "#00008b",
-    border: "2px solid #000",
-    hover: "white",
-    color: "white",
+    backgroundColor: '#00008b',
+    border: '2px solid #000',
+    hover: 'white',
+    color: 'white',
   },
   playerwrapper: {
-    position: relativeTimeRounding,
     paddingTop: "56.25%",
+    position: "absolute",
+    top: 'auto',
+    left: 'auto',
+    display: "flex",
+    justifyContent: "center",
+    marginTop: theme.spacing(2)
   },
 
   reactplayer: {
     position: "absolute",
-    top: 350,
-    left: 800,
+    top: 'auto',
+    left: 'auto',
     display: "flex",
-    alignItems: "center",
     justifyContent: "center",
-    
+    marginTop: theme.spacing(2)
   },
 }));
 
@@ -150,6 +155,8 @@ const Subscription = () => {
 
   useEffect(() => {
     loadSubscription();
+    expoMailer();
+
     // loadBooks() // this would have loaded the books
   }, []);
 
@@ -163,7 +170,7 @@ const Subscription = () => {
 
   const loadSubscription = () => {
     axios
-      .get("/api/auth/getAllSubs")
+      .get('/api/auth/getAllSubs')
       .then((res) => {
         const subs = res.data.subscriptions;
         setSubscriptions(subs);
@@ -177,7 +184,7 @@ const Subscription = () => {
     e.preventDefault();
 
     axios
-      .get("/api/auth/getAllSubs")
+      .get('/api/auth/getAllSubs')
       .then((res) => {
         const subs = res.data.subscriptions;
         setSubscriptions(subs);
@@ -194,9 +201,9 @@ const Subscription = () => {
 
   const handleInput = (event) => {
     const url_link = event.target.value;
-    const urlStringify = JSON.stringify(url_link); 
+    const urlStringify = JSON.stringify(url_link);
     setUrl(urlStringify);
-  }
+  };
 
   function deleteSubscription(id) {
     API.deleteSubs(id)
@@ -208,7 +215,7 @@ const Subscription = () => {
 
   return (
     <div>
-      <h1 className={classes.title}>EZ Tracker - Subscriptions!</h1>
+      <h2 className={classes.title}>EZ Tracker - Subscriptions!</h2>
       <List className={classes.title}>
         <ListItemIcon onClick={handleOpen} className={classes.button1}>
           <AddCircleIcon />
@@ -222,14 +229,14 @@ const Subscription = () => {
           id="url"
           label="URL for video/song"
           name="url-link"
+          fullWidth
           variant="outlined"
           placeholder="Video will play once url is in the input"
           onChange={handleInput}
         />
-        
       </List>
-      <Grid container direction="row" justify="center" alignItems="center">
-        <Grid className={classes.root1} item xs>
+      <Grid className={classes.root1} container direction="row" justify="center" alignItems="center">
+        <Grid item xs>
           <div>
             {subscriptions.length ? (
               <div>
@@ -263,7 +270,7 @@ const Subscription = () => {
                           <TableCell>{sub.startDate}</TableCell>
                           <TableCell>{sub.expirationDate}</TableCell>
                           <TableCell>
-                            {" "}
+                            {' '}
                             <Button
                               data-id={sub._id}
                               variant="contained"
@@ -286,15 +293,20 @@ const Subscription = () => {
           </div>
         </Grid>
       </Grid>
-
+      
+      <Grid container direction="row" justify="center" alignItems="center">
+      <Box display={{ xs: 'block', xl: 'none' }}>
       <div className={classes.playerwrapper}>
         <ReactPlayer
           className={classes.reactplayer}
-          height="40%"
-          width="40%"
+          height="50vh"
+          width="50vh"
           url={url}
         />
       </div>
+      </Box>
+      </Grid>
+      
 
       {/* <Grid container component="main">
           <Grid item xs

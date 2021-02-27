@@ -13,7 +13,8 @@ import MenuIcon from "@material-ui/icons/Menu";
 const DrawerComponent = () => {
   const useStyles = makeStyles((theme) => ({
     drawerContainer: {
-      backgroundColor: "#d3d3d3",
+      background: "linear-gradient(45deg, #00008b 30%, #FF8E53 90%)",
+      width: '25vh',
     },
     iconButtonContainer: {
       marginLeft: "auto",
@@ -24,6 +25,9 @@ const DrawerComponent = () => {
       fontSize: "1.5rem",
       marginLeft: "auto",
     },
+    link: {
+      color: 'white',
+    }
   }));
 
   const [openDrawer, setOpenDrawer] = useState(false);
@@ -44,6 +48,7 @@ const DrawerComponent = () => {
               style={{ textDecoration: "none" }}
               href="/home"
               color="inherit"
+              className={classes.link}
             >
               <ListItemText> Home</ListItemText>
             </Link>
@@ -54,6 +59,7 @@ const DrawerComponent = () => {
                 style={{ textDecoration: "none" }}
                 href="/profile"
                 color="inherit"
+                className={classes.link}
               >
                 <ListItemText> Profile</ListItemText>
               </Link>
@@ -65,18 +71,9 @@ const DrawerComponent = () => {
               style={{ textDecoration: "none" }}
               href="/about"
               color="inherit"
+              className={classes.link}
             >
               <ListItemText> About</ListItemText>
-            </Link>
-          </ListItem>
-
-          <ListItem divider button onClick={() => setOpenDrawer(false)}>
-            <Link
-              style={{ textDecoration: "none" }}
-              href="/contact"
-              color="inherit"
-            >
-              <ListItemText> Contact</ListItemText>
             </Link>
           </ListItem>
         </List>

@@ -46,22 +46,26 @@ import { Button } from '@material-ui/core';
 const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
-    color: '#FF8E53',
+    color: 'white',
     textAlign: 'center',
   },
-  Logout: {
-    height: 48,
-    width: 100,
-    margin: 8,
+  github: {
+    height: '2.5vh',
+    width: '5vh',
+    margin: 4,
     color: 'white',
     background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
   },
+  footer: {
+    backgroundColor: '#00008b',
+    marginTop: theme.spacing(150)
+  }
 }));
 
 export default function Footer() {
   const classes = useStyles();
   return (
-    <AppBar position="ixed" color="primary">
+    <AppBar className={classes.footer}position="sticky" color="inherit">
       <Container maxWidth="md">
         <Toolbar>
           <Grid container justify="center" alignItems="center">
@@ -69,26 +73,14 @@ export default function Footer() {
               item
               xs={12}
               className={classes.title}
-              justify="center"
-              alignItems="center"
-              textAlign="center"
+
             >
               Any Question click the Button Below
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              className={classes.title}
-              justify="center"
-              alignItems="center"
-              textAlign="center"
-            >
-              © 2021 Copyright by
             </Grid>
             <Button
               color="inherit"
               ml={2}
-              className={classes.Logout}
+              className={classes.github}
               href="https://github.com/tonycrosby-tech"
             >
               Tony {''}
@@ -96,7 +88,7 @@ export default function Footer() {
             <Button
               color="inherit"
               m={2}
-              className={classes.Logout}
+              className={classes.github}
               href="https://github.com/parth167"
             >
               Parth
@@ -104,7 +96,7 @@ export default function Footer() {
             <Button
               color="inherit"
               m={2}
-              className={classes.Logout}
+              className={classes.github}
               href="https://github.com/LoganPippin"
             >
               Logan
@@ -112,7 +104,7 @@ export default function Footer() {
             <Button
               color="inherit"
               m={2}
-              className={classes.Logout}
+              className={classes.github}
               href="https://github.com/MarioThompson0010"
             >
               Mario

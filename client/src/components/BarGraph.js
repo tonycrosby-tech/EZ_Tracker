@@ -40,8 +40,8 @@ export default class App extends React.Component {
       <div>
         <Bar
           data={this.groomGraphData()}
-          height={300}
-          width={350}
+          height={250}
+          width={300}
           options={{
             maintainAspectRatio: false,
             scales: {
