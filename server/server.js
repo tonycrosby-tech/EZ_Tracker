@@ -15,7 +15,9 @@ const app = express();
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(helmet());
+app.use(helmet({
+  contentSecurityPolicy: false,
+}));
 app.use(session({ secret: 'TBD', resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -45,6 +47,7 @@ const FORCE_SCHEMA = process.env.NODE_ENV === 'test';
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/project3', {
   useNewUrlParser: true,
   useFindAndModify: false,
+  useCreateIndex: true,
   useUnifiedTopology: true,
 });
 

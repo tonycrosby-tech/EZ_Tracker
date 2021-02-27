@@ -12,7 +12,7 @@ module.exports = async (email) => {
   const mailOptions = {
     from: 'EZTracker <eztracker2@gmail.com>',
     to: email,
-    subject: 'Thanks For Singing Up!',
+    subject: 'Thanks For Signing Up!',
     text:
       'We really appreciate you, and think that your choice in subscription tracking apps was the right one we look forward to your continued use and enjoy. Thank You.',
   };
