@@ -267,7 +267,7 @@ const Subscription = () => {
                             <Button
                               data-id={sub._id}
                               variant="contained"
-                              color="none"
+                              color="inherit"
                               className={classes.button2}
                               onClick={() => deleteSubscription(sub._id)}
                             >
