@@ -29,7 +29,7 @@ export default () => {
       email = res.data.email;
       console.log(email);
       subs.map((item) => {
-        if (new Date(item.expirationDate) < date) {
+        if (new Date(item.expirationDate) - date <= 86400000) {
           title.push(item.SubscriptionName);
         }
         console.log(title);
