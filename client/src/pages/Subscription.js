@@ -1,38 +1,38 @@
-import React, { useState, useEffect } from 'react';
-import Calendar from 'react-calendar';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItemText from '@material-ui/core/ListItemText';
-import Avatar from '@material-ui/core/Avatar';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
-import Card from '@material-ui/core/Card';
-import TextField from '@material-ui/core/TextField';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import { red } from '@material-ui/core/colors';
-import { relativeTimeRounding } from 'moment';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
-import Fade from '@material-ui/core/Fade';
-import 'react-calendar/dist/Calendar.css';
-import NewSubscription from '../components/Model';
-import axios from 'axios';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableRow from '@material-ui/core/TableRow';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import CheckBox from '@material-ui/core/Checkbox';
-import API from '../utils/API';
-import ReactPlayer from 'react-player';
-import expoMailer from '../utils/expoMail';
+import React, { useState, useEffect } from "react";
+import Calendar from "react-calendar";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
+import List from "@material-ui/core/List";
+import ListItemText from "@material-ui/core/ListItemText";
+import Avatar from "@material-ui/core/Avatar";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
+import Card from "@material-ui/core/Card";
+import TextField from "@material-ui/core/TextField";
+import CardHeader from "@material-ui/core/CardHeader";
+import CardContent from "@material-ui/core/CardContent";
+import IconButton from "@material-ui/core/IconButton";
+import Typography from "@material-ui/core/Typography";
+import { red } from "@material-ui/core/colors";
+import Box from '@material-ui/core/Box';
+import { relativeTimeRounding } from "moment";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
+import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
+import Modal from "@material-ui/core/Modal";
+import Backdrop from "@material-ui/core/Backdrop";
+import Fade from "@material-ui/core/Fade";
+import "react-calendar/dist/Calendar.css";
+import NewSubscription from "../components/Model";
+import axios from "axios";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableRow from "@material-ui/core/TableRow";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import CheckBox from "@material-ui/core/Checkbox";
+import API from "../utils/API";
+import ReactPlayer from "react-player";
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -55,7 +55,7 @@ const StyledTableRow = withStyles((theme) => ({
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 345,
+    width: '345vh',
   },
   blue: {
     backgroundColor: '#00008b',
@@ -63,9 +63,8 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(1),
   },
   title: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    display: "flex",
+    justifyContent: "center",
   },
   subCard: {
     display: 'flex',
@@ -107,7 +106,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
   },
   videoInput: {
-    width: '25%',
+    width: "50vh"
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
@@ -128,17 +127,22 @@ const useStyles = makeStyles((theme) => ({
     color: 'white',
   },
   playerwrapper: {
-    position: relativeTimeRounding,
-    paddingTop: '56.25%',
+    paddingTop: "56.25%",
+    position: "absolute",
+    top: 'auto',
+    left: 'auto',
+    display: "flex",
+    justifyContent: "center",
+    marginTop: theme.spacing(2)
   },
 
   reactplayer: {
-    position: 'absolute',
-    top: 350,
-    left: 800,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    position: "absolute",
+    top: 'auto',
+    left: 'auto',
+    display: "flex",
+    justifyContent: "center",
+    marginTop: theme.spacing(2)
   },
 }));
 
@@ -210,7 +214,7 @@ const Subscription = () => {
 
   return (
     <div>
-      <h1 className={classes.title}>EZ Tracker - Subscriptions!</h1>
+      <h2 className={classes.title}>EZ Tracker - Subscriptions!</h2>
       <List className={classes.title}>
         <ListItemIcon onClick={handleOpen} className={classes.button1}>
           <AddCircleIcon />
@@ -224,13 +228,14 @@ const Subscription = () => {
           id="url"
           label="URL for video/song"
           name="url-link"
+          fullWidth
           variant="outlined"
           placeholder="Video will play once url is in the input"
           onChange={handleInput}
         />
       </List>
-      <Grid container direction="row" justify="center" alignItems="center">
-        <Grid className={classes.root1} item xs>
+      <Grid className={classes.root1} container direction="row" justify="center" alignItems="center">
+        <Grid item xs>
           <div>
             {subscriptions.length ? (
               <div>
@@ -287,15 +292,20 @@ const Subscription = () => {
           </div>
         </Grid>
       </Grid>
-
+      
+      <Grid container direction="row" justify="center" alignItems="center">
+      <Box display={{ xs: 'block', xl: 'none' }}>
       <div className={classes.playerwrapper}>
         <ReactPlayer
           className={classes.reactplayer}
-          height="40%"
-          width="40%"
+          height="50vh"
+          width="50vh"
           url={url}
         />
       </div>
+      </Box>
+      </Grid>
+      
 
       {/* <Grid container component="main">
           <Grid item xs

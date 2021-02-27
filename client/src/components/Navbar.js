@@ -10,7 +10,7 @@ import Menu from "@material-ui/core/Menu";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import DrawerComponent from "./DrawerComponent";
-import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 
@@ -24,14 +24,14 @@ const useStyles = makeStyles((theme) => ({
   },
   appBar: {
     borderBottom: `1px solid ${theme.palette.divider}`,
-    background: "#00008b",
+    background: "linear-gradient(45deg, #00008b 30%, #FF8E53 90%)",
   },
   toolbarTitle: {
     flexGrow: 1,
     color: "#FF8E53",
   },
   link: {
-    margin: theme.spacing(1, 1.5),
+    margin: theme.spacing(1, 1),
     color: "white",
   },
   root: {
@@ -44,13 +44,13 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
-    color: "#FF8E53",
+    color: "orange",
   },
   Logout: {
     background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
   },
   profileButton: {
-    color: "orange",
+    color: "#00008b",
   },
 }));
 
@@ -91,47 +91,11 @@ const Navbar = function () {
           [classes.appBarShift]: open,
         })}
       >
-        <Toolbar >
+        <Toolbar>
           <DrawerComponent />
           <Typography variant="h6" className={classes.title} noWrap>
             EZ Tracker
           </Typography>
-          <Link
-            style={{ textDecoration: "none" }}
-            variant="button"
-            color="textPrimary"
-            href="/home"
-            className={classes.link}
-          >
-            Home
-          </Link>
-          <Link
-            style={{ textDecoration: "none" }}
-            variant="button"
-            color="textPrimary"
-            href="/profile"
-            className={classes.link}
-          >
-            Profile
-          </Link>
-          <Link 
-            style={{ textDecoration: "none" }}
-            variant="button"
-            color="textPrimary"
-            href="/about"
-            className={classes.link}
-          >
-            About
-          </Link>
-          <Link
-            style={{ textDecoration: "none" }}
-            variant="button"
-            color="textPrimary"
-            href="/contact"
-            className={classes.link}
-          >
-            Contact
-          </Link>
 
           {/* <Link
             variant="button"

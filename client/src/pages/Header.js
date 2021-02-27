@@ -6,17 +6,21 @@ import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
-import CssBaseline from "@material-ui/core/CssBaseline";
 
 const styles = theme => ({
   root: {
     height: '100vh',
   },
+  backgroundImage: {
+
+  },
   title: {
     color: "orange",
+    fontSize: 32
   },
   subtitle: {
-    color: "#add8e6",
+    color: "#00008b",
+    fontSize: 24
   },
   typedContainer: {
     position: "absolute",
@@ -30,6 +34,10 @@ const styles = theme => ({
   button: {
     margin: theme.spacing(1),
   },
+  about: {
+    background: 'linear-gradient(45deg, #00008b 30%, #FF8E53 90%)',
+    color: 'white'
+  }
 });
 
 class Header extends Component {  
@@ -41,20 +49,19 @@ class Header extends Component {
     const { classes } = this.props;
     return (
       <div>
-        <CssBaseline />
         <Grid container className={classes.root} component="main">
           <div className={classes.image}>
             <Box className={classes.typedContainer}>
               <Typography className={classes.title} variant="h4">
                 <Typed
-                  strings={["Welcome to the Subscription Tracker"]}
+                  strings={["WELCOME TO EZ TRACKER 😄"]}
                   typeSpeed={40}
                 />
               </Typography>
 
               <Typography className={classes.subtitle} variant="h5">
                 <Typed
-                  strings={["To get started", "Click the more info Button"]}
+                  strings={["TO GET STARTED,", "CLICK THE MORE INFO BUTTON!"]}
                   typeSpeed={40}
                   backSpeed={50}
                   loop
@@ -62,7 +69,7 @@ class Header extends Component {
               </Typography>
 
               <Link href="/about">
-                <Button variant="contained" color="default">
+                <Button variant="contained" className={classes.about}color="default">
                   More Info
                 </Button>
               </Link>

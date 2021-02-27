@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   },
   graphs: {
     padding: theme.spacing(4),
-    marginLeft: theme.spacing(10),
+    marginLeft: theme.spacing(0),
   },
 }));
 
@@ -23,13 +23,15 @@ export default function Profile() {
 
   return (
     <>
-      <Grid container justify='center'>
-        <Grid item xs={4}>
+      <Grid Grid container direction="row" justify="center">
+        <Grid item xs={8}>
           <PieGraph />
         </Grid>
-        <Grid item xs={4} className={classes.graphs}>
+      </Grid>
+      <Grid Grid container direction="row" justify="center">
+      <Grid item xs={12} className={classes.graphs}>
           <BarGraph />
-        </Grid>
+      </Grid>
       </Grid>
     </>
   );
