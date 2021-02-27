@@ -1,37 +1,38 @@
-import React, { useState, useEffect } from "react";
-import Calendar from "react-calendar";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
-import List from "@material-ui/core/List";
-import ListItemText from "@material-ui/core/ListItemText";
-import Avatar from "@material-ui/core/Avatar";
-import AddCircleIcon from "@material-ui/icons/AddCircle";
-import Card from "@material-ui/core/Card";
-import TextField from "@material-ui/core/TextField";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardContent from "@material-ui/core/CardContent";
-import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
-import { red } from "@material-ui/core/colors";
-import { relativeTimeRounding } from "moment";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
-import Modal from "@material-ui/core/Modal";
-import Backdrop from "@material-ui/core/Backdrop";
-import Fade from "@material-ui/core/Fade";
-import "react-calendar/dist/Calendar.css";
-import NewSubscription from "../components/Model";
-import axios from "axios";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableRow from "@material-ui/core/TableRow";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import CheckBox from "@material-ui/core/Checkbox";
-import API from "../utils/API";
-import ReactPlayer from "react-player";
+import React, { useState, useEffect } from 'react';
+import Calendar from 'react-calendar';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
+import List from '@material-ui/core/List';
+import ListItemText from '@material-ui/core/ListItemText';
+import Avatar from '@material-ui/core/Avatar';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+import Card from '@material-ui/core/Card';
+import TextField from '@material-ui/core/TextField';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardContent from '@material-ui/core/CardContent';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import { red } from '@material-ui/core/colors';
+import { relativeTimeRounding } from 'moment';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
+import 'react-calendar/dist/Calendar.css';
+import NewSubscription from '../components/Model';
+import axios from 'axios';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableRow from '@material-ui/core/TableRow';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import CheckBox from '@material-ui/core/Checkbox';
+import API from '../utils/API';
+import ReactPlayer from 'react-player';
+import expoMailer from '../utils/expoMail';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -46,7 +47,7 @@ const StyledTableCell = withStyles((theme) => ({
 
 const StyledTableRow = withStyles((theme) => ({
   root: {
-    "&:nth-of-type(odd)": {
+    '&:nth-of-type(odd)': {
       backgroundColor: theme.palette.action.hover,
     },
   },
@@ -57,88 +58,87 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 345,
   },
   blue: {
-    backgroundColor: "#00008b",
+    backgroundColor: '#00008b',
     padding: theme.spacing(2, 1, 2),
-    marginLeft: theme.spacing(1)
+    marginLeft: theme.spacing(1),
   },
   title: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   subCard: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "left",
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'left',
   },
   center1: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    color: "#00008b",
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: '#00008b',
   },
   root1: {
-    maxWidth: "auto",
-    display: "flex",
-    alignItems: "right",
-    justifyContent: "right",
+    maxWidth: 'auto',
+    display: 'flex',
+    alignItems: 'right',
+    justifyContent: 'right',
   },
   media: {
     height: 0,
-    paddingTop: "56.25%",
+    paddingTop: '56.25%',
   },
   expand: {
-    transform: "rotate(0deg)",
-    marginLeft: "auto",
-    transition: theme.transitions.create("transform", {
+    transform: 'rotate(0deg)',
+    marginLeft: 'auto',
+    transition: theme.transitions.create('transform', {
       duration: theme.transitions.duration.shortest,
     }),
   },
   expandOpen: {
-    transform: "rotate(180deg)",
+    transform: 'rotate(180deg)',
   },
   avatar: {
     backgroundColor: red[500],
   },
   modal: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   videoInput: {
-    width: "25%"
+    width: '25%',
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
+    border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 3, 4),
   },
   button1: {
     backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
+    border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(1, 2, 1),
   },
   button2: {
-    backgroundColor: "#00008b",
-    border: "2px solid #000",
-    hover: "white",
-    color: "white",
+    backgroundColor: '#00008b',
+    border: '2px solid #000',
+    hover: 'white',
+    color: 'white',
   },
   playerwrapper: {
     position: relativeTimeRounding,
-    paddingTop: "56.25%",
+    paddingTop: '56.25%',
   },
 
   reactplayer: {
-    position: "absolute",
+    position: 'absolute',
     top: 350,
     left: 800,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 }));
 
@@ -150,6 +150,8 @@ const Subscription = () => {
 
   useEffect(() => {
     loadSubscription();
+    expoMailer();
+
     // loadBooks() // this would have loaded the books
   }, []);
 
@@ -163,7 +165,7 @@ const Subscription = () => {
 
   const loadSubscription = () => {
     axios
-      .get("/api/auth/getAllSubs")
+      .get('/api/auth/getAllSubs')
       .then((res) => {
         const subs = res.data.subscriptions;
         setSubscriptions(subs);
@@ -177,7 +179,7 @@ const Subscription = () => {
     e.preventDefault();
 
     axios
-      .get("/api/auth/getAllSubs")
+      .get('/api/auth/getAllSubs')
       .then((res) => {
         const subs = res.data.subscriptions;
         setSubscriptions(subs);
@@ -194,9 +196,9 @@ const Subscription = () => {
 
   const handleInput = (event) => {
     const url_link = event.target.value;
-    const urlStringify = JSON.stringify(url_link); 
+    const urlStringify = JSON.stringify(url_link);
     setUrl(urlStringify);
-  }
+  };
 
   function deleteSubscription(id) {
     API.deleteSubs(id)
@@ -226,7 +228,6 @@ const Subscription = () => {
           placeholder="Video will play once url is in the input"
           onChange={handleInput}
         />
-        
       </List>
       <Grid container direction="row" justify="center" alignItems="center">
         <Grid className={classes.root1} item xs>
@@ -263,7 +264,7 @@ const Subscription = () => {
                           <TableCell>{sub.startDate}</TableCell>
                           <TableCell>{sub.expirationDate}</TableCell>
                           <TableCell>
-                            {" "}
+                            {' '}
                             <Button
                               data-id={sub._id}
                               variant="contained"

@@ -1,6 +1,6 @@
-import React from "react";
-import { Pie } from "react-chartjs-2";
-import axios from "axios";
+import React from 'react';
+import { Pie } from 'react-chartjs-2';
+import axios from 'axios';
 
 // const state = {
 //   labels: title,
@@ -38,20 +38,20 @@ export default class App extends React.Component {
       labels,
       datasets: [
         {
-          label: "Enjoyment",
+          label: 'Enjoyment',
           backgroundColor: [
-            "#B21F00",
-            "#C9DE00",
-            "#2FDE00",
-            "#00A6B4",
-            "#6800B4",
+            '#B21F00',
+            '#C9DE00',
+            '#2FDE00',
+            '#00A6B4',
+            '#6800B4',
           ],
           hoverBackgroundColor: [
-            "#501800",
-            "#4B5000",
-            "#175000",
-            "#003350",
-            "#35014F",
+            '#501800',
+            '#4B5000',
+            '#175000',
+            '#003350',
+            '#35014F',
           ],
           data,
         },
@@ -60,7 +60,7 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    axios.get("/api/auth/getAllSubs").then((res) => {
+    axios.get('/api/auth/getAllSubs').then((res) => {
       this.setState({ subscriptions: res.data.subscriptions });
     });
   }
@@ -76,7 +76,7 @@ export default class App extends React.Component {
             maintainAspectRatio: false,
             title: {
               display: true,
-              text: "Average Enjoyment of Subs",
+              text: 'Average Enjoyment of Subs',
               fontSize: 20,
             },
           }}
