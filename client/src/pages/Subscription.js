@@ -133,7 +133,7 @@ const useStyles = makeStyles((theme) => ({
     left: 'auto',
     display: "flex",
     justifyContent: "center",
-    marginTop: theme.spacing(5)
+    marginTop: theme.spacing(2)
   },
 
   reactplayer: {
@@ -142,7 +142,7 @@ const useStyles = makeStyles((theme) => ({
     left: 'auto',
     display: "flex",
     justifyContent: "center",
-    marginTop: theme.spacing(5)
+    marginTop: theme.spacing(2)
   },
 }));
 
