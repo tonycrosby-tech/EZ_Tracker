@@ -5,7 +5,7 @@ import axios from 'axios';
 axios.get('/api/auth/getAllSubs').then((res) => {
   const subs = res.data.subscriptions;
   if (subs) {
-    subs.map((item) => {
+    subs.map(item => {
       let joy = item.rating;
       let name = item.SubscriptionName;
       enjoyment.push(joy);
