@@ -12,6 +12,7 @@ import CardContent from "@material-ui/core/CardContent";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import { red } from "@material-ui/core/colors";
+import Box from '@material-ui/core/Box';
 import { relativeTimeRounding } from "moment";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Grid from "@material-ui/core/Grid";
@@ -54,7 +55,7 @@ const StyledTableRow = withStyles((theme) => ({
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 345,
+    width: '345vh',
   },
   blue: {
     backgroundColor: "#00008b",
@@ -63,7 +64,6 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     display: "flex",
-    alignItems: "center",
     justifyContent: "center",
   },
   subCard: {
@@ -106,7 +106,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
   },
   videoInput: {
-    width: "25%"
+    width: "50vh"
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
@@ -127,18 +127,22 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
   },
   playerwrapper: {
-    position: relativeTimeRounding,
     paddingTop: "56.25%",
+    position: "absolute",
+    top: 'auto',
+    left: 'auto',
+    display: "flex",
+    justifyContent: "center",
+    marginTop: theme.spacing(5)
   },
 
   reactplayer: {
     position: "absolute",
-    top: 350,
-    left: 800,
+    top: 'auto',
+    left: 'auto',
     display: "flex",
-    alignItems: "center",
     justifyContent: "center",
-    
+    marginTop: theme.spacing(5)
   },
 }));
 
@@ -208,7 +212,7 @@ const Subscription = () => {
 
   return (
     <div>
-      <h1 className={classes.title}>EZ Tracker - Subscriptions!</h1>
+      <h2 className={classes.title}>EZ Tracker - Subscriptions!</h2>
       <List className={classes.title}>
         <ListItemIcon onClick={handleOpen} className={classes.button1}>
           <AddCircleIcon />
@@ -222,14 +226,15 @@ const Subscription = () => {
           id="url"
           label="URL for video/song"
           name="url-link"
+          fullWidth
           variant="outlined"
           placeholder="Video will play once url is in the input"
           onChange={handleInput}
         />
         
       </List>
-      <Grid container direction="row" justify="center" alignItems="center">
-        <Grid className={classes.root1} item xs>
+      <Grid className={classes.root1} container direction="row" justify="center" alignItems="center">
+        <Grid item xs>
           <div>
             {subscriptions.length ? (
               <div>
@@ -286,15 +291,20 @@ const Subscription = () => {
           </div>
         </Grid>
       </Grid>
-
+      
+      <Grid container direction="row" justify="center" alignItems="center">
+      <Box display={{ xs: 'block', xl: 'none' }}>
       <div className={classes.playerwrapper}>
         <ReactPlayer
           className={classes.reactplayer}
-          height="40%"
-          width="40%"
+          height="50vh"
+          width="50vh"
           url={url}
         />
       </div>
+      </Box>
+      </Grid>
+      
 
       {/* <Grid container component="main">
           <Grid item xs
