@@ -10,6 +10,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const db = require('../../models');
 const signUpMailer = require('./signUpMail');
+let nodemailer = require('nodemailer');
 
 // api/auth/register
 // output: registered user, send back email and username, and id of user
@@ -30,6 +31,38 @@ router.post('/register', function(req, res) {
     } else {
       res.json({
         user,
+      });
+    }
+  });
+});
+
+router.post('/access', (req, res, next) => {
+  var email = req.body.email;
+  var title = req.body.title;
+
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'eztracker2@gmail.com',
+      pass: 'SuperSecret12',
+    },
+  });
+
+  var mail = {
+    from: 'EZTracker <eztracker2@gmail.com>',
+    to: email,
+    subject: `Subscription about to expire!`,
+    text: `Your Subscription(s) ${title} are about to expire`,
+  };
+
+  transporter.sendMail(mail, (err, data) => {
+    if (err) {
+      res.json({
+        status: 'fail',
+      });
+    } else {
+      res.json({
+        status: 'success',
       });
     }
   });

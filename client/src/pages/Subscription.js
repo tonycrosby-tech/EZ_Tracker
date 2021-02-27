@@ -30,6 +30,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import CheckBox from '@material-ui/core/Checkbox';
 import API from '../utils/API';
+import expoMailer from '../utils/expoMail';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -100,10 +101,10 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1, 2, 1),
   },
   button2: {
-    backgroundColor: "#00008b",
-    border: "2px solid #000",
-    hover: "white",
-    color: "white"
+    backgroundColor: '#00008b',
+    border: '2px solid #000',
+    hover: 'white',
+    color: 'white',
   },
 }));
 
@@ -114,6 +115,8 @@ const Subscription = () => {
 
   useEffect(() => {
     loadSubscription();
+    expoMailer();
+
     // loadBooks() // this would have loaded the books
   }, []);
 
@@ -158,8 +161,8 @@ const Subscription = () => {
 
   function deleteSubscription(id) {
     API.deleteSubs(id)
-      .then(res => loadSubscription())
-      .catch(err => console.log(err));
+      .then((res) => loadSubscription())
+      .catch((err) => console.log(err));
   }
 
   const classes = useStyles();
@@ -174,9 +177,8 @@ const Subscription = () => {
           alignItems="center"
           justify="center"
         >
-          <h1>Hello, User</h1>
-          <h1>Subscriptions - Amount Spent: $0 </h1>
-          <h3>Remaining Balance - $0</h3>
+          <h1>Hello, user</h1>
+          <h1>Subscriptions - Amount Spent: </h1>
         </Grid>
       </Grid>
       <List className={classes.root}>
@@ -249,7 +251,7 @@ const Subscription = () => {
                             <TableCell>{sub.startDate}</TableCell>
                             <TableCell>{sub.expirationDate}</TableCell>
                             <TableCell>
-                              {" "}
+                              {' '}
                               <Button
                                 data-id={sub._id}
                                 variant="contained"

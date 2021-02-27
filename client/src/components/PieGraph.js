@@ -18,25 +18,30 @@ axios.get('/api/auth/getAllSubs').then((res) => {
 const enjoyment = [];
 const title = [];
 
-const state = {
-  labels: title,
-  datasets: [
-    {
-      label: 'Enjoyment',
-      backgroundColor: ['#B21F00', '#C9DE00', '#2FDE00', '#00A6B4', '#6800B4'],
-      hoverBackgroundColor: [
-        '#501800',
-        '#4B5000',
-        '#175000',
-        '#003350',
-        '#35014F',
-      ],
-      data: enjoyment,
-    },
-  ],
-};
-
 export default class App extends React.Component {
+  state = {
+    labels: title,
+    datasets: [
+      {
+        label: 'Enjoyment',
+        backgroundColor: [
+          '#B21F00',
+          '#C9DE00',
+          '#2FDE00',
+          '#00A6B4',
+          '#6800B4',
+        ],
+        hoverBackgroundColor: [
+          '#501800',
+          '#4B5000',
+          '#175000',
+          '#003350',
+          '#35014F',
+        ],
+        data: enjoyment,
+      },
+    ],
+  };
   render() {
     return (
       <div>
