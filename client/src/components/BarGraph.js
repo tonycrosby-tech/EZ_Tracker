@@ -1,41 +1,45 @@
-import React from 'react';
-import { Bar } from 'react-chartjs-2';
-import axios from 'axios';
+import React from "react";
+import { Bar } from "react-chartjs-2";
+import axios from "axios";
+export default class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      subscriptions: [],
+    };
+  }
 
-axios.get('/api/auth/getAllSubs').then((res) => {
-  const subs = res.data.subscriptions;
-  if (subs) {
-    subs.map(item => {
-      let joy = item.rating;
-      let name = item.SubscriptionName;
-      enjoyment.push(joy);
-      title.push(name);
+  componentDidMount() {
+    axios.get("/api/auth/getAllSubs").then((res) => {
+      this.setState({ subscriptions: res.data.subscriptions });
     });
   }
-});
 
-const enjoyment = [];
-const title = [];
+  groomGraphData() {
+    const labels = this.state.subscriptions.map(
+      (item) => item.SubscriptionName
+    );
+    const data = this.state.subscriptions.map((item) => item.rating);
 
-const state = {
-  labels: title,
-  datasets: [
-    {
-      label: 'Enjoyment',
-      backgroundColor: 'rgba(75,192,192,1)',
-      borderColor: 'rgba(0,0,0,1)',
-      borderWidth: 2,
-      data: enjoyment,
-    },
-  ],
-};
+    return {
+      labels,
+      datasets: [
+        {
+          label: "Enjoyment",
+          backgroundColor: "rgba(75,192,192,1)",
+          borderColor: "rgba(0,0,0,1)",
+          borderWidth: 2,
+          data,
+        },
+      ],
+    };
+  }
 
-export default class App extends React.Component {
   render() {
     return (
       <div>
         <Bar
-          data={state}
+          data={this.groomGraphData()}
           height={300}
           width={350}
           options={{
@@ -45,13 +49,15 @@ export default class App extends React.Component {
                 {
                   ticks: {
                     beginAtZero: true,
+                    min: 0,
+                    max: 100,
                   },
                 },
               ],
             },
             title: {
               display: true,
-              text: 'Average Joy from Subscriptions',
+              text: "Average Joy from Subscriptions",
               fontSize: 20,
             },
           }}
