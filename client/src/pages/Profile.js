@@ -21,25 +21,6 @@ const useStyles = makeStyles((theme) => ({
 export default function Profile() {
   const classes = useStyles();
 
-  const [subscriptions, setSubscriptions] = useState([]);
-
-  useEffect(() => {
-    loadSubscription();
-    // loadBooks() // this would have loaded the books
-  }, []);
-
-  const loadSubscription = () => {
-    axios
-      .get('/api/auth/getAllSubs')
-      .then((res) => {
-        const subs = res.data.subscriptions;
-        setSubscriptions(subs);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
   return (
     <>
       <Grid container justify='center'>
