@@ -33,6 +33,7 @@ import TableHead from "@material-ui/core/TableHead";
 import CheckBox from "@material-ui/core/Checkbox";
 import API from "../utils/API";
 import ReactPlayer from "react-player";
+import expoMailer from "../utils/expoMail";
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
