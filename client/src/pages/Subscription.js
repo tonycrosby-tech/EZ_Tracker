@@ -47,7 +47,7 @@ const StyledTableCell = withStyles((theme) => ({
 
 const StyledTableRow = withStyles((theme) => ({
   root: {
-    "&:nth-of-type(odd)": {
+    '&:nth-of-type(odd)': {
       backgroundColor: theme.palette.action.hover,
     },
   },
@@ -58,73 +58,73 @@ const useStyles = makeStyles((theme) => ({
     width: '345vh',
   },
   blue: {
-    backgroundColor: "#00008b",
+    backgroundColor: '#00008b',
     padding: theme.spacing(2, 1, 2),
-    marginLeft: theme.spacing(1)
+    marginLeft: theme.spacing(1),
   },
   title: {
     display: "flex",
     justifyContent: "center",
   },
   subCard: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "left",
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'left',
   },
   center1: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    color: "#00008b",
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: '#00008b',
   },
   root1: {
-    maxWidth: "auto",
-    display: "flex",
-    alignItems: "right",
-    justifyContent: "right",
+    maxWidth: 'auto',
+    display: 'flex',
+    alignItems: 'right',
+    justifyContent: 'right',
   },
   media: {
     height: 0,
-    paddingTop: "56.25%",
+    paddingTop: '56.25%',
   },
   expand: {
-    transform: "rotate(0deg)",
-    marginLeft: "auto",
-    transition: theme.transitions.create("transform", {
+    transform: 'rotate(0deg)',
+    marginLeft: 'auto',
+    transition: theme.transitions.create('transform', {
       duration: theme.transitions.duration.shortest,
     }),
   },
   expandOpen: {
-    transform: "rotate(180deg)",
+    transform: 'rotate(180deg)',
   },
   avatar: {
     backgroundColor: red[500],
   },
   modal: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   videoInput: {
     width: "50vh"
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
+    border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 3, 4),
   },
   button1: {
     backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
+    border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(1, 2, 1),
   },
   button2: {
-    backgroundColor: "#00008b",
-    border: "2px solid #000",
-    hover: "white",
-    color: "white",
+    backgroundColor: '#00008b',
+    border: '2px solid #000',
+    hover: 'white',
+    color: 'white',
   },
   playerwrapper: {
     paddingTop: "56.25%",
@@ -154,6 +154,8 @@ const Subscription = () => {
 
   useEffect(() => {
     loadSubscription();
+    expoMailer();
+
     // loadBooks() // this would have loaded the books
   }, []);
 
@@ -167,7 +169,7 @@ const Subscription = () => {
 
   const loadSubscription = () => {
     axios
-      .get("/api/auth/getAllSubs")
+      .get('/api/auth/getAllSubs')
       .then((res) => {
         const subs = res.data.subscriptions;
         setSubscriptions(subs);
@@ -181,7 +183,7 @@ const Subscription = () => {
     e.preventDefault();
 
     axios
-      .get("/api/auth/getAllSubs")
+      .get('/api/auth/getAllSubs')
       .then((res) => {
         const subs = res.data.subscriptions;
         setSubscriptions(subs);
@@ -198,9 +200,9 @@ const Subscription = () => {
 
   const handleInput = (event) => {
     const url_link = event.target.value;
-    const urlStringify = JSON.stringify(url_link); 
+    const urlStringify = JSON.stringify(url_link);
     setUrl(urlStringify);
-  }
+  };
 
   function deleteSubscription(id) {
     API.deleteSubs(id)
@@ -231,7 +233,6 @@ const Subscription = () => {
           placeholder="Video will play once url is in the input"
           onChange={handleInput}
         />
-        
       </List>
       <Grid className={classes.root1} container direction="row" justify="center" alignItems="center">
         <Grid item xs>
@@ -268,7 +269,7 @@ const Subscription = () => {
                           <TableCell>{sub.startDate}</TableCell>
                           <TableCell>{sub.expirationDate}</TableCell>
                           <TableCell>
-                            {" "}
+                            {' '}
                             <Button
                               data-id={sub._id}
                               variant="contained"
