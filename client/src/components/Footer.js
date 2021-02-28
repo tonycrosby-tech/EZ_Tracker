@@ -57,24 +57,21 @@ const useStyles = makeStyles((theme) => ({
     background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
   },
   footer: {
+    top: 'auto',
+    bottom: 0,
     backgroundColor: '#00008b',
-    marginTop: theme.spacing(150)
-  }
+    background: 'linear-gradient(45deg, #FF8E53 30%,  #00008b 90%)',
+  },
 }));
 
 export default function Footer() {
   const classes = useStyles();
   return (
-    <AppBar className={classes.footer}position="sticky" color="inherit">
+    <AppBar className={classes.footer} position="fixed" color="inherit">
       <Container maxWidth="md">
         <Toolbar>
           <Grid container justify="center" alignItems="center">
-            <Grid
-              item
-              xs={12}
-              className={classes.title}
-
-            >
+            <Grid item xs={12} className={classes.title}>
               Any Question click the Button Below
             </Grid>
             <Button
