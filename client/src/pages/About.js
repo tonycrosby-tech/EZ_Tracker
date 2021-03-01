@@ -60,7 +60,7 @@ class About extends Component {
               <Typography className={classes.subtitle} variant="h5">
                 <Typed
                   strings={[
-                    'EzTracker is the newest Subscription tracking app that lets you manually input your subscriptions, balance, and expiration date and It has charts  to help you manage your spending. it will alert a notification to you when your subscription is about to expire.',
+                    'EzTracker is the newest subscription tracking app that lets you manually input your subscriptions--including balance and expiration date--and it has charts to help you manage your subscriptions.',
                   ]}
                   typeSpeed={30}
                 />
@@ -68,7 +68,7 @@ class About extends Component {
               <Typography className={classes.subtitle} variant="h5">
                 <Typed
                   strings={[
-                    'You can create new Account by clicking signup button or simply click login to track your Subscription',
+                    'It will alert you by sending you a notification when your subscription is about to expire. You can create new account by clicking the  Signup button or simply click the Login button to track your Subscription',
                   ]}
                   typeSpeed={80}
                 />
