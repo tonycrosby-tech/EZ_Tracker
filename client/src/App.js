@@ -74,7 +74,7 @@ class App extends Component {
             <Route path="*" component={NotFoundPage} />
             <Redirect to="/404" />
           </Switch>
-          <Footer />
+          {/* <Footer /> */}
         </BrowserRouter>
       </React.Fragment>
     );
