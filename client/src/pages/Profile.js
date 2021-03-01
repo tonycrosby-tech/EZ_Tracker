@@ -7,7 +7,7 @@ import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 500,
+    marginTop: theme.spacing(10)
   },
   media: {
     height: 250,
@@ -23,15 +23,15 @@ export default function Profile() {
 
   return (
     <>
-      <Grid Grid container direction="row" justify="center">
+      <Grid className={classes.root} Grid container direction="row" justify="center">
         <Grid item xs={8}>
           <PieGraph />
         </Grid>
       </Grid>
-      <Grid Grid container direction="row" justify="center">
-      <Grid item xs={12} className={classes.graphs}>
+      <Grid className={classes.root} Grid container direction="row" justify="center">
+        <Grid item xs={12} className={classes.graphs}>
           <BarGraph />
-      </Grid>
+        </Grid>
       </Grid>
     </>
   );
