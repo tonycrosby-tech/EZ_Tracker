@@ -2,6 +2,7 @@ import React from "react";
 import { Bar } from "react-chartjs-2";
 import axios from "axios";
 import Container from "@material-ui/core/Container";
+import Paper from "@material-ui/core/Paper";
 export default class App extends React.Component {
   constructor() {
     super();
@@ -39,7 +40,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        <Container>
+        <Container component={Paper}>
           <Bar
             data={this.groomGraphData()}
             height={250}
