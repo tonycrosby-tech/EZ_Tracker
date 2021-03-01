@@ -217,15 +217,15 @@ const Subscription = () => {
 
   return (
     <div>
+      <h1 className={classes.title}>EZ Tracker - Subscriptions!</h1>
       <Container component={Paper}>
-      <h2 className={classes.title}>EZ Tracker - Subscriptions!</h2>
       <List className={classes.title}>
         <ListItemIcon onClick={handleOpen} className={classes.button1}>
           <AddCircleIcon />
           <ListItemText color="primary" primary="Add a new Subscription" />
         </ListItemIcon>
       </List>
-
+      <h2 className={classes.title}>Video is Currently only working for mobile!</h2>
       <List className={classes.title}>
         <TextField
           className={classes.videoInput}
