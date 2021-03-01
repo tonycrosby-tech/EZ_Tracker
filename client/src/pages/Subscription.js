@@ -13,6 +13,8 @@ import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import { red } from "@material-ui/core/colors";
 import Box from '@material-ui/core/Box';
+import Container from "@material-ui/core/Container";
+import Paper from "@material-ui/core/Paper";
 import { relativeTimeRounding } from "moment";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Grid from "@material-ui/core/Grid";
@@ -215,14 +217,15 @@ const Subscription = () => {
 
   return (
     <div>
-      <h2 className={classes.title}>EZ Tracker - Subscriptions!</h2>
+      <h1 className={classes.title}>EZ Tracker - Subscriptions!</h1>
+      <Container component={Paper}>
       <List className={classes.title}>
         <ListItemIcon onClick={handleOpen} className={classes.button1}>
           <AddCircleIcon />
           <ListItemText color="primary" primary="Add a new Subscription" />
         </ListItemIcon>
       </List>
-
+      <h2 className={classes.title}>Video is Currently only working for mobile!</h2>
       <List className={classes.title}>
         <TextField
           className={classes.videoInput}
@@ -356,6 +359,7 @@ const Subscription = () => {
           </Fade>
         </Modal>
       </div>
+      </Container>
     </div>
   );
 };
