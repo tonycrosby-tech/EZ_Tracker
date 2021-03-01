@@ -12,7 +12,7 @@ import NotFoundPage from './pages/NotFoundPage';
 import Profile from './pages/Profile';
 import ProtectedRoute from './utils/PrivateRoute';
 import axios from 'axios';
-import Footer from './components/Footer';
+// import Footer from './components/Footer';
 
 class App extends Component {
   constructor(props) {

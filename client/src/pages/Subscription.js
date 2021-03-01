@@ -13,6 +13,8 @@ import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import { red } from "@material-ui/core/colors";
 import Box from '@material-ui/core/Box';
+import Container from "@material-ui/core/Container";
+import Paper from "@material-ui/core/Paper";
 import { relativeTimeRounding } from "moment";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Grid from "@material-ui/core/Grid";
@@ -215,6 +217,7 @@ const Subscription = () => {
 
   return (
     <div>
+      <Container component={Paper}>
       <h2 className={classes.title}>EZ Tracker - Subscriptions!</h2>
       <List className={classes.title}>
         <ListItemIcon onClick={handleOpen} className={classes.button1}>
@@ -356,6 +359,7 @@ const Subscription = () => {
           </Fade>
         </Modal>
       </div>
+      </Container>
     </div>
   );
 };
