@@ -13,6 +13,7 @@ const styles = (theme) => ({
     backgroundImage: `url(${backgroundImage})`,
     backgroundColor: '#7fc7d9',
     backgroundPosition: 'center',
+    height: '100vh'
   },
   button: {
     minWidth: 200,
@@ -38,7 +39,7 @@ function About(props) {
     <AboutLayout backgroundClassName={classes.background}>
       <img style={{ display: 'none' }} src={backgroundImage} alt="increase priority" />
       <Typography color="inherit" align="center" variant="h3" marked="center">
-      If you have trouble keeping track of your Subscriptions then this is the App for you!
+      Do you have trouble keeping track of your Subscriptions? Then this is the App for you!
       </Typography>
       <Typography color="inherit" align="center" variant="h5" className={classes.h5}>
       To create an Account get started by clicking the Register button or Login by clicking the Login button below to start tracking your Subscriptions!.

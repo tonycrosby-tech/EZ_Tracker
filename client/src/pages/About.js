@@ -1,104 +1,55 @@
-import React, { Component } from 'react';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import Typed from 'react-typed';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
+import Button from '../components/Button';
+import Typography from '../components/Typography';
+import AboutLayout from './HomeLayout';
+
+const backgroundImage =
+  'https://wallpaperplay.com/walls/full/a/5/0/164628.jpg';
 
 const styles = (theme) => ({
-  root: {
-    height: '100vh',
-  },
-  backgroundImage: {},
-  title: {
-    color: 'orange',
-    fontSize: 32,
-  },
-  subtitle: {
-    color: '#00008b',
-    fontSize: 24,
-    marginTop: 15,
-  },
-  typedContainer: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%,-50%)',
-    width: '70vw',
-    textAlign: 'center',
-    zIndex: 1,
+  background: {
+    backgroundImage: `url(${backgroundImage})`,
+    backgroundColor: '#7fc7d9',
+    backgroundPosition: 'center',
+    height: '100vh'
   },
   button: {
-    margin: theme.spacing(1),
+    minWidth: 200,
+    background: "#00008b",
+    marginTop: theme.spacing(2),
   },
-  about: {
-    background: 'linear-gradient(45deg, #00008b 30%, #FF8E53 90%)',
-    color: 'white',
-    marginLeft: 5,
-    marginTop: 15,
-    textDecoration: 'none'
+  h5: {
+    marginBottom: theme.spacing(4),
+    marginTop: theme.spacing(10),
+    [theme.breakpoints.up('sm')]: {
+      marginTop: theme.spacing(10),
+    },
+  },
+  more: {
+    marginTop: theme.spacing(2),
   },
 });
 
-class About extends Component {
-  constructor() {
-    super();
-  }
+function About(props) {
+  const { classes } = props;
 
-  render() {
-    const { classes } = this.props;
-    return (
-      <div>
-        <Grid container className={classes.root} component="main">
-          <div className={classes.image}>
-            <Box className={classes.typedContainer}>
-              <Typography className={classes.title} variant="h4">
-                <Typed strings={['WELCOME TO EZ TRACKER 😄']} typeSpeed={40} />
-              </Typography>
-
-              <Typography className={classes.subtitle} variant="h5">
-                <Typed
-                  strings={[
-                    'EZ Tracker is the newest Subscription tracking app. It is an app that lets you manually input your subscriptions, balance, and expiration date. It then has charts to keep track of your enjoyment. EZ Tracker will alert a notification to you when your subscription is about to expire.',
-                  ]}
-                  typeSpeed={40}
-                />
-              </Typography>
-              <Typography className={classes.subtitle} variant="h5">
-                <Typed
-                  strings={[
-                    'You can create a new Account by clicking the Sign up button or simply click the login button to start tracking your Subscriptions!',
-                  ]}
-                  typeSpeed={40}
-                />
-              </Typography>
-
-              <Link style={{ textDecoration: "none" }} href="/" color="inherit">
-                <Button
-                  variant="contained"
-                  className={classes.about}
-                  color="inherit"
-                >
-                  Signup
-                </Button>
-              </Link>
-              <Link style={{ textDecoration: "none" }} href="/login">
-                <Button
-                  variant="contained"
-                  className={classes.about}
-                  color="inherit"
-                >
-                  Login
-                </Button>
-              </Link>
-            </Box>
-          </div>
-        </Grid>
-      </div>
-    );
-  }
+  return (
+    <AboutLayout backgroundClassName={classes.background}>
+      <img style={{ display: 'none' }} src={backgroundImage} alt="increase priority" />
+      <Typography color="inherit" align="center" variant="h2" marked="center">
+        About Us
+      </Typography>
+      <Typography color="inherit" align="center" variant="h5" className={classes.h5}>
+      about us info goes here!.
+      </Typography>
+    </AboutLayout>
+  );
 }
 
-export default withStyles(styles, { withTheme: true })(About);
+About.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(About);
