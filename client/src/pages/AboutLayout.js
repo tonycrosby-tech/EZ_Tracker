@@ -29,6 +29,7 @@ const styles = (theme) => ({
     right: 0,
     top: 0,
     bottom: 0,
+    height: '100vh',
     backgroundColor: theme.palette.common.black,
     opacity: 0.5,
     zIndex: -2,
