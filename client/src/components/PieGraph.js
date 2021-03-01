@@ -1,6 +1,7 @@
 import React from 'react';
 import { Pie } from 'react-chartjs-2';
 import axios from 'axios';
+import Container from "@material-ui/core/Container";
 
 // const state = {
 //   labels: title,
@@ -68,6 +69,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
+        <Container>
         <Pie
           data={this.groomGraphData()}
           width={350}
@@ -81,6 +83,7 @@ export default class App extends React.Component {
             },
           }}
         />
+        </Container>
       </div>
     );
   }
