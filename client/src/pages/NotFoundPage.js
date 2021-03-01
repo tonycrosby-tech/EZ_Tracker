@@ -6,13 +6,14 @@ class NotFoundPage extends Component {
     return (
       <div>
         <Jumbotron>
-          <h1 style={{ textAlign: 'center' }}>PAGE NOT FOUND</h1>
-          <h1 style={{ textAlign: 'center' }}>
+          <h1>PAGE NOT FOUND</h1>
+          <h2>ERROR: 404</h2>
+          <h1>
             <span role="img" aria-label="Face With Rolling Eyes Emoji">
               🙄
             </span>
           </h1>
-          <h1 style={{ textAlign: 'center' }}>
+          <h1>
             <Link to="/home">Go to Home </Link>
           </h1>
         </Jumbotron>
