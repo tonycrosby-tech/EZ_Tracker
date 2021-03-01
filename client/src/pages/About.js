@@ -38,6 +38,7 @@ const styles = (theme) => ({
     color: 'white',
     marginLeft: 5,
     marginTop: 15,
+    textDecoration: 'none'
   },
 });
 
@@ -60,34 +61,34 @@ class About extends Component {
               <Typography className={classes.subtitle} variant="h5">
                 <Typed
                   strings={[
-                    'EzTracker is the newest Subscription tracking app that lets you manually input your subscriptions, balance, and expiration date and It has charts  to help you manage your spending. it will alert a notification to you when your subscription is about to expire.',
+                    'EZ Tracker is the newest Subscription tracking app. It is an app that lets you manually input your subscriptions, balance, and expiration date. It then has charts to keep track of your enjoyment. EZ Tracker will alert a notification to you when your subscription is about to expire.',
                   ]}
-                  typeSpeed={30}
+                  typeSpeed={40}
                 />
               </Typography>
               <Typography className={classes.subtitle} variant="h5">
                 <Typed
                   strings={[
-                    'You can create new Account by clicking signup button or simply click login to track your Subscription',
+                    'You can create a new Account by clicking the Sign up button or simply click the login button to start tracking your Subscriptions!',
                   ]}
-                  typeSpeed={80}
+                  typeSpeed={40}
                 />
               </Typography>
 
-              <Link href="/" color="inherit">
+              <Link style={{ textDecoration: "none" }} href="/" color="inherit">
                 <Button
                   variant="contained"
                   className={classes.about}
-                  color="default"
+                  color="inherit"
                 >
                   Signup
                 </Button>
               </Link>
-              <Link href="/login">
+              <Link style={{ textDecoration: "none" }} href="/login">
                 <Button
                   variant="contained"
                   className={classes.about}
-                  color="default"
+                  color="inherit"
                 >
                   Login
                 </Button>
