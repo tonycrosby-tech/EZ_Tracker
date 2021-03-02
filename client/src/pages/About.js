@@ -8,23 +8,25 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '../components/Typography';
 import AboutLayout from './HomeLayout';
-import Container from '@material-ui/core/Container';
-import tony from './images/project3-TC.jpg';
+import Button from '@material-ui/core/Button';
 
 const backgroundImage =
   'https://wallpaperplay.com/walls/full/a/5/0/164628.jpg';
 
-const tonycrosbyImage = 'https://scontent-dfw5-1.xx.fbcdn.net/v/t1.0-9/25659359_1592018460891328_3469076148730558199_n.jpg?_nc_cat=110&ccb=3&_nc_sid=8bfeb9&_nc_ohc=GF_gdSH25hsAX8M5Wzt&_nc_ht=scontent-dfw5-1.xx&oh=3a1a6e7e2feb13f662ff13e74851cfcd&oe=6061862B'
+const placeHolderImage = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Placeholder_no_text.svg/1200px-Placeholder_no_text.svg.png';
+
+const tonyImage = 'https://scontent-dfw5-1.xx.fbcdn.net/v/t1.0-9/25659359_1592018460891328_3469076148730558199_n.jpg?_nc_cat=110&ccb=3&_nc_sid=8bfeb9&_nc_ohc=GF_gdSH25hsAX8M5Wzt&_nc_ht=scontent-dfw5-1.xx&oh=3a1a6e7e2feb13f662ff13e74851cfcd&oe=6061862B'
+
+const loganImage = 'https://ca.slack-edge.com/T019A0SE3U2-U01AE7TPTAL-43701f9fa0b7-512';
+
+const marioImage = 'https://ca.slack-edge.com/T019A0SE3U2-U0192JGFV9V-c6e4b3ed4a64-512';
+
+const parthImage = 'https://scontent-dfw5-2.xx.fbcdn.net/v/t31.0-8/15391431_10209786289487350_1235057481723360132_o.jpg?_nc_cat=109&ccb=3&_nc_sid=174925&_nc_ohc=CIcHa5YaSWEAX88R20Z&_nc_ht=scontent-dfw5-2.xx&oh=15dfbb4364b3ebbbe7688b917a2e7719&oe=60637E68';
+
 
 const styles = (theme) => ({
   background: {
     backgroundImage: `url(${backgroundImage})`,
-    backgroundColor: '#7fc7d9',
-    backgroundPosition: 'center',
-    height: '100vh'
-  },
-  tony: {
-    backgroundImage: `url('./pages/images/project3-TC.jpg')`,
     backgroundColor: '#7fc7d9',
     backgroundPosition: 'center',
     height: '100vh'
@@ -45,11 +47,11 @@ const styles = (theme) => ({
     marginTop: theme.spacing(2),
   },
   root: {
-    width: '35vh',
-    justifyContent: 'center',
-    display: 'flex',
-    flexGrow: 1,
-    marginTop: theme.spacing(2)
+    maxWidth: 345,
+  },
+  media: {
+    height: 140,
+    width: 'auto'
   },
   container: {
     justifyContent: 'center',
@@ -57,9 +59,29 @@ const styles = (theme) => ({
     flexGrow: 1,
     marginTop: theme.spacing(2)
   },
-  media: {
-    height: '35vh',
+  tony: {
+    height: 140,
+    width: '25vh',
     paddingTop: '56.25%', // 16:9
+    backgroundImage: `url(${tonyImage})`,
+  },
+  logan: {
+    height: 140,
+    width: '25vh',
+    paddingTop: '56.25%', // 16:9
+    backgroundImage: `url(${loganImage})`,
+  },
+  parth: {
+    height: 140,
+    width: '25vh',
+    paddingTop: '56.25%', // 16:9
+    backgroundImage: `url(${parthImage})`,
+  },
+  mario: {
+    height: 140,
+    width: '25vh',
+    paddingTop: '56.25%', // 16:9
+    backgroundImage: `url(${marioImage})`,
   },
   subtitle: {
     paddingTop: theme.spacing(5)
@@ -86,49 +108,56 @@ function About(props) {
         <Grid xs={12} item >
           <Card variant="outlined" className={classes.root}>
             <CardMedia
-              className={classes.media}
-              image={classes.tony}
-            />
+              className={classes.tony}
+            ></CardMedia>
             <CardContent>
-              <Typography>
+              <Typography gutterBottom variant="h6" justifyContent='center'>
                 Tony Crosby
-        </Typography>
+              </Typography>
+              <Button >Github</Button>
+              <Button >Contact</Button>
             </CardContent>
           </Card>
         </Grid>
         <Grid xs={12} item >
           <Card variant="outlined" className={classes.root}>
             <CardMedia
-              className={classes.media}
+              className={classes.logan}
             />
             <CardContent>
-              <Typography>
+              <Typography gutterBottom variant="h6" justifyContent='center'>
                 Logan Pippin
-        </Typography>
+              </Typography>
+              <Button >Github</Button>
+              <Button >Contact</Button>
             </CardContent>
           </Card>
         </Grid>
         <Grid xs={12} item >
           <Card variant="outlined" className={classes.root}>
             <CardMedia
-              className={classes.media}
+              className={classes.parth}
             />
             <CardContent>
-              <Typography>
+              <Typography gutterBottom variant="h6" justifyContent='center'>
                 Parth Patel
-        </Typography>
+              </Typography>
+              <Button >Github</Button>
+              <Button >Contact</Button>
             </CardContent>
           </Card>
         </Grid>
         <Grid xs={12} item >
           <Card variant="outlined" className={classes.root}>
             <CardMedia
-              className={classes.media}
+              className={classes.mario}
             />
-            <CardContent>
-              <Typography>
+            <CardContent >
+              <Typography gutterBottom variant="h6" justifyContent='center'>
                 Mario Thompson
-        </Typography>
+              </Typography>
+              <Button >Github</Button>
+              <Button >Contact</Button>
             </CardContent>
           </Card>
         </Grid>
