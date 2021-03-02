@@ -64,6 +64,16 @@ function About(props) {
       >
         Login
       </Button>
+      <Button
+        color="inherit"
+        variant="contained"
+        size="medium"
+        className={classes.button}
+        component="a"
+        href="/subscription"
+      >
+        Subscriptions
+      </Button>
       <Typography variant="body2" color="inherit" className={classes.more}>
         Start Tracking Today!
       </Typography>
