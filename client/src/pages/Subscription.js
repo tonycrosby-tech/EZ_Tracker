@@ -252,7 +252,6 @@ const Subscription = () => {
                   >
                     <TableHead>
                       <TableRow>
-                        <StyledTableCell></StyledTableCell>
                         <StyledTableCell>Name</StyledTableCell>
                         <StyledTableCell>Cost</StyledTableCell>
                         <StyledTableCell>Rating</StyledTableCell>
@@ -264,9 +263,6 @@ const Subscription = () => {
                     <TableBody>
                       {subscriptions.map((sub) => (
                         <StyledTableRow>
-                          <TableCell padding="checkbox">
-                            <CheckBox color="primary" />
-                          </TableCell>
                           <TableCell>{sub.SubscriptionName}</TableCell>
                           <TableCell>${sub.cost}</TableCell>
                           <TableCell>{sub.rating}</TableCell>
