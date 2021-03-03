@@ -33,7 +33,6 @@ const styles = (theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    height: '108vh'
   },
   avatar: {
     margin: theme.spacing(1),

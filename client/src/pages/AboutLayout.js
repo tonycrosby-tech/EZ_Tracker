@@ -29,7 +29,7 @@ const styles = (theme) => ({
     right: 0,
     top: 0,
     bottom: 0,
-    height: '150vh',
+    height: '100vh',
     backgroundColor: theme.palette.common.black,
     opacity: 0.5,
     zIndex: -2,
@@ -51,7 +51,7 @@ function AboutLayout(props) {
 
   return (
     <section className={classes.root}>
-      <Container fixed maxwidth="sm" className={classes.container}>
+      <Container className={classes.container}>
         {children}
         <div className={classes.backdrop} />
         <div className={clsx(classes.background, backgroundClassName)} />
