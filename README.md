@@ -1,6 +1,6 @@
 # Project_3
 
-[ez_tracker live]: https://enigmatic-eyrie-65011.herokuapp.com/
+[ez_tracker live]: https://enigmatic-eyrie-64011.herokuapp.com
 
 # [EZ-Tracker][ez_tracker live]
 
@@ -69,7 +69,7 @@ npm start
 
 ## Deployed Website
 
-- [EZ-Tracker Deployed link](https://enigmatic-eyrie-65011.herokuapp.com/)
+- [EZ-Tracker Deployed link](https://enigmatic-eyrie-65011.herokuapp.com)
 
 ## Repository
 
