@@ -10,7 +10,7 @@ const backgroundImage =
 
 const styles = (theme) => ({
   background: {
-    backgroundImage: `url(${backgroundImage})`,
+    backgroundImage: `url(${backgroundImage}) no-repeat center center`,
     backgroundColor: '#7fc7d9',
     backgroundPosition: 'center',
     height: '100vh'

@@ -27,7 +27,7 @@ const parthImage = 'https://scontent-dfw5-2.xx.fbcdn.net/v/t31.0-8/15391431_1020
 
 const styles = (theme) => ({
   background: {
-    backgroundImage: `url(${backgroundImage})`,
+    backgroundImage: `url(${backgroundImage}) no-repeat center center`,
     backgroundColor: '#7fc7d9',
     backgroundPosition: 'center',
     height: '100vh'

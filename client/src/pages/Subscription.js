@@ -69,6 +69,10 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
   },
+  newSub: {
+    display: 'block',
+    justifyContent: 'right'
+  },
   subCard: {
     display: 'flex',
     alignItems: 'center',
@@ -122,6 +126,8 @@ const useStyles = makeStyles((theme) => ({
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(1, 2, 1),
+    display: 'flexbox',
+    justifyContent: 'flex-end',
   },
   button2: {
     backgroundColor: '#00008b',
@@ -218,32 +224,23 @@ const Subscription = () => {
   return (
     <div>
       <h1 className={classes.title}>EZ Tracker - Subscriptions!</h1>
+      <hr style={{ width: '50%'}}></hr>
       <Container component={Paper}>
-      <List className={classes.title}>
+        <Grid item xs={6}>
+        <List className={classes.newSub}>
+        <ListItemIcon><h1 className={classes.center1}>Subscriptions</h1></ListItemIcon>
         <ListItemIcon onClick={handleOpen} className={classes.button1}>
           <AddCircleIcon />
           <ListItemText color="primary" primary="Add a new Subscription" />
         </ListItemIcon>
       </List>
-      <h2 className={classes.title}>Video is Currently only working for mobile!</h2>
-      <List className={classes.title}>
-        <TextField
-          className={classes.videoInput}
-          id="url"
-          label="URL for video/song"
-          name="url-link"
-          fullWidth
-          variant="outlined"
-          placeholder="Video will play once url is in the input"
-          onChange={handleInput}
-        />
-      </List>
+        </Grid>
       <Grid className={classes.root1} container direction="row" justify="center" alignItems="center">
         <Grid item xs>
           <div>
             {subscriptions.length ? (
               <div>
-                <h1 className={classes.center1}>Subscriptions</h1>
+                
                 <TableContainer padding="checkbox">
                   <Table
                     className={classes.table}
