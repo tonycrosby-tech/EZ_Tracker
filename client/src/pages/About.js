@@ -2,13 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
 import Grid from '@material-ui/core/Grid';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '../components/Typography';
 import AboutLayout from './HomeLayout';
 import Button from '@material-ui/core/Button';
+import Link from '@material-ui/core/Link';
+import Typed from 'react-typed';
 
 const backgroundImage =
   'https://wallpaperplay.com/walls/full/a/5/0/164628.jpg';
@@ -48,6 +49,7 @@ const styles = (theme) => ({
   },
   root: {
     maxWidth: 345,
+    marginLeft: theme.spacing(2)
   },
   media: {
     height: 140,
@@ -85,6 +87,20 @@ const styles = (theme) => ({
   },
   subtitle: {
     paddingTop: theme.spacing(5)
+  },
+  blue: {
+    background: '#00008b',
+    color: 'white',
+    marginLeft: theme.spacing(1)
+  },
+  orange: {
+    background: 'orange',
+    color: 'white',
+    marginLeft: theme.spacing(1)
+  },
+  name: {
+    display: 'flex',
+    justifyContent: 'center'
   }
 });
 
@@ -94,10 +110,15 @@ function About(props) {
   return (
     <AboutLayout backgroundClassName={classes.background}>
       <Typography color="inherit" align="center" variant="h2" marked="center">
-        About Us
+        About the project
       </Typography>
       <Typography className={classes.subtitle} color="inherit" align="center" variant="h5" marked="center">
-        About Us
+        <Typed strings={[
+                  'EZ Tracker is the newest Subscription tracking app. It is an app that lets you manually input your subscriptions, balance, and expiration date. It then has charts to keep track of your enjoyment. EZ Tracker will alert a notification to you when your subscription is about to expire.'
+        ]}
+        typeSpeed={30}>
+
+        </Typed>
       </Typography>
       <img style={{ display: 'none' }} src={backgroundImage} alt="increase priority" />
       <Typography color="inherit" align="center" className={classes.subtitle} variant="h5">
@@ -111,11 +132,16 @@ function About(props) {
               className={classes.tony}
             ></CardMedia>
             <CardContent>
-              <Typography gutterBottom variant="h6" justifyContent='center'>
+              <Typography gutterBottom variant="h6" className={classes.name}>
                 Tony Crosby
               </Typography>
-              <Button >Github</Button>
-              <Button >Contact</Button>
+              <Link style={{ textDecoration: 'none' }} href="https://github.com/tonycrosby-tech">
+              <Button variant='contained' className={classes.blue}>Github</Button>
+              </Link>
+
+              <Link style={{ textDecoration: 'none' }} href="mailto:tonycrosby96@gmail.com">
+              <Button variant='contained' className={classes.orange}>Contact</Button>
+              </Link>
             </CardContent>
           </Card>
         </Grid>
@@ -125,11 +151,16 @@ function About(props) {
               className={classes.logan}
             />
             <CardContent>
-              <Typography gutterBottom variant="h6" justifyContent='center'>
+              <Typography gutterBottom variant="h6" className={classes.name}>
                 Logan Pippin
               </Typography>
-              <Button >Github</Button>
-              <Button >Contact</Button>
+              <Link style={{ textDecoration: 'none' }} href='https://github.com/LoganPippin'>
+              <Button variant='contained' className={classes.blue}>Github</Button>
+              </Link>
+
+              <Link style={{ textDecoration: 'none' }} href='mailto:logan.pippin32@gmail.com'>
+              <Button variant='contained' className={classes.orange}>Contact</Button>
+              </Link>
             </CardContent>
           </Card>
         </Grid>
@@ -139,11 +170,16 @@ function About(props) {
               className={classes.parth}
             />
             <CardContent>
-              <Typography gutterBottom variant="h6" justifyContent='center'>
+              <Typography gutterBottom variant="h6" className={classes.name}>
                 Parth Patel
               </Typography>
-              <Button >Github</Button>
-              <Button >Contact</Button>
+              <Link style={{ textDecoration: 'none' }} href='https://github.com/parth167'>
+              <Button variant='contained' className={classes.blue}>Github</Button>
+              </Link>
+
+              <Link style={{ textDecoration: 'none' }} href="mailto:parthpatel167@gmail.com">
+              <Button variant='contained' className={classes.orange}>Contact</Button>
+              </Link>
             </CardContent>
           </Card>
         </Grid>
@@ -153,11 +189,16 @@ function About(props) {
               className={classes.mario}
             />
             <CardContent >
-              <Typography gutterBottom variant="h6" justifyContent='center'>
+              <Typography gutterBottom variant="h6" className={classes.name}>
                 Mario Thompson
               </Typography>
-              <Button >Github</Button>
-              <Button >Contact</Button>
+              <Link style={{ textDecoration: 'none' }} href='https://github.com/MarioThompson0010'>
+              <Button variant='contained' className={classes.blue}>Github</Button>
+              </Link>
+
+              <Link style={{ textDecoration: 'none' }} href='mailto:mariothompson0010@gmail.com'>
+              <Button variant='contained' className={classes.orange}>Contact</Button>
+              </Link>
             </CardContent>
           </Card>
         </Grid>
