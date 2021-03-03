@@ -58,29 +58,30 @@ const styles = (theme) => ({
   container: {
     justifyContent: 'center',
     display: 'flex',
+    alignItems: 'center',
     flexGrow: 1,
     marginTop: theme.spacing(2)
   },
   tony: {
-    height: 140,
+    height: '25vh',
     width: '25vh',
     paddingTop: '56.25%', // 16:9
     backgroundImage: `url(${tonyImage})`,
   },
   logan: {
-    height: 140,
+    height: '25vh',
     width: '25vh',
     paddingTop: '56.25%', // 16:9
     backgroundImage: `url(${loganImage})`,
   },
   parth: {
-    height: 140,
+    height: '25vh',
     width: '25vh',
     paddingTop: '56.25%', // 16:9
     backgroundImage: `url(${parthImage})`,
   },
   mario: {
-    height: 140,
+    height: '25vh',
     width: '25vh',
     paddingTop: '56.25%', // 16:9
     backgroundImage: `url(${marioImage})`,
@@ -125,8 +126,9 @@ function About(props) {
         Our Team
       </Typography>
 
-      <Grid className={classes.container} spacing={2} >
-        <Grid xs={12} item >
+      <Grid className={classes.container} >
+        
+        <Grid container xs={12} item >
           <Card variant="outlined" className={classes.root}>
             <CardMedia
               className={classes.tony}
@@ -145,7 +147,7 @@ function About(props) {
             </CardContent>
           </Card>
         </Grid>
-        <Grid xs={12} item >
+        <Grid container xs={12} item >
           <Card variant="outlined" className={classes.root}>
             <CardMedia
               className={classes.logan}
@@ -164,7 +166,7 @@ function About(props) {
             </CardContent>
           </Card>
         </Grid>
-        <Grid xs={12} item >
+        <Grid container xs={12} item >
           <Card variant="outlined" className={classes.root}>
             <CardMedia
               className={classes.parth}
@@ -183,7 +185,7 @@ function About(props) {
             </CardContent>
           </Card>
         </Grid>
-        <Grid xs={12} item >
+        <Grid container xs={12} item >
           <Card variant="outlined" className={classes.root}>
             <CardMedia
               className={classes.mario}
