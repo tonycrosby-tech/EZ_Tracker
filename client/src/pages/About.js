@@ -58,29 +58,30 @@ const styles = (theme) => ({
   container: {
     justifyContent: 'center',
     display: 'flex',
+    alignItems: 'center',
     flexGrow: 1,
     marginTop: theme.spacing(2)
   },
   tony: {
-    height: 140,
+    height: '25vh',
     width: '25vh',
     paddingTop: '56.25%', // 16:9
     backgroundImage: `url(${tonyImage})`,
   },
   logan: {
-    height: 140,
+    height: '25vh',
     width: '25vh',
     paddingTop: '56.25%', // 16:9
     backgroundImage: `url(${loganImage})`,
   },
   parth: {
-    height: 140,
+    height: '25vh',
     width: '25vh',
     paddingTop: '56.25%', // 16:9
     backgroundImage: `url(${parthImage})`,
   },
   mario: {
-    height: 140,
+    height: '25vh',
     width: '25vh',
     paddingTop: '56.25%', // 16:9
     backgroundImage: `url(${marioImage})`,
