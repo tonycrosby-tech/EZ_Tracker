@@ -12,7 +12,6 @@ import NotFoundPage from './pages/NotFoundPage';
 import Profile from './pages/Profile';
 import ProtectedRoute from './utils/PrivateRoute';
 import axios from 'axios';
-import Footer from './components/Footer';
 
 class App extends Component {
   constructor(props) {
@@ -74,7 +73,6 @@ class App extends Component {
             <Route path="*" component={NotFoundPage} />
             <Redirect to="/404" />
           </Switch>
-          <Footer />
         </BrowserRouter>
       </React.Fragment>
     );
