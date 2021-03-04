@@ -55,17 +55,20 @@ npm start
 
 ## Usage
 
+- this screenshot is about page of EZ-Tracker
+![about](./client/src/assets/images/about.PNG)
+
 - this screenshot is login page of EZ-Tracker
-- ![login]()
+![login](./client/src/assets/images/signin.PNG)
 
 - this screenshot is homescreen page of EZ-Tracker
-- ![home]()
+![home](./client/src/assets/images/home.PNG)
 
 - this screenshot is Subscription page of EZ-Tracker
-- ![Subscription]()
+![Subscription](./client/src/assets/images/subscriptions.PNG)
 
 - this screenshot is profile page of EZ-Tracker,where user see chart
-- ![profile]()
+![profile](./client/src/assets/images/profile.PNG)
 
 ## Deployed Website
 
@@ -91,11 +94,14 @@ npm start
 - <a href="https://www.w3schools.com/css/" target="_blank"> 
   <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg" width="50" height="50"/> </a>
 
-- <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="50" height="50"/></a> 
+- <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="50" height="50"/>
 
-- <a href="https://reactjs.org/" target="_blank"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" width="50" height="50"/> </a>
+- </a> -<a href="https://reactjs.org/" target="_blank">
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" width="50" height="50"/> </a>
 
 - <a href="https://material-ui.com/" target="_blank"> <img src="https://material-ui.com/static/logo_raw.svg" alt="material ui" width="50" height="50"/> </a>
+
+- <a href="https://reactjs.org/" target="_blank"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="react" width="50" height="50"/> </a>
 
 - <a href="https://heroku.com" target="_blank"> <img src="https://www.vectorlogo.zone/logos/heroku/heroku-icon.svg" alt="heroku" width="50" height="50"/> </a>
 
