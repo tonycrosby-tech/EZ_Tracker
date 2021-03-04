@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
     width: '5vh',
     margin: 4,
     color: 'white',
-    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+    background: 'linear-gradient(45deg, #00008b 30%, #FF8E53 90%)',
   },
   footer: {
     top: 'auto',
