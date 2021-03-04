@@ -55,17 +55,20 @@ npm start
 
 ## Usage
 
+- this screenshot is about page of EZ-Tracker
+![about](./client/src/assets/images/about.PNG)
+
 - this screenshot is login page of EZ-Tracker
-- ![login]()
+![login](./client/src/assets/images/signin.PNG)
 
 - this screenshot is homescreen page of EZ-Tracker
-- ![home]()
+![home](./client/src/assets/images/home.PNG)
 
 - this screenshot is Subscription page of EZ-Tracker
-- ![Subscription]()
+![Subscription](./client/src/assets/images/subscriptions.PNG)
 
 - this screenshot is profile page of EZ-Tracker,where user see chart
-- ![profile]()
+![profile](./client/src/assets/images/profile.PNG)
 
 ## Deployed Website
 
