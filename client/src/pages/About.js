@@ -62,7 +62,6 @@ const styles = (theme) => ({
     alignItems: 'center',
     flexGrow: 1,
     marginTop: theme.spacing(2),
-    wordWrap: 'wrap'
   },
   cardAction: {
     justifyContent: 'center',
@@ -71,30 +70,34 @@ const styles = (theme) => ({
   },
   tony: {
     height: '25vh',
-    width: '25vh',
+    width: '100%',
     paddingTop: '56.25%', // 16:9
     backgroundImage: `url(${tonyImage})`,
   },
   logan: {
     height: '25vh',
-    width: '25vh',
+    width: '100%',
     paddingTop: '56.25%', // 16:9
     backgroundImage: `url(${loganImage})`,
   },
   parth: {
     height: '25vh',
-    width: '25vh',
+    width: '100%',
     paddingTop: '56.25%', // 16:9
     backgroundImage: `url(${parthImage})`,
   },
   mario: {
     height: '25vh',
-    width: '25vh',
+    width: '100%',
     paddingTop: '56.25%', // 16:9
     backgroundImage: `url(${marioImage})`,
   },
   subtitle: {
-    paddingTop: theme.spacing(5)
+    paddingTop: theme.spacing(5),
+  },
+  subtitle1: {
+    marginTop: theme.spacing(5),
+    color: 'white'
   },
   blue: {
     background: '#00008b',
@@ -121,100 +124,100 @@ function About(props) {
         About the project
       </Typography>
       <Typography className={classes.subtitle} color="inherit" align="center" variant="h5" marked="center">
-EZ Tracker is the newest Subscription tracking app. It is an app that lets you manually input your subscriptions, balance, and expiration date. It then has charts to keep track of your enjoyment. EZ Tracker will alert a notification to you when your subscription is about to expire.
+        EZ Tracker is the newest Subscription tracking app. It is an app that lets you manually input your subscriptions, balance, and expiration date. It then has charts to keep track of your enjoyment. EZ Tracker will alert a notification to you when your subscription is about to expire.
 
       </Typography>
       <img style={{ display: 'none' }} src={backgroundImage} alt="increase priority" />
-      <Typography color="inherit" align="center" className={classes.subtitle} variant="h5">
+      <Typography color="inherit" align="center" className={classes.subtitle1} variant="h5">
         Our Team
       </Typography>
 
-      <Grid maxWidth="sm" className={classes.container} >
-        
-        <Grid container xs={12} row item >
-          <Card variant="outlined" className={classes.root}>
-            <CardMedia
-              className={classes.tony}
-            ></CardMedia>
-            <CardContent>
-              <Typography gutterBottom variant="h6" className={classes.name}>
-                Tony Crosby
+      <Grid container spacing={2}>
+
+      <Grid xs={12} sm={6} md={3} item>
+        <Card variant="outlined" className={classes.root}>
+          <CardMedia
+            className={classes.tony}
+          ></CardMedia>
+          <CardContent>
+            <Typography gutterBottom variant="h6" className={classes.name}>
+              Tony Crosby
               </Typography>
-            </CardContent>
-            <CardActions className={classes.cardAction}>
+          </CardContent>
+          <CardActions className={classes.cardAction}>
             <Link style={{ textDecoration: 'none' }} href="https://github.com/tonycrosby-tech">
               <Button variant='contained' className={classes.blue}>Github</Button>
-              </Link>
+            </Link>
 
-              <Link style={{ textDecoration: 'none' }} href="mailto:tonycrosby96@gmail.com">
+            <Link style={{ textDecoration: 'none' }} href="mailto:tonycrosby96@gmail.com">
               <Button variant='contained' className={classes.orange}>Contact</Button>
-              </Link>
-            </CardActions>
-          </Card>
-        </Grid>
-        <Grid container xs={12} row item >
-          <Card variant="outlined" className={classes.root}>
-            <CardMedia
-              className={classes.logan}
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h6" className={classes.name}>
-                Logan Pippin
+            </Link>
+          </CardActions>
+        </Card>
+      </Grid>
+      <Grid xs={12} sm={6} md={3} item>
+        <Card variant="outlined" className={classes.root}>
+          <CardMedia
+            className={classes.logan}
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h6" className={classes.name}>
+              Logan Pippin
               </Typography>
-            </CardContent>
-            <CardActions className={classes.cardAction}>
+          </CardContent>
+          <CardActions className={classes.cardAction}>
             <Link style={{ textDecoration: 'none' }} href='https://github.com/LoganPippin'>
               <Button variant='contained' className={classes.blue}>Github</Button>
-              </Link>
+            </Link>
 
-              <Link style={{ textDecoration: 'none' }} href='mailto:logan.pippin32@gmail.com'>
+            <Link style={{ textDecoration: 'none' }} href='mailto:logan.pippin32@gmail.com'>
               <Button variant='contained' className={classes.orange}>Contact</Button>
-              </Link>
-            </CardActions>
-          </Card>
-        </Grid>
-        <Grid container xs={12} row item >
-          <Card variant="outlined" className={classes.root}>
-            <CardMedia
-              className={classes.parth}
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h6" className={classes.name}>
-                Parth Patel
+            </Link>
+          </CardActions>
+        </Card>
+      </Grid>
+      <Grid xs={12} sm={6} md={3} item>
+        <Card variant="outlined" className={classes.root}>
+          <CardMedia
+            className={classes.parth}
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h6" className={classes.name}>
+              Parth Patel
               </Typography>
-            </CardContent>
-            <CardActions className={classes.cardAction}>
+          </CardContent>
+          <CardActions className={classes.cardAction}>
             <Link style={{ textDecoration: 'none' }} href='https://github.com/parth167'>
               <Button variant='contained' className={classes.blue}>Github</Button>
-              </Link>
+            </Link>
 
-              <Link style={{ textDecoration: 'none' }} href="mailto:parthpatel167@gmail.com">
+            <Link style={{ textDecoration: 'none' }} href="mailto:parthpatel167@gmail.com">
               <Button variant='contained' className={classes.orange}>Contact</Button>
-              </Link>
-            </CardActions>
-          </Card>
-        </Grid>
-        <Grid container xs={12} row item >
-          <Card variant="outlined" className={classes.root}>
-            <CardMedia
-              className={classes.mario}
-            />
-            <CardContent >
-              <Typography gutterBottom variant="h6" className={classes.name}>
-                Mario Thompson
+            </Link>
+          </CardActions>
+        </Card>
+      </Grid>
+      <Grid xs={12} sm={6} md={3} item>
+        <Card variant="outlined" className={classes.root}>
+          <CardMedia
+            className={classes.mario}
+          />
+          <CardContent >
+            <Typography gutterBottom variant="h6" className={classes.name}>
+              Mario Thompson
               </Typography>
-            </CardContent>
-            <CardActions className={classes.cardAction}>
+          </CardContent>
+          <CardActions className={classes.cardAction}>
             <Link style={{ textDecoration: 'none' }} href='https://github.com/MarioThompson0010'>
               <Button variant='contained' className={classes.blue}>Github</Button>
-              </Link>
+            </Link>
 
-              <Link style={{ textDecoration: 'none' }} href='mailto:mariothompson0010@gmail.com'>
+            <Link style={{ textDecoration: 'none' }} href='mailto:mariothompson0010@gmail.com'>
               <Button variant='contained' className={classes.orange}>Contact</Button>
-              </Link>
-            </CardActions>
-          </Card>
-        </Grid>
+            </Link>
+          </CardActions>
+        </Card>
+      </Grid>
       </Grid>
 
     </AboutLayout>
