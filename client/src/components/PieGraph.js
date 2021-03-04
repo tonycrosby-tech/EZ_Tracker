@@ -70,7 +70,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        <Container component={Paper} spacing={4}>
+        <Container style={{ paddingBottom: 15 }} component={Paper} spacing={4}>
         <Pie
           data={this.groomGraphData()}
           width={350}

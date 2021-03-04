@@ -69,6 +69,10 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
   },
+  title1: {
+    display: "flex",
+    justifyContent: "flex-end",
+  },
   subCard: {
     display: 'flex',
     alignItems: 'center',
@@ -77,7 +81,7 @@ const useStyles = makeStyles((theme) => ({
   center1: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'left',
     color: '#00008b',
   },
   root1: {
@@ -119,7 +123,7 @@ const useStyles = makeStyles((theme) => ({
   },
   button1: {
     backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
+    border: '1px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(1, 2, 1),
   },
@@ -219,31 +223,22 @@ const Subscription = () => {
     <div>
       <h1 className={classes.title}>EZ Tracker - Subscriptions!</h1>
       <Container component={Paper}>
-      <List className={classes.title}>
+      
+      <List className={classes.title1}>
+        <ListItemText className={classes.center1} primary={<Typography type="body2" style={{ color: '#00008b', fontSize: 32 }}>Subscriptions</Typography>}></ListItemText>
         <ListItemIcon onClick={handleOpen} className={classes.button1}>
           <AddCircleIcon />
           <ListItemText color="primary" primary="Add a new Subscription" />
         </ListItemIcon>
+        
       </List>
-      <h2 className={classes.title}>Video is Currently only working for mobile!</h2>
-      <List className={classes.title}>
-        <TextField
-          className={classes.videoInput}
-          id="url"
-          label="URL for video/song"
-          name="url-link"
-          fullWidth
-          variant="outlined"
-          placeholder="Video will play once url is in the input"
-          onChange={handleInput}
-        />
-      </List>
+      
       <Grid className={classes.root1} container direction="row" justify="center" alignItems="center">
+        
         <Grid item xs>
           <div>
             {subscriptions.length ? (
               <div>
-                <h1 className={classes.center1}>Subscriptions</h1>
                 <TableContainer padding="checkbox">
                   <Table
                     className={classes.table}
@@ -291,19 +286,6 @@ const Subscription = () => {
             )}
           </div>
         </Grid>
-      </Grid>
-      
-      <Grid container direction="row" justify="center" alignItems="center">
-      <Box display={{ xs: 'block', xl: 'none' }}>
-      <div className={classes.playerwrapper}>
-        <ReactPlayer
-          className={classes.reactplayer}
-          height="50vh"
-          width="50vh"
-          url={url}
-        />
-      </div>
-      </Box>
       </Grid>
       
 

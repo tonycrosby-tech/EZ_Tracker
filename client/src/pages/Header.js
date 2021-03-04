@@ -42,28 +42,8 @@ function About(props) {
       Do you have trouble keeping track of your Subscriptions? Then this is the App for you!
       </Typography>
       <Typography color="inherit" align="center" variant="h5" className={classes.h5}>
-      To create an Account get started by clicking the Register button or Login by clicking the Login button below to start tracking your Subscriptions!.
+      To get started click the button below to start tracking your Subscriptions!
       </Typography>
-      <Button
-        color="inherit"
-        variant="contained"
-        size="medium"
-        className={classes.button}
-        component="a"
-        href="/"
-      >
-        Register
-      </Button>
-      <Button
-        color="inherit"
-        variant="contained"
-        size="medium"
-        className={classes.button}
-        component="a"
-        href="/login"
-      >
-        Login
-      </Button>
       <Button
         color="inherit"
         variant="contained"
