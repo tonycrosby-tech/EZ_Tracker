@@ -7,13 +7,13 @@ import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginTop: theme.spacing(10)
+    marginTop: theme.spacing(0)
   },
   media: {
     height: 250,
   },
   graphs: {
-    padding: theme.spacing(4),
+    padding: theme.spacing(1),
     marginLeft: theme.spacing(0),
   },
 }));
