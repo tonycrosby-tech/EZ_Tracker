@@ -16,11 +16,6 @@ export default () => {
       body: JSON.stringify({ email, title }),
     });
     const resData = await response.json();
-    if (resData.status === 'success') {
-      alert('Subscriptions about to expire.');
-    } else if (resData.status === 'fail') {
-      alert('Message failed to send.');
-    }
   };
   axios.get('/api/auth/getAllSubs').then((res) => {
     const subs = res.data.subscriptions;
