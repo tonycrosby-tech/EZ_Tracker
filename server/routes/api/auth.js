@@ -52,7 +52,7 @@ router.post('/access', (req, res, next) => {
     from: 'EZTracker <eztracker2@gmail.com>',
     to: email,
     subject: `Subscription about to expire!`,
-    text: `Your Subscription(s) ${title} are about to expire`,
+    text: `Your Subscription(s) ${title} are about to expire or have already expired please check the dates in the app.`,
   };
 
   transporter.sendMail(mail, (err, data) => {
